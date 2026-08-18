@@ -1,0 +1,18 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="292.375" height="292.375" viewBox="0 0 292.375 292.375" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="ELEMEN SEGITIGA" filter="url(#filter0_d_640_454)">
+<path id="Polygon 26" d="M123.323 39.6025C133.485 22.0014 158.89 22.0014 169.052 39.6025L249.925 179.679C260.087 197.28 247.385 219.281 227.061 219.281H65.3145C44.9904 219.281 32.2879 197.28 42.4499 179.679L123.323 39.6025Z" fill="#9513FF"/>
+<path id="Polygon 23" d="M134.754 70.6939C139.835 61.8935 152.538 61.8936 157.619 70.6939L217.282 174.034C222.363 182.834 216.012 193.835 205.85 193.835H86.523C76.3612 193.835 70.0104 182.834 75.0913 174.034L134.754 70.6939Z" stroke="white" stroke-width="13.2008"/>
+</g>
+<defs>
+<filter id="filter0_d_640_454" x="23.8734" y="11.4017" width="244.628" height="222.88" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="7.5"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_640_454"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_640_454" result="shape"/>
+</filter>
+</defs>
+</svg>

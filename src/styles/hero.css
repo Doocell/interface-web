@@ -1,0 +1,379 @@
+/* =========================================================
+   INTERFACE HERO
+   Menggunakan SVG asli hasil export Figma.
+
+   Logo SVG:
+   652 × 272
+
+   Building Terrain SVG:
+   1455 × 133
+   ========================================================= */
+
+.figma-hero {
+  position: relative;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  scroll-margin-top:
+    var(--navbar-height);
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.figma-hero__content {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+
+  padding-top:
+    clamp(
+      175px,
+      15.9vw,
+      230px
+    );
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+}
+
+
+/* =========================================================
+   LOGO
+
+   Tidak memakai:
+   - filter
+   - drop-shadow
+   - transform
+   - background-image
+   - crop
+
+   Supaya SVG tetap tajam.
+   ========================================================= */
+
+.figma-hero__logo {
+  display: block;
+
+  width:
+    min(
+      45.28vw,
+      652px
+    );
+
+  height: auto;
+
+  max-width: none;
+
+  flex: 0 0 auto;
+
+  object-fit: contain;
+
+  image-rendering: auto;
+
+  user-select: none;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   BUILDING TERRAIN
+
+   SVG asli sudah miring.
+   Jangan rotate lagi dengan CSS.
+
+   1455px adalah lebar asli Figma
+   untuk frame sekitar 1440px.
+   ========================================================= */
+
+.figma-hero__terrain {
+  display: block;
+
+  width:
+    calc(
+      100vw + 15px
+    );
+
+  height: auto;
+
+  max-width: none;
+
+  flex: 0 0 auto;
+
+  margin-top:
+    clamp(
+      18px,
+      1.8vw,
+      28px
+    );
+
+  margin-left:
+    -7.5px;
+
+  object-fit: fill;
+
+  image-rendering: auto;
+
+  user-select: none;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   DEKORASI NEON KIRI
+   ========================================================= */
+
+.figma-hero__bar {
+  position: absolute;
+
+  left: 0;
+
+  z-index: 1;
+
+  pointer-events: none;
+
+  border-radius:
+    0
+    999px
+    999px
+    0;
+}
+
+
+.figma-hero__bar--pink {
+  top:
+    clamp(
+      70px,
+      6.5vw,
+      95px
+    );
+
+  width:
+    clamp(
+      255px,
+      24.3vw,
+      350px
+    );
+
+  height:
+    clamp(
+      42px,
+      4vw,
+      58px
+    );
+
+  background:
+    #ff59fb;
+
+  box-shadow:
+    0 0 9px
+      rgba(
+        255,
+        89,
+        251,
+        0.78
+      ),
+    0 0 24px
+      rgba(
+        255,
+        89,
+        251,
+        0.28
+      );
+}
+
+
+.figma-hero__bar--purple {
+  top:
+    clamp(
+      112px,
+      9.8vw,
+      143px
+    );
+
+  width:
+    clamp(
+      225px,
+      20.8vw,
+      300px
+    );
+
+  height:
+    clamp(
+      40px,
+      3.8vw,
+      55px
+    );
+
+  background:
+    #9513ff;
+
+  box-shadow:
+    0 0 12px
+      rgba(
+        149,
+        19,
+        255,
+        0.34
+      );
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+
+   Menjaga ukuran logo sama seperti node
+   export Figma ketika viewport > frame design.
+   ========================================================= */
+
+@media (min-width: 1440px) {
+
+  .figma-hero__content {
+    padding-top: 230px;
+  }
+
+
+  .figma-hero__logo {
+    width: 652px;
+  }
+
+
+  .figma-hero__terrain {
+    margin-top: 28px;
+  }
+
+
+  .figma-hero__bar--pink {
+    top: 95px;
+
+    width: 350px;
+
+    height: 58px;
+  }
+
+
+  .figma-hero__bar--purple {
+    top: 143px;
+
+    width: 300px;
+
+    height: 55px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .figma-hero__content {
+    padding-top:
+      clamp(
+        135px,
+        18vw,
+        175px
+      );
+  }
+
+
+  .figma-hero__logo {
+    width:
+      min(
+        52vw,
+        520px
+      );
+  }
+
+
+  .figma-hero__terrain {
+    margin-top:
+      20px;
+  }
+
+
+  .figma-hero__bar--pink {
+    top: 65px;
+
+    width: 245px;
+
+    height: 43px;
+  }
+
+
+  .figma-hero__bar--purple {
+    top: 101px;
+
+    width: 210px;
+
+    height: 40px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+  .figma-hero__content {
+    padding-top:
+      112px;
+  }
+
+
+  .figma-hero__logo {
+    width:
+      min(
+        55vw,
+        350px
+      );
+  }
+
+
+  .figma-hero__terrain {
+    width:
+      calc(
+        100vw + 6px
+      );
+
+    margin-left:
+      -3px;
+
+    margin-top:
+      14px;
+  }
+
+
+  .figma-hero__bar--pink {
+    top: 42px;
+
+    width: 98px;
+
+    height: 22px;
+  }
+
+
+  .figma-hero__bar--purple {
+    top: 59px;
+
+    width: 83px;
+
+    height: 21px;
+  }
+
+}

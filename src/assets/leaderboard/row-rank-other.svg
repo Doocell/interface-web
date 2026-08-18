@@ -1,0 +1,17 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="1140.61" height="79.037" viewBox="0 0 1140.61 79.037" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Rectangle 1148" filter="url(#filter0_d_640_446)">
+<path d="M18.5244 8.0273H1122.08C1127.88 8.0273 1132.58 12.727 1132.58 18.5244V60.5127C1132.58 66.31 1127.88 71.0097 1122.08 71.0097H18.5244C12.727 71.0097 8.0273 66.3101 8.0273 60.5127V18.5244C8.0273 12.727 12.727 8.0273 18.5244 8.0273Z" stroke="#9513FF" stroke-width="3.70486" shape-rendering="crispEdges"/>
+</g>
+<defs>
+<filter id="filter0_d_640_446" x="0" y="0" width="1140.61" height="79.037" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="3.08738"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.58307 0 0 0 0 0.0734887 0 0 0 0 1 0 0 0 1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_640_446"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_640_446" result="shape"/>
+</filter>
+</defs>
+</svg>

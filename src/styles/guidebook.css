@@ -1,0 +1,704 @@
+/* =========================================================
+   GUIDEBOOK
+   FIGMA BASE FRAME: 1440 × 1273
+
+   TIDAK ADA BACKGROUND BARU.
+   Pattern tetap berasal dari homepage.
+   ========================================================= */
+
+.gbk-section {
+  position: relative;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  background: transparent;
+
+  scroll-margin-top:
+    calc(
+      var(--navbar-height, 82px)
+      + 18px
+    );
+}
+
+
+/* =========================================================
+   FRAME
+
+   1 cqw = 14.4 px
+   ketika frame berada pada ukuran Figma 1440px.
+
+   Jadi koordinat Figma dapat diterjemahkan
+   langsung tanpa mengikuti monitor > 1440px.
+   ========================================================= */
+
+.gbk-frame {
+  position: relative;
+
+  width:
+    min(
+      100%,
+      1440px
+    );
+
+  height:
+    88.403cqw;
+
+  max-height:
+    1273px;
+
+  margin-inline: auto;
+
+  container-type: inline-size;
+
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   TITLE
+   FIGMA:
+   x = 336
+   y = 113
+
+   B/P:
+   114.04 px
+
+   UKU/ANDUAN:
+   102.64 px
+
+   shadow:
+   9px 8px #AC4AFD
+   ========================================================= */
+
+.gbk-heading {
+  position: absolute;
+
+  left:
+    23.333cqw;
+
+  top:
+    7.847cqw;
+
+  z-index: 20;
+
+  pointer-events: none;
+}
+
+
+.gbk-heading h2 {
+  margin: 0;
+
+  display: flex;
+
+  align-items: baseline;
+
+  color: #ffffff;
+
+  font-family:
+    "Tektur",
+    sans-serif;
+
+  font-weight: 800;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  letter-spacing:
+    0;
+
+  text-shadow:
+    0.625cqw
+    0.556cqw
+    0
+    rgba(
+      172,
+      74,
+      253,
+      1
+    );
+}
+
+
+.gbk-heading__big {
+  font-size:
+    7.919cqw;
+
+  line-height:
+    5.94cqw;
+}
+
+
+.gbk-heading__normal {
+  color: #ffffff;
+
+  font-size:
+    7.128cqw;
+
+  line-height:
+    5.346cqw;
+}
+
+
+.gbk-heading__yellow {
+  color:
+    #ffd900;
+}
+
+
+.gbk-heading__space {
+  width:
+    1.65cqw;
+}
+
+
+/* =========================================================
+   BOOK
+
+   Codegen:
+   cover utama:
+   x = 500.04
+   y = 274
+   412.89 × 584.29
+
+   Book group juga memiliki backing/shadow
+   sampai sekitar 442px.
+
+   Asset guidebook-book.svg adalah seluruh
+   artwork buku, sehingga tidak perlu crop.
+   ========================================================= */
+
+.gbk-book {
+  position: absolute;
+
+  left:
+    34.725cqw;
+
+  top:
+    19.028cqw;
+
+  z-index: 10;
+
+  width:
+    30.73cqw;
+
+  max-width:
+    442.51px;
+
+  transform:
+    translateZ(0);
+}
+
+
+.gbk-book__image {
+  display: block;
+
+  width: 100%;
+
+  height: auto;
+
+  max-width: none;
+
+  user-select: none;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   LEFT NEON
+   Exact bounding position hasil rotasi Figma.
+   ========================================================= */
+
+.gbk-left-neon {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 4;
+
+  pointer-events: none;
+}
+
+
+/*
+   Pink Figma:
+   528.38 × 86.74
+   left 278.74
+   top 607.98
+   rotate 89°
+
+   Visual bounding box kira-kira:
+   x 192
+   y 608
+   w 96
+   h 530
+*/
+
+.gbk-left-neon__pink {
+  position: absolute;
+
+  left:
+    13.334cqw;
+
+  top:
+    42.221cqw;
+
+  width:
+    6.663cqw;
+
+  height:
+    36.792cqw;
+
+  border-radius:
+    999px;
+
+  background:
+    #ff59fb;
+
+  box-shadow:
+    0
+    0
+    1.637cqw
+    rgba(
+      255,
+      255,
+      255,
+      0.7
+    ),
+    0
+    0
+    1.637cqw
+    #ff59fb;
+}
+
+
+/*
+   Purple visual:
+   x ≈ 249.5
+   y ≈ 673.3
+   w ≈ 88.5
+   h ≈ 487
+*/
+
+.gbk-left-neon__purple {
+  position: absolute;
+
+  left:
+    17.325cqw;
+
+  top:
+    46.756cqw;
+
+  width:
+    6.147cqw;
+
+  height:
+    33.818cqw;
+
+  border-radius:
+    999px;
+
+  background:
+    #9513ff;
+
+  box-shadow:
+    0
+    0
+    1.637cqw
+    rgba(
+      255,
+      255,
+      255,
+      0.7
+    ),
+    0
+    0
+    1.637cqw
+    #9513ff;
+}
+
+
+/* =========================================================
+   RIGHT NEON
+   ========================================================= */
+
+.gbk-right-neon {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 4;
+
+  pointer-events: none;
+}
+
+
+/*
+   Yellow visual:
+   x ≈ 1149.85
+   y = 278.82
+   w ≈ 97.72
+   h ≈ 541.52
+*/
+
+.gbk-right-neon__yellow {
+  position: absolute;
+
+  left:
+    79.851cqw;
+
+  top:
+    19.363cqw;
+
+  width:
+    6.786cqw;
+
+  height:
+    37.606cqw;
+
+  border-radius:
+    999px;
+
+  background:
+    #ffd900;
+
+  box-shadow:
+    0
+    0
+    1.577cqw
+    rgba(
+      255,
+      255,
+      255,
+      0.7
+    ),
+    0
+    0
+    1.577cqw
+    #ffd900;
+}
+
+
+/*
+   Blue visual:
+   x ≈ 1108.28
+   y = 274.07
+   w ≈ 86.05
+   h ≈ 464.16
+*/
+
+.gbk-right-neon__blue {
+  position: absolute;
+
+  left:
+    76.964cqw;
+
+  top:
+    19.033cqw;
+
+  z-index: 2;
+
+  width:
+    5.976cqw;
+
+  height:
+    32.233cqw;
+
+  border-radius:
+    999px;
+
+  background:
+    #3498db;
+
+  box-shadow:
+    0
+    0
+    1.577cqw
+    rgba(
+      255,
+      255,
+      255,
+      0.7
+    ),
+    0
+    0
+    1.577cqw
+    #3498db;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.gbk-actions {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 30;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   BUTTON BASE
+   ========================================================= */
+
+.gbk-action {
+  position: absolute;
+
+  width:
+    21.052cqw;
+
+  height:
+    6.715cqw;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius:
+    0.485cqw;
+
+  font-family:
+    "Londrina Solid",
+    sans-serif;
+
+  font-size:
+    2.328cqw;
+
+  font-weight: 900;
+
+  line-height:
+    2.441cqw;
+
+  letter-spacing:
+    0.047cqw;
+
+  text-align: center;
+
+  text-transform: uppercase;
+
+  text-decoration: none;
+
+  pointer-events: auto;
+
+  transform:
+    rotate(-1deg);
+
+  transform-origin:
+    center;
+}
+
+
+/* =========================================================
+   PDF
+
+   Figma rotated rectangle menghasilkan
+   visual position sekitar:
+   x = 568.58
+   y = 919.28
+   ========================================================= */
+
+.gbk-action--pdf {
+  left:
+    39.485cqw;
+
+  top:
+    63.839cqw;
+
+  color:
+    #dfb009;
+
+  background:
+    #fffbe4;
+
+  border:
+    0.399cqw
+    solid
+    #ffd900;
+
+  box-shadow:
+    0
+    0
+    1.997cqw
+    #ffd900,
+
+    inset
+    0
+    -2.231cqw
+    0.194cqw
+    #ebe3b3;
+
+  text-shadow:
+    0.278cqw
+    0.278cqw
+    0.278cqw
+    rgba(
+      0,
+      0,
+      0,
+      0.25
+    );
+}
+
+
+/* =========================================================
+   DRIVE
+
+   visual y ≈ 1056.56
+   ========================================================= */
+
+.gbk-action--drive {
+  left:
+    39.485cqw;
+
+  top:
+    73.372cqw;
+
+  color:
+    #189cf4;
+
+  background:
+    #d5eeff;
+
+  border:
+    0.399cqw
+    solid
+    #189cf4;
+
+  box-shadow:
+    0
+    0
+    1.997cqw
+    #189cf4,
+
+    inset
+    0
+    -2.231cqw
+    0.194cqw
+    #c0e1f9;
+
+  text-shadow:
+    0.278cqw
+    0.278cqw
+    0.278cqw
+    rgba(
+      0,
+      0,
+      0,
+      0.25
+    );
+}
+
+
+.gbk-action.is-disabled {
+  cursor: default;
+}
+
+
+/* =========================================================
+   BOTTOM RIGHT PINK SQUARE
+
+   Figma:
+   x 1436.77
+   y 997
+   175.03 × 175.03
+   rotate 64°
+   ========================================================= */
+
+.gbk-corner {
+  position: absolute;
+
+  left:
+    99.776cqw;
+
+  top:
+    69.236cqw;
+
+  z-index: 3;
+
+  width:
+    12.155cqw;
+
+  height:
+    12.155cqw;
+
+  transform:
+    rotate(64deg);
+
+  transform-origin:
+    top left;
+
+  border-radius:
+    1.897cqw;
+
+  background:
+    #ff59fb;
+
+  pointer-events: none;
+}
+
+
+.gbk-corner span {
+  position: absolute;
+
+  left:
+    1.15cqw;
+
+  top:
+    1.526cqw;
+
+  width:
+    9.868cqw;
+
+  height:
+    9.868cqw;
+
+  border:
+    0.808cqw
+    solid
+    #ffffff;
+
+  border-radius:
+    1.106cqw;
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+
+   Setelah 1440px, SEMUA ukuran berhenti membesar.
+   ========================================================= */
+
+@media (min-width: 1441px) {
+
+  .gbk-frame {
+    width: 1440px;
+
+    height: 1273px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+
+  .gbk-action,
+  .gbk-book {
+    transition: none;
+  }
+
+}

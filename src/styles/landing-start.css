@@ -1,0 +1,1105 @@
+/* =========================================================
+   INTERFACE 2026
+   FIGMA NODE : 303:2
+   SECTION AWAL + NAVBAR
+
+   REFERENCE:
+   Desktop frame : 1440 × 1024
+   Navbar        : 1440 × 76
+   Hero          : 1440 × 948
+
+   Target:
+   - ukuran elemen mengikuti Figma desktop
+   - desktop lebar tetap full viewport
+   - Building Terrain menyentuh kiri + kanan browser
+   - teks Building Terrain TIDAK ikut membesar
+   ========================================================= */
+
+
+/* =========================================================
+   DESIGN TOKENS
+   ========================================================= */
+
+:root {
+  --interface-bg: #685abb;
+  --interface-dark: #26353c;
+
+  --interface-pink: #ff59fb;
+  --interface-purple: #9513ff;
+  --interface-blue: #189cf4;
+  --interface-yellow: #ffd900;
+
+  --navbar-height: 76px;
+}
+
+
+/* =========================================================
+   GLOBAL RESET
+   ========================================================= */
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 100%;
+  min-height: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  background: var(--interface-bg);
+}
+
+
+html {
+  overflow-x: hidden;
+}
+
+
+body {
+  overflow-x: hidden;
+}
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+img {
+  display: block;
+}
+
+
+/* =========================================================
+   NAVBAR
+   FIGMA NODE : 303:3
+   HEIGHT      : 76px
+   
+   FIXED DI TOP AGAR SELALU TERLIHAT DI ATAS
+   ========================================================= */
+
+.figma-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  z-index: 1000;
+
+  width: 100%;
+  height: 76px;
+
+  margin: 0;
+  padding: 0;
+
+  background: #26353c;
+
+  border-bottom: 2px solid #9513ff;
+
+  overflow: visible;
+}
+
+
+/*
+   Navbar menggunakan canvas referensi 1440px.
+   Pada desktop lebih besar, canvas tetap di tengah
+   sehingga ukuran dan spacing menu sama dengan Figma.
+*/
+
+.figma-navbar__canvas {
+  position: relative;
+
+  width: 1440px;
+  height: 76px;
+
+  margin: 0 auto;
+
+  overflow: visible;
+}
+
+
+/* =========================================================
+   NAVBAR LOGO
+   FIGMA:
+   x = 35
+   y = 14
+   w = 178
+   h = 47.532
+   ========================================================= */
+
+.figma-navbar__brand {
+  position: absolute;
+
+  left: 35px;
+  top: 14px;
+
+  z-index: 10;
+
+  display: block;
+
+  width: 178px;
+  height: 47.532px;
+}
+
+
+.figma-navbar__brand img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  object-position: center;
+
+  user-select: none;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.figma-navbar__menu {
+  position: absolute;
+
+  inset: 0;
+
+  font-family:
+    "Tektur",
+    sans-serif;
+}
+
+
+.figma-navbar__link {
+  position: absolute;
+
+  top: 13px;
+
+  height: 50px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #ffffff;
+
+  font-family:
+    "Tektur",
+    sans-serif;
+
+  font-size: 20px;
+  font-weight: 600;
+
+  line-height: 50px;
+
+  text-align: center;
+  text-transform: capitalize;
+
+  white-space: nowrap;
+
+  text-shadow:
+    0 0 16.742px
+    rgba(255, 255, 255, 0.58);
+
+  transition:
+    color 200ms ease,
+    text-shadow 200ms ease,
+    transform 150ms ease;
+
+  will-change: color, text-shadow, transform;
+}
+
+.figma-navbar__link:hover {
+  transform: translateY(-1px);
+}
+
+.figma-navbar__link:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   EXACT FIGMA MENU POSITION
+   ========================================================= */
+
+.nav-information {
+  left: 405px;
+  width: 120px;
+}
+
+
+.nav-timeline {
+  left: 540px;
+  width: 81px;
+}
+
+
+.nav-leaderboard {
+  left: 636px;
+  width: 128px;
+}
+
+
+.nav-vote {
+  left: 779px;
+  width: 46px;
+}
+
+
+.nav-map {
+  left: 840px;
+  width: 40px;
+}
+
+
+.nav-game-description {
+  left: 895px;
+  width: 172px;
+}
+
+
+.nav-quest-collect {
+  left: 1082px;
+  width: 128px;
+}
+
+
+.nav-faq {
+  left: 1225px;
+
+  width: 43px;
+
+  font-family:
+    "Sora",
+    sans-serif;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   ACTIVE NAVIGATION
+   INFORMATION ACTIVE PADA FRAME 303:2
+   ========================================================= */
+
+.figma-navbar__link.is-active {
+  color: #189cf4;
+
+  text-shadow:
+    0 0 16.742px
+    rgba(255, 255, 255, 0.58);
+}
+
+
+.figma-navbar__link.is-active::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 36px;
+
+  width: 100%;
+  height: 1px;
+
+  background: #189cf4;
+
+  box-shadow:
+    0 0 4px
+    rgba(24, 156, 244, 0.85);
+}
+
+
+.figma-navbar__link:hover {
+  color: #189cf4;
+}
+
+
+/* =========================================================
+   BUKU PANDUAN
+   FIGMA NODE : 303:53
+
+   x = 1283.527
+   y = 14
+   w = 121.819
+   h = 48.116
+   ========================================================= */
+
+.figma-navbar__guidebook {
+  position: absolute;
+
+  left: 1283.527px;
+  top: 14px;
+
+  z-index: 10;
+
+  width: 121.819px;
+  height: 48.116px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  isolation: isolate;
+
+  transition: 
+    filter 150ms ease,
+    transform 150ms ease;
+
+  will-change: filter, transform;
+}
+
+
+.figma-navbar__guidebook-bg {
+  position: absolute;
+
+  left: 0;
+  top: 4.74px;
+
+  z-index: -1;
+
+  width: 121.819px;
+  height: 40.598px;
+
+  max-width: none;
+
+  pointer-events: none;
+}
+
+
+.figma-navbar__guidebook span {
+  position: relative;
+
+  z-index: 2;
+
+  color: #ff59fb;
+
+  font-family:
+    "Londrina Solid",
+    sans-serif;
+
+  font-size: 14px;
+  font-weight: 900;
+
+  line-height: 48px;
+
+  letter-spacing: 0.28px;
+
+  text-align: center;
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  text-shadow:
+    5.41px
+    5.41px
+    5.139px
+    rgba(0, 0, 0, 0.25);
+}
+
+
+.figma-navbar__guidebook:hover {
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+}
+
+.figma-navbar__guidebook:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   SECTION AWAL
+   1024 - 76 NAVBAR = 948px
+   
+   TIDAK PERLU BACKGROUND SENDIRI - PAKAI GLOBAL BACKGROUND
+   ========================================================= */
+
+.figma-start {
+  position: relative;
+
+  width: 100vw;
+  height: 948px;
+
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+
+  /* Background dihapus - pakai BackgroundPattern global */
+}
+
+
+.figma-start__canvas {
+  position: relative;
+
+  width: 100vw;
+  height: 948px;
+
+  margin: 0;
+  padding: 0;
+
+  overflow: visible;
+
+  /* Background dihapus - pakai BackgroundPattern global */
+}
+
+
+/* =========================================================
+   BACKGROUND PATTERN
+   ========================================================= */
+
+.figma-start__pattern {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 0;
+
+  overflow: hidden;
+
+  pointer-events: none;
+}
+
+
+.figma-start__pattern img {
+  position: absolute;
+
+  display: block;
+
+  width: calc(100vw + 286.339px);
+  height: 716.798px;
+
+  max-width: none;
+
+  object-fit: fill;
+
+  pointer-events: none;
+  user-select: none;
+}
+
+
+/*
+   Figma:
+   top = -206
+
+   Relative terhadap hero:
+   -206 - navbar 76
+*/
+
+.figma-start__pattern-top {
+  left: -142.661px;
+  top: -282px;
+}
+
+
+/*
+   Figma:
+   top = 532.256
+
+   Relative hero:
+   532.256 - 76
+*/
+
+.figma-start__pattern-bottom {
+  left: -143px;
+  top: 456.256px;
+}
+
+
+/* =========================================================
+   LEFT PINK + PURPLE
+   ========================================================= */
+
+.figma-start__neon {
+  position: absolute;
+
+  z-index: 2;
+
+  pointer-events: none;
+}
+
+
+/* PINK */
+
+.figma-start__neon--pink {
+  left: -62.48px;
+  top: 88px;
+
+  width: 412.474px;
+  height: 67.632px;
+
+  background: #ff59fb;
+
+  border-radius:
+    0
+    59.039px
+    59.039px
+    0;
+
+  transform:
+    rotate(-0.54deg)
+    skewX(1.77deg);
+
+  box-shadow:
+    0 0 18.373px #ff59fb,
+    0 0 18.373px
+    rgba(255, 255, 255, 0.7);
+}
+
+
+/* PURPLE */
+
+.figma-start__neon--purple {
+  left: -80.01px;
+  top: 132.796px;
+
+  width: 377.785px;
+  height: 62.418px;
+
+  background: #9513ff;
+
+  border-radius:
+    0
+    63.437px
+    63.437px
+    0;
+
+  transform:
+    rotate(-0.54deg)
+    skewX(1.77deg);
+
+  box-shadow:
+    0 0 18.373px #9513ff,
+    0 0 18.373px
+    rgba(255, 255, 255, 0.7);
+}
+
+
+/* =========================================================
+   MAIN INTERFACE LOGO
+   FIGMA:
+
+   x = 402
+   y = 305
+   width = 636
+   height = 267.773
+
+   Center:
+   402 + (636 / 2)
+   = 720
+
+   karena itu gunakan 50% viewport.
+   ========================================================= */
+
+.figma-start__main-logo {
+  position: absolute;
+
+  left: 50%;
+  top: 229px;
+
+  z-index: 4;
+
+  width: 636px;
+  height: 267.773px;
+
+  transform: translateX(-50%);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+
+.figma-start__main-logo img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  object-position: center;
+
+  max-width: none;
+
+  user-select: none;
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   BUILDING TERRAIN
+   FIGMA NODE : 303:57
+
+   BAGIAN INI DIBUAT KHUSUS AGAR:
+
+   1. ukuran teks tetap mengikuti Figma
+   2. SVG tengah tidak stretch
+   3. border/background diperpanjang sampai
+      sisi kiri dan kanan monitor
+   4. tidak ada lagi margin kosong pada monitor 1920px
+   ========================================================= */
+
+.figma-start__terrain {
+  position: absolute;
+
+  left: 50%;
+  top: 526.837px;
+
+  z-index: 5;
+
+  width: 100vw;
+  height: 132.88px;
+
+  transform: translateX(-50%);
+
+  overflow: visible;
+
+  line-height: 0;
+
+  pointer-events: none;
+
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   FULL WIDTH TERRAIN BACKGROUND
+
+   Ini memperpanjang strip asli Figma
+   sampai melewati edge browser.
+
+   SVG tengah tetap pada ukuran aslinya.
+   ========================================================= */
+
+.figma-start__terrain::before {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+
+  /*
+     Rectangle asli berada di tengah
+     bounding box 132.88px.
+
+     (132.88 - 94.849) / 2
+     ≈ 19.015px
+  */
+
+  top: 19.015px;
+
+  z-index: -2;
+
+  width: calc(100vw + 160px);
+  height: 94.849px;
+
+  transform:
+    translateX(-50%)
+    rotate(-1.5deg)
+    skewX(-0.37deg);
+
+  transform-origin: center center;
+
+  background:
+    #26353c;
+
+  border-top:
+    2.427px solid
+    #ffffff;
+
+  border-bottom:
+    2.427px solid
+    #ffffff;
+}
+
+
+/* =========================================================
+   SUBTLE PATTERN EXTENSION
+
+   Mengisi area tambahan kiri/kanan agar strip
+   tidak terlihat seperti warna polos total.
+   ========================================================= */
+
+.figma-start__terrain::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  top: 23px;
+
+  z-index: -1;
+
+  width: calc(100vw + 150px);
+  height: 87px;
+
+  transform:
+    translateX(-50%)
+    rotate(-1.5deg);
+
+  transform-origin: center;
+
+  pointer-events: none;
+
+  opacity: 0.32;
+
+  background-image:
+
+    radial-gradient(
+      circle at 28px 25px,
+      rgba(11, 25, 31, 0.8)
+      0 8px,
+      transparent 9px
+    ),
+
+    radial-gradient(
+      circle at 118px 61px,
+      rgba(11, 25, 31, 0.72)
+      0 7px,
+      transparent 8px
+    );
+
+  background-size:
+    180px 90px,
+    180px 90px;
+
+  background-position:
+    0 0,
+    76px -8px;
+}
+
+
+/* =========================================================
+   ORIGINAL BUILDING TERRAIN SVG
+
+   PENTING:
+   - TIDAK dibuat 100vw
+   - ukurannya tetap sesuai Figma
+   - teks tidak melebar
+   - artwork tetap original
+   ========================================================= */
+
+.figma-start__terrain img {
+  position: absolute;
+
+  left: 50%;
+  top: 0;
+
+  z-index: 2;
+
+  display: block;
+
+  width: 1454.896px !important;
+  min-width: 1454.896px;
+  max-width: none !important;
+
+  height: 132.88px !important;
+
+  transform: translateX(-50%);
+
+  object-fit: fill;
+
+  /*
+     Buang beberapa pixel edge SVG sehingga
+     garis penutup kiri/kanan bawaan SVG
+     tidak terlihat di tengah layar.
+
+     Border full-width dari ::before menjadi
+     border utama.
+  */
+
+  clip-path:
+    inset(
+      0
+      14px
+      0
+      14px
+    );
+
+  user-select: none;
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   RIGHT BLUE + YELLOW
+   ========================================================= */
+
+.figma-start__right-neon {
+  position: absolute;
+
+  z-index: 3;
+
+  pointer-events: none;
+
+  border-radius: 999px;
+}
+
+
+/* =========================================================
+   BLUE
+
+   FIGMA:
+   x = 1144.05
+   width = 371.402
+
+   overflow kanan:
+   1144.05 + 371.402 - 1440
+   ≈ 75.452px
+   ========================================================= */
+
+.figma-start__right-neon--blue {
+  right: -75.452px;
+  top: 690px;
+
+  width: 371.402px;
+  height: 67.071px;
+
+  background: #3498db;
+
+  box-shadow:
+    0 0 17.697px #3498db,
+    0 0 17.697px
+    rgba(255, 255, 255, 0.7);
+}
+
+
+/* =========================================================
+   YELLOW
+
+   FIGMA:
+   x = 1089.961
+   width = 421.792
+
+   overflow ≈ 71.753px
+   ========================================================= */
+
+.figma-start__right-neon--yellow {
+  right: -71.753px;
+  top: 722.4px;
+
+  width: 421.792px;
+  height: 76.171px;
+
+  background: #ffd900;
+
+  box-shadow:
+    0 0 17.697px #ffd900,
+    0 0 17.697px
+    rgba(255, 255, 255, 0.7);
+}
+
+
+/* =========================================================
+   DESKTOP >= 1440
+   PRIMARY TARGET
+   ========================================================= */
+
+@media (min-width: 1440px) {
+
+  .figma-start {
+    width: 100vw;
+    height: 948px;
+  }
+
+
+  .figma-start__canvas {
+    width: 100vw;
+    height: 948px;
+  }
+
+
+  .figma-start__main-logo {
+    width: 636px;
+    height: 267.773px;
+  }
+
+
+  /*
+     Terrain SVG tengah tetap ukuran Figma,
+     hanya strip belakangnya yang full screen.
+  */
+
+  .figma-start__terrain img {
+    width: 1454.896px !important;
+    min-width: 1454.896px;
+  }
+
+}
+
+
+/* =========================================================
+   1280 - 1439 DESKTOP
+   ========================================================= */
+
+@media
+  (min-width: 1280px)
+  and
+  (max-width: 1439px) {
+
+  .figma-navbar__canvas {
+    left: 50%;
+
+    width: 1440px;
+
+    margin: 0;
+
+    transform:
+      translateX(-50%)
+      scale(0.88);
+
+    transform-origin:
+      top center;
+  }
+
+
+  .figma-start__main-logo {
+    width: 572px;
+    height: 241px;
+  }
+
+
+  .figma-start__terrain img {
+    width: 1280px !important;
+    min-width: 1280px;
+
+    height: 116.9px !important;
+
+    top: 8px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET / SMALL DESKTOP FALLBACK
+   ========================================================= */
+
+@media (max-width: 1279px) {
+
+  .figma-navbar__canvas {
+    width: 100%;
+  }
+
+
+  .figma-navbar__menu {
+    display: none;
+  }
+
+
+  .figma-navbar__brand {
+    left: 24px;
+  }
+
+
+  .figma-start__main-logo {
+    width: min(636px, 72vw);
+    height: auto;
+  }
+
+
+  .figma-start__terrain img {
+    width: 115vw !important;
+    min-width: 115vw;
+
+    height: 120px !important;
+
+    object-fit: fill;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE FALLBACK
+   HERO DESKTOP TIDAK DIUBAH
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .figma-navbar {
+    height: 68px;
+  }
+
+
+  .figma-navbar__canvas {
+    height: 68px;
+  }
+
+
+  .figma-navbar__brand {
+    left: 20px;
+    top: 10px;
+
+    width: 170px;
+    height: 46px;
+  }
+
+
+  .figma-start {
+    min-height: 720px;
+  }
+
+
+  .figma-start__canvas {
+    min-height: 720px;
+  }
+
+
+  .figma-start__main-logo {
+    top: 185px;
+
+    width: min(86vw, 540px);
+  }
+
+
+  .figma-start__neon--pink {
+    top: 70px;
+
+    width: 270px;
+    height: 50px;
+  }
+
+
+  .figma-start__neon--purple {
+    top: 105px;
+
+    width: 235px;
+    height: 46px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+  }
+
+}

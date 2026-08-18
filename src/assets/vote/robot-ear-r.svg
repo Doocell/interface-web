@@ -1,0 +1,20 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="11.4837" height="25.0068" viewBox="0 0 11.4837 25.0068" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Kuping Kanan">
+<g id="Rectangle 1001" filter="url(#filter0_i_642_2015)">
+<path d="M0.147741 6.01769C0.147741 3.24792 2.39308 1.00259 5.16285 1.00259H11.4837V23.5705H5.16285C2.39308 23.5705 0.147741 21.3252 0.147741 18.5554V6.01769Z" fill="#FE5AF9"/>
+</g>
+<path id="Rectangle 1002" d="M0 1.00259L2.21475 16.5433C2.61057 19.3207 4.51899 21.647 7.16542 22.5782L9.98583 23.5705H5.0151C2.24534 23.5705 0 21.3252 0 18.5554V1.00259Z" fill="#76007D" fill-opacity="0.18"/>
+<path id="Vector 340" d="M11.4836 23.4378V1.56892C11.4836 0.702431 10.7812 0 9.91472 0C9.04822 0 8.34579 0.702429 8.34579 1.56892V23.4378C8.34579 24.3043 9.04822 25.0068 9.91472 25.0068C10.7812 25.0068 11.4836 24.3043 11.4836 23.4378Z" fill="#209CEE"/>
+</g>
+<defs>
+<filter id="filter0_i_642_2015" x="0.147741" y="1.00259" width="11.3359" height="22.5679" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dx="1.50453"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.00784314 0 0 0 0 0.315686 0 0 0 0 0.576471 0 0 0 1 0"/>
+<feBlend mode="normal" in2="shape" result="effect1_innerShadow_642_2015"/>
+</filter>
+</defs>
+</svg>
