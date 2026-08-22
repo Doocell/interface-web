@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
+import BackgroundPattern from "../components/layout/BackgroundPattern";
 
 // Floating geometric shapes from leaderboard
 import elemenX from "../assets/leaderboard/elemen-x.svg";
@@ -375,7 +376,7 @@ export default function Vote() {
                       </div>
 
                       {/* Name Plate at Bottom */}
-                      <div className="absolute bottom-[38px] sm:bottom-[44px] md:bottom-[48px] left-1/2 -translate-x-1/2 w-[180px] sm:w-[195px] md:w-[209.9px] h-[30px] sm:h-[33px] md:h-[36px] flex items-center justify-center z-10">
+                      <div className="absolute bottom-[38px] sm:bottom-[44px] md:bottom-[48px] left-1/2 -translate-x-1/2 w-[180px] sm:w-[195px] md:w-[209.9px] h-[30px] sm:h-[33px] md:h-[36px] flex items-center justify-center z-30">
                         <img
                           src={cardNamePlate}
                           alt=""
@@ -393,7 +394,7 @@ export default function Vote() {
                       </div>
 
                       {/* Clouds Overlay at Card Bottom */}
-                      <div className="absolute bottom-0 left-0 w-full h-[65px] sm:h-[75px] md:h-[82px] overflow-hidden rounded-b-[12.9px] pointer-events-none z-20">
+                      <div className="absolute bottom-0 left-0 w-full h-[65px] sm:h-[75px] md:h-[82px] overflow-hidden rounded-b-[12.9px] pointer-events-none z-40">
                         <img
                           src={cardClouds}
                           alt=""

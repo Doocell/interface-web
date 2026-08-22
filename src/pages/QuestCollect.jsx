@@ -1,4 +1,5 @@
 import { useState } from "react";
+import BackgroundPattern from "../components/layout/BackgroundPattern";
 
 const QUESTS = [
   {
@@ -169,10 +170,12 @@ function QuestCard({ quest, index }) {
 
 export default function QuestCollect() {
   return (
-    <main
-      className="quest-page"
-      style={{ paddingTop: "76px" }}
-    >
+    <>
+      <BackgroundPattern />
+      <main
+        className="quest-page"
+        style={{ paddingTop: "76px" }}
+      >
       <style>{`
         /* ========== QUEST COLLECT PAGE ========== */
         .quest-page {
@@ -510,5 +513,6 @@ export default function QuestCollect() {
         ))}
       </div>
     </main>
+    </>
   );
 }

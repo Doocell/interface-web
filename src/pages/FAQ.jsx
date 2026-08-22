@@ -1,10 +1,46 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
+import BackgroundPattern from "../components/layout/BackgroundPattern";
+import "../styles/FAQSection.css";
+
+// Figma Asset URLs
+const imgElemenSegitiga = "https://www.figma.com/api/mcp/asset/30980250-2181-4d73-a820-564dfbb8b439.svg";
+const imgElemenX = "https://www.figma.com/api/mcp/asset/0ccf7fc0-1c28-4d9a-9c21-c658f531518f.svg";
+const imgGroup101042 = "https://www.figma.com/api/mcp/asset/1ace6d9a-3289-4ef0-9486-c83b9c2e077a.svg";
+const imgWeuiArrowFilled = "https://www.figma.com/api/mcp/asset/be1cf2a2-a5af-402d-a249-adcff38820bb.svg";
+const imgGroup101043 = "https://www.figma.com/api/mcp/asset/db809479-16a1-4c1a-b4fd-0122acf38971.svg";
+const imgGroup101044 = "https://www.figma.com/api/mcp/asset/6a81e2e0-0dab-4ad9-83a8-c73bdd3602d5.svg";
+
+const defaultFaqItems = [
+  {
+    icon: imgGroup101042,
+    question: "Lorem Ipsum Dolor Sit Amet?",
+    answer:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+  },
+  {
+    icon: imgGroup101043,
+    question: "Lorem Ipsum Dolor Sit Amet?",
+    answer:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  },
+  {
+    icon: imgGroup101043,
+    question: "Lorem Ipsum Dolor Sit Amet?",
+    answer:
+      "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  },
+  {
+    icon: imgGroup101044,
+    question: "Lorem Ipsum Dolor Sit Amet?",
+    answer:
+      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+  },
+];
 
 export default function FAQ() {
+  const [activeIndex, setActiveIndex] = useState(-1);
   const [questions, setQuestions] = useState([]);
-  const [form, setForm] = useState({ nama: "", kode_kelompok: "", pertanyaan: "" });
-  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     async function fetchFAQ() {
@@ -18,89 +54,117 @@ export default function FAQ() {
     fetchFAQ();
   }, []);
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    if (!form.nama || !form.pertanyaan) return;
-    const { error } = await supabase.from("questions").insert({ ...form, status: "pending" });
-    if (!error) {
-      setSubmitted(true);
-      setForm({ nama: "", kode_kelompok: "", pertanyaan: "" });
-    }
-  }
+  // Use database questions if available, otherwise use default
+  const faqItems = questions.length > 0 
+    ? questions.map((q, idx) => ({
+        icon: defaultFaqItems[idx % defaultFaqItems.length].icon,
+        question: q.pertanyaan,
+        answer: q.jawaban,
+      }))
+    : defaultFaqItems;
+
+  const toggleFaq = (index) => {
+    setActiveIndex((prev) => (prev === index ? -1 : index));
+  };
 
   return (
-    <div className="w-full flex flex-col items-center px-4 md:px-8 py-10 md:py-16" style={{ paddingTop: "calc(76px + 2.5rem)" }}>
-      <h1 className="font-tektur font-black text-white text-3xl md:text-5xl text-center">
-        QUESTION & FAQ
-      </h1>
-
-      <div className="w-full max-w-4xl grid md:grid-cols-2 gap-8 mt-10">
-        {/* Form */}
-        <div>
-          <h2 className="font-tektur font-semibold text-white text-lg mb-4">Kirim Pertanyaan</h2>
-          {submitted ? (
-            <p className="font-tektur text-sm text-green-400">
-              Pertanyaan kamu terkirim! Admin akan menjawab secepatnya.
-            </p>
-          ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-              <input
-                type="text"
-                placeholder="Nama"
-                value={form.nama}
-                onChange={(e) => setForm({ ...form, nama: e.target.value })}
-                className="px-4 py-2 rounded-lg text-sm text-black outline-none"
-                required
-              />
-              <input
-                type="text"
-                placeholder="Kode Kelompok (opsional)"
-                value={form.kode_kelompok}
-                onChange={(e) => setForm({ ...form, kode_kelompok: e.target.value })}
-                className="px-4 py-2 rounded-lg text-sm text-black outline-none"
-              />
-              <textarea
-                placeholder="Pertanyaan kamu..."
-                value={form.pertanyaan}
-                onChange={(e) => setForm({ ...form, pertanyaan: e.target.value })}
-                rows={4}
-                className="px-4 py-2 rounded-lg text-sm text-black outline-none resize-none"
-                required
-              />
-              <button
-                type="submit"
-                className="mt-1 px-5 py-2 rounded-full font-tektur font-semibold text-sm text-black self-start"
-                style={{ background: "#FFD900" }}
-              >
-                KIRIM
-              </button>
-            </form>
-          )}
+    <>
+      {/* Background Pattern */}
+      <BackgroundPattern />
+      
+      <section className="faq-page-section">
+        {/* Decorative Triangle - Right Top */}
+        <div className="faq-triangle-decor">
+          <img 
+            src={imgElemenSegitiga} 
+            alt="" 
+            className="faq-decor-img"
+          />
         </div>
 
-        {/* FAQ list */}
-        <div>
-          <h2 className="font-tektur font-semibold text-white text-lg mb-4">Pertanyaan Umum</h2>
-          <div className="flex flex-col gap-3">
-            {questions.length === 0 ? (
-              <p className="text-white/50 font-tektur text-sm">Belum ada FAQ tersedia.</p>
-            ) : (
-              questions.map((q) => (
-                <details
-                  key={q.id}
-                  className="rounded-xl px-4 py-3"
-                  style={{ background: "rgba(255,255,255,0.06)" }}
+        {/* Decorative Cross - Left Bottom */}
+        <div className="faq-cross-decor">
+          <img 
+            src={imgElemenX} 
+            alt="" 
+            className="faq-decor-img"
+          />
+        </div>
+
+        {/* Main Content Container */}
+        <div className="faq-container">
+          {/* Left Side: Title and Button */}
+          <div className="faq-left-side">
+            {/* Title */}
+            <div className="faq-title">
+              <div className="faq-title-line">
+                <span className="faq-title-letter-big">P</span>
+                <span className="faq-title-text">ERTANYAAN</span>
+              </div>
+              <div className="faq-title-line">
+                <span className="faq-title-letter-big">U</span>
+                <span className="faq-title-text">MUM</span>
+              </div>
+              <div className="faq-title-line">
+                <span className="faq-title-highlight">(FAQ)</span>
+              </div>
+            </div>
+
+            {/* Send Question Button */}
+            <button 
+              className="faq-send-button"
+              onClick={() => window.location.href = '/quest-collect'}
+            >
+              <span className="faq-send-button-text">SEND QUESTION HERE!</span>
+            </button>
+          </div>
+
+          {/* Right Side: FAQ List */}
+          <div className="faq-right-side">
+            {faqItems.map((item, index) => {
+              const isOpen = activeIndex === index;
+
+              return (
+                <div 
+                  key={index}
+                  className={`faq-item ${isOpen ? "faq-item-open" : ""}`}
                 >
-                  <summary className="font-tektur text-white text-sm cursor-pointer">
-                    {q.pertanyaan}
-                  </summary>
-                  <p className="font-tektur text-white/70 text-xs mt-2">{q.jawaban}</p>
-                </details>
-              ))
-            )}
+                  {/* Question Header */}
+                  <button 
+                    className="faq-question-header"
+                    onClick={() => toggleFaq(index)}
+                  >
+                    <div className="faq-question-left">
+                      <img 
+                        src={item.icon} 
+                        alt="" 
+                        className="faq-question-icon"
+                      />
+                      <span className="faq-question-text">
+                        {item.question}
+                      </span>
+                    </div>
+                    <div className="faq-chevron">
+                      <img 
+                        src={imgWeuiArrowFilled} 
+                        alt="" 
+                        className="faq-chevron-icon"
+                      />
+                    </div>
+                  </button>
+
+                  {/* Answer Content */}
+                  {isOpen && (
+                    <div className="faq-answer">
+                      <p className="faq-answer-text">{item.answer}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 }
