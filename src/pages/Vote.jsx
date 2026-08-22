@@ -375,12 +375,21 @@ export default function Vote() {
                         </div>
                       </div>
 
-                      {/* Name Plate at Bottom */}
-                      <div className="absolute bottom-[38px] sm:bottom-[44px] md:bottom-[48px] left-1/2 -translate-x-1/2 w-[180px] sm:w-[195px] md:w-[209.9px] h-[30px] sm:h-[33px] md:h-[36px] flex items-center justify-center z-30">
+                      {/* Clouds Overlay at Card Bottom - BEHIND name plate */}
+                      <div className="absolute bottom-0 left-0 w-full h-[65px] sm:h-[75px] md:h-[82px] overflow-hidden rounded-b-[12.9px] pointer-events-none z-5">
+                        <img
+                          src={cardClouds}
+                          alt=""
+                          className="w-full h-full object-cover object-bottom"
+                        />
+                      </div>
+
+                      {/* Name Plate at Bottom - ABOVE clouds */}
+                      <div className="absolute bottom-[38px] sm:bottom-[44px] md:bottom-[48px] left-1/2 -translate-x-1/2 w-[180px] sm:w-[195px] md:w-[209.9px] h-[30px] sm:h-[33px] md:h-[36px] flex items-center justify-center z-10">
                         <img
                           src={cardNamePlate}
                           alt=""
-                          className="absolute inset-0 w-full h-full object-fill pointer-events-none"
+                          className="absolute inset-0 w-full h-full object-fill pointer-events-none z-1"
                         />
                         <span
                           className="relative z-10 font-['Russo_One',sans-serif] text-white text-center leading-tight px-6 whitespace-nowrap"
@@ -391,15 +400,6 @@ export default function Vote() {
                         >
                           {opt.nama_kandidat}
                         </span>
-                      </div>
-
-                      {/* Clouds Overlay at Card Bottom */}
-                      <div className="absolute bottom-0 left-0 w-full h-[65px] sm:h-[75px] md:h-[82px] overflow-hidden rounded-b-[12.9px] pointer-events-none z-40">
-                        <img
-                          src={cardClouds}
-                          alt=""
-                          className="w-full h-full object-cover object-bottom"
-                        />
                       </div>
 
                       {/* Selected Indicator Checkmark Badge */}
