@@ -1,5 +1,5 @@
 import HeroSection from "../components/sections/HeroSection";
-import TimelineSection from "../components/sections/TimelineSection";
+// import TimelineSection from "../components/sections/TimelineSection";
 
 
 export default function Home() {
@@ -18,8 +18,8 @@ export default function Home() {
           TIMELINE DI LANDING PAGE
           FIGMA 303:944
       ========================================== */}
-
-      <TimelineSection />
+{/* 
+      <TimelineSection /> */}
 
     </main>
   );

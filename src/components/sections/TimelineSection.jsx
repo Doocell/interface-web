@@ -1,4 +1,5 @@
 import "../../styles/timeline-section.css";
+import BackgroundPattern from "../layout/BackgroundPattern";
 
 /*
  * FIGMA SOURCE
@@ -10,12 +11,6 @@ import "../../styles/timeline-section.css";
  */
 
 const ASSETS = {
-  patternTop:
-    "https://www.figma.com/api/mcp/asset/6b385835-1e46-4e06-a30a-b3ae0d8156df.svg",
-
-  patternBottom:
-    "https://www.figma.com/api/mcp/asset/6aa5b922-82c0-40d6-9339-80fa50d7e8cd.svg",
-
   trackLeftRight:
     "https://www.figma.com/api/mcp/asset/37051bb4-8d40-4a8c-bdac-5293afdb4fb4.svg",
 
@@ -156,26 +151,8 @@ export default function TimelineSection() {
       {/* ==========================================
           BACKGROUND PATTERN
       ========================================== */}
-
-      <div
-        className="timeline-section__pattern"
-        aria-hidden="true"
-      >
-        <img
-          className="timeline-section__pattern-top"
-          src={ASSETS.patternTop}
-          alt=""
-          draggable="false"
-        />
-
-        <img
-          className="timeline-section__pattern-bottom"
-          src={ASSETS.patternBottom}
-          alt=""
-          draggable="false"
-        />
-      </div>
-
+      
+      <BackgroundPattern />
 
       {/* ==========================================
           DECORATION LEFT

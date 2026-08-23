@@ -68,103 +68,101 @@ export default function FAQ() {
   };
 
   return (
-    <>
-      {/* Background Pattern */}
+    <section className="faq-page-section">
+      {/* Background Pattern Global */}
       <BackgroundPattern />
-      
-      <section className="faq-page-section">
-        {/* Decorative Triangle - Right Top */}
-        <div className="faq-triangle-decor">
-          <img 
-            src={imgElemenSegitiga} 
-            alt="" 
-            className="faq-decor-img"
-          />
-        </div>
 
-        {/* Decorative Cross - Left Bottom */}
-        <div className="faq-cross-decor">
-          <img 
-            src={imgElemenX} 
-            alt="" 
-            className="faq-decor-img"
-          />
-        </div>
+      {/* Decorative Triangle - Right Top */}
+      <div className="faq-triangle-decor">
+        <img 
+          src={imgElemenSegitiga} 
+          alt="" 
+          className="faq-decor-img"
+        />
+      </div>
 
-        {/* Main Content Container */}
-        <div className="faq-container">
-          {/* Left Side: Title and Button */}
-          <div className="faq-left-side">
-            {/* Title */}
-            <div className="faq-title">
-              <div className="faq-title-line">
-                <span className="faq-title-letter-big">P</span>
-                <span className="faq-title-text">ERTANYAAN</span>
-              </div>
-              <div className="faq-title-line">
-                <span className="faq-title-letter-big">U</span>
-                <span className="faq-title-text">MUM</span>
-              </div>
-              <div className="faq-title-line">
-                <span className="faq-title-highlight">(FAQ)</span>
-              </div>
+      {/* Decorative Cross - Left Bottom */}
+      <div className="faq-cross-decor">
+        <img 
+          src={imgElemenX} 
+          alt="" 
+          className="faq-decor-img"
+        />
+      </div>
+
+      {/* Main Content Container */}
+      <div className="faq-container">
+        {/* Left Side: Title and Button */}
+        <div className="faq-left-side">
+          {/* Title */}
+          <div className="faq-title">
+            <div className="faq-title-line">
+              <span className="faq-title-letter-big">P</span>
+              <span className="faq-title-text">ERTANYAAN</span>
             </div>
-
-            {/* Send Question Button */}
-            <button 
-              className="faq-send-button"
-              onClick={() => window.location.href = '/quest-collect'}
-            >
-              <span className="faq-send-button-text">SEND QUESTION HERE!</span>
-            </button>
+            <div className="faq-title-line">
+              <span className="faq-title-letter-big">U</span>
+              <span className="faq-title-text">MUM</span>
+            </div>
+            <div className="faq-title-line">
+              <span className="faq-title-highlight">(FAQ)</span>
+            </div>
           </div>
 
-          {/* Right Side: FAQ List */}
-          <div className="faq-right-side">
-            {faqItems.map((item, index) => {
-              const isOpen = activeIndex === index;
-
-              return (
-                <div 
-                  key={index}
-                  className={`faq-item ${isOpen ? "faq-item-open" : ""}`}
-                >
-                  {/* Question Header */}
-                  <button 
-                    className="faq-question-header"
-                    onClick={() => toggleFaq(index)}
-                  >
-                    <div className="faq-question-left">
-                      <img 
-                        src={item.icon} 
-                        alt="" 
-                        className="faq-question-icon"
-                      />
-                      <span className="faq-question-text">
-                        {item.question}
-                      </span>
-                    </div>
-                    <div className="faq-chevron">
-                      <img 
-                        src={imgWeuiArrowFilled} 
-                        alt="" 
-                        className="faq-chevron-icon"
-                      />
-                    </div>
-                  </button>
-
-                  {/* Answer Content */}
-                  {isOpen && (
-                    <div className="faq-answer">
-                      <p className="faq-answer-text">{item.answer}</p>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+          {/* Send Question Button */}
+          <button 
+            className="faq-send-button"
+            onClick={() => window.location.href = '/quest-collect'}
+          >
+            <span className="faq-send-button-text">SEND QUESTION HERE!</span>
+          </button>
         </div>
-      </section>
-    </>
+
+        {/* Right Side: FAQ List */}
+        <div className="faq-right-side">
+          {faqItems.map((item, index) => {
+            const isOpen = activeIndex === index;
+
+            return (
+              <div 
+                key={index}
+                className={`faq-item ${isOpen ? "faq-item-open" : ""}`}
+              >
+                {/* Question Header */}
+                <button 
+                  className="faq-question-header"
+                  onClick={() => toggleFaq(index)}
+                >
+                  <div className="faq-question-left">
+                    <img 
+                      src={item.icon} 
+                      alt="" 
+                      className="faq-question-icon"
+                    />
+                    <span className="faq-question-text">
+                      {item.question}
+                    </span>
+                  </div>
+                  <div className="faq-chevron">
+                    <img 
+                      src={imgWeuiArrowFilled} 
+                      alt="" 
+                      className="faq-chevron-icon"
+                    />
+                  </div>
+                </button>
+
+                {/* Answer Content */}
+                {isOpen && (
+                  <div className="faq-answer">
+                    <p className="faq-answer-text">{item.answer}</p>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
   );
 }

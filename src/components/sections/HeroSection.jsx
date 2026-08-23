@@ -15,7 +15,7 @@ export default function HeroSection() {
         {/* ================================
             BACKGROUND PATTERN
         ================================= */}
-        <div
+        {/* <div
           className="figma-start__pattern"
           aria-hidden="true"
         >
@@ -30,7 +30,7 @@ export default function HeroSection() {
             src={PATTERN_BOTTOM}
             alt=""
           />
-        </div>
+        </div> */}
 
 
         {/* ================================

@@ -141,6 +141,9 @@ export default function Vote() {
         paddingTop: "76px",
       }}
     >
+      {/* Background Pattern Global */}
+      <BackgroundPattern />
+
       {/* ========================================================================= */}
       {/* FLOATING DECORATIVE FIGMA ELEMENTS (MATCHING FIGMA NODE 405:5627) */}
       {/* ========================================================================= */}

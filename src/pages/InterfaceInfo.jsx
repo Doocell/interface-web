@@ -1,16 +1,16 @@
 import BackgroundPattern from "../components/layout/BackgroundPattern";
 
 // Assets from Figma
-const imgGroup100915 = "https://www.figma.com/api/mcp/asset/c0dba49b-dc8d-4982-a28d-4ace0baba4e7.svg";
-const imgGroup100996 = "https://www.figma.com/api/mcp/asset/11ed3e9c-a351-4e1a-8077-76f644676123.svg";
 const imgElemenLingkaran = "https://www.figma.com/api/mcp/asset/d51580ab-3eb4-4bbb-b607-3d8ca7601567.svg";
 const imgWeuiArrowFilled = "https://www.figma.com/api/mcp/asset/07bdeb0b-fe11-4e3e-97a7-3c22bb656ac3.svg";
 
 export default function InterfaceInfo() {
   return (
     <>
-      <BackgroundPattern />
       <main className="interface-info-page">
+      {/* Background Pattern Global */}
+      <BackgroundPattern />
+      
       <style>{`
         .interface-info-page {
           position: relative;
@@ -19,35 +19,6 @@ export default function InterfaceInfo() {
           overflow-x: hidden;
           padding-top: 120px;
           padding-bottom: 80px;
-        }
-
-        /* Background pattern */
-        .info-bg-pattern {
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 100%;
-          height: 100%;
-          overflow: hidden;
-          pointer-events: none;
-          opacity: 0.25;
-          z-index: 0;
-        }
-
-        .info-bg-pattern img {
-          position: absolute;
-          left: -10%;
-          width: 120%;
-          height: auto;
-          object-fit: cover;
-        }
-
-        .info-bg-pattern img:first-child {
-          top: 0;
-        }
-
-        .info-bg-pattern img:last-child {
-          top: 700px;
         }
 
         /* Decorative elements */
@@ -332,12 +303,6 @@ export default function InterfaceInfo() {
           }
         }
       `}</style>
-
-      {/* Background Pattern */}
-      <div className="info-bg-pattern" aria-hidden="true">
-        <img src={imgGroup100915} alt="" />
-        <img src={imgGroup100996} alt="" />
-      </div>
 
       {/* Decorative Square */}
       <div className="info-decor-square" aria-hidden="true">

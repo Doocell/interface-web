@@ -1,10 +1,6 @@
-import BackgroundPattern from "../components/layout/BackgroundPattern";
-
 export default function NotFound(){
 
 return(
-<>
-<BackgroundPattern />
 <div
 className="
 min-h-screen
@@ -28,7 +24,6 @@ Halaman tidak ditemukan
 </div>
 
 </div>
-</>
 )
 
 }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import BackgroundPattern from "../components/layout/BackgroundPattern";
 
 /* ============================================================
    MAP DATA — titik-titik lokasi kegiatan Interface 2026

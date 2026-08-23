@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
+import BackgroundPattern from "../components/layout/BackgroundPattern";
 
 // Figma Assets
 import crown1 from "../assets/leaderboard/crown-1.svg";
@@ -87,6 +88,9 @@ export default function Leaderboard() {
         paddingTop: "76px",
       }}
     >
+      {/* Background Pattern Global */}
+      <BackgroundPattern />
+
       {/* ========================================================================= */}
       {/* FLOATING DECORATIVE FIGMA ELEMENTS WITH SUBTLE AMBIENT ANIMATIONS */}
       {/* ========================================================================= */}

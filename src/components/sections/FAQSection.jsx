@@ -1,5 +1,4 @@
 import { useState } from "react";
-import BackgroundPattern from "../layout/BackgroundPattern";
 import "../../styles/FAQSection.css";
 
 const faqItems = [
@@ -200,10 +199,6 @@ export default function FAQSection() {
 
   return (
     <section className="faq-section" id="faq">
-      <div className="faq-background-pattern" aria-hidden="true">
-        <BackgroundPattern />
-      </div>
-
       <RightDecorShape />
       <LeftCrossDecorShape />
 
