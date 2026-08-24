@@ -1,0 +1,532 @@
+:root {
+  --ii-dark: #26353c;
+  --ii-card: rgba(41, 54, 62, 0.68);
+  --ii-pink: #ff59fb;
+  --ii-purple: #9513ff;
+  --ii-blue: #189cf4;
+  --ii-yellow: #ffd900;
+}
+
+.ii-page {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  overflow: clip;
+  color: #fff;
+  background: transparent;
+}
+
+.ii-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.ii-display-heading {
+  margin: 0;
+  color: #fff;
+  font-family: "Tektur", sans-serif;
+  font-size: clamp(3.2rem, 6.8vw, 6.15rem);
+  font-weight: 800;
+  font-variation-settings: "wdth" 100;
+  line-height: 0.75;
+  letter-spacing: -0.055em;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow:
+    8.9px 7.7px 0 #ac4afd,
+    0 0 8.9px #fff;
+}
+
+.ii-heading-line {
+  display: block;
+}
+
+.ii-heading-accent {
+  color: var(--ii-yellow);
+  font-size: 1.11em;
+}
+
+.ii-information-section {
+  width: min(100%, 1440px);
+  margin: 0 auto;
+  padding: 120px 40px 172px;
+}
+
+.ii-information-heading {
+  max-width: 910px;
+  margin: 0 auto 72px;
+}
+
+.ii-information-list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.ii-information-card {
+  --accent: var(--ii-yellow);
+  --label-fill: #fff6c4;
+  position: relative;
+  min-height: 407px;
+  margin-top: 58px;
+  padding: 70px 66px 44px;
+  border: 7px solid var(--accent);
+  border-radius: 25px;
+  background: var(--ii-card);
+  box-shadow:
+    0 0 45px var(--accent),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.ii-information-card.is-right {
+  text-align: right;
+}
+
+.ii-information-label {
+  position: absolute;
+  top: -58px;
+  left: 18px;
+  min-width: 360px;
+  height: 86px;
+  margin: 0;
+  padding: 17px 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-family: "Londrina Solid", sans-serif;
+  font-size: clamp(2rem, 2.85vw, 2.57rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: var(--label-fill);
+  border: 5px solid var(--accent);
+  border-radius: 8px;
+  box-shadow:
+    0 0 24px var(--accent),
+    5px 5px 5px rgba(0, 0, 0, 0.25);
+  transform: rotate(-2.6deg) skewX(-3deg);
+}
+
+.ii-information-card.is-right .ii-information-label {
+  right: 18px;
+  left: auto;
+  transform: rotate(2.1deg) skewX(3deg);
+}
+
+.ii-information-copy {
+  font-family: "Londrina Solid", sans-serif;
+  font-size: clamp(1.28rem, 2.13vw, 1.916rem);
+  font-weight: 300;
+  line-height: 1.18;
+}
+
+.ii-information-copy p {
+  margin: 0;
+}
+
+.ii-information-copy strong {
+  font-weight: 400;
+}
+
+.ii-schedule-section {
+  position: relative;
+  width: 100%;
+  padding: 95px 40px 110px;
+  background: rgba(41, 54, 62, 0.72);
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: skewY(-0.45deg);
+}
+
+.ii-schedule-inner {
+  width: min(100%, 1213px);
+  margin: 0 auto;
+  transform: skewY(0.45deg);
+}
+
+.ii-schedule-heading {
+  max-width: 1000px;
+  margin: 0 auto 66px;
+}
+
+.ii-schedule-intro {
+  max-width: 1045px;
+  margin: 0 auto 48px;
+  font-family: "Londrina Solid", sans-serif;
+  font-size: clamp(1.35rem, 2.13vw, 1.916rem);
+  font-weight: 300;
+  line-height: 1.18;
+  text-align: center;
+}
+
+.ii-schedule-list {
+  border-top: 2px solid rgba(255, 255, 255, 0.9);
+}
+
+.ii-schedule-item {
+  --accent: var(--ii-pink);
+  padding: 36px 0 31px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.9);
+}
+
+.ii-schedule-item h3,
+.ii-schedule-item time,
+.ii-schedule-item p {
+  margin: 0;
+}
+
+.ii-schedule-item h3 {
+  color: var(--accent);
+  font-family: "Tektur", sans-serif;
+  font-size: clamp(1.75rem, 2.72vw, 2.45rem);
+  font-weight: 800;
+  font-variation-settings: "wdth" 100;
+  line-height: 1;
+}
+
+.ii-schedule-item time {
+  display: block;
+  margin-top: 2px;
+  color: var(--accent);
+  font-family: "Londrina Solid", sans-serif;
+  font-size: clamp(1.35rem, 2.13vw, 1.925rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.ii-schedule-item p {
+  margin-top: 8px;
+  font-family: "Londrina Solid", sans-serif;
+  font-size: clamp(1.28rem, 2.13vw, 1.916rem);
+  font-weight: 300;
+  line-height: 1.18;
+}
+
+.ii-committee-section {
+  width: min(100%, 1440px);
+  margin: 0 auto;
+  padding: 140px 29px 118px;
+}
+
+.ii-committee-heading {
+  max-width: 920px;
+  margin: 0 auto 95px;
+}
+
+.ii-committee-columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  align-items: start;
+}
+
+.ii-committee-column {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-width: 0;
+}
+
+.ii-role-card {
+  --accent: var(--ii-pink);
+  --card-min-height: 210px;
+  --name-columns: 1;
+  position: relative;
+  min-height: var(--card-min-height);
+  margin: 40px 0 0 54px;
+  padding: 69px 22px 30px;
+  border: 8px solid var(--accent);
+  border-radius: 25px;
+  background: var(--ii-card);
+  box-shadow: 0 0 45px var(--accent);
+}
+
+.ii-role-header {
+  position: absolute;
+  top: -40px;
+  left: -60px;
+  width: min(315px, calc(100% + 20px));
+  height: 90px;
+}
+
+.ii-role-icon {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  width: 107px;
+  height: 90px;
+  object-fit: contain;
+}
+
+.ii-role-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.ii-role-title-wrap {
+  position: absolute;
+  z-index: 1;
+  top: 14px;
+  left: 60px;
+  width: min(255px, calc(100% - 60px));
+  height: 43px;
+  display: flex;
+  align-items: center;
+  padding: 0 22px 0 46px;
+  background: var(--ii-dark);
+  border-top: 1px solid #7dd7ff;
+  border-bottom: 1px solid #7dd7ff;
+  clip-path: polygon(0 0, 100% 0, 92% 100%, 0 100%);
+}
+
+.ii-role-title-wrap h3 {
+  margin: 0;
+  overflow: hidden;
+  color: #fff;
+  font-family: "Russo One", "Tektur", sans-serif;
+  font-size: clamp(0.92rem, 1.5vw, 1.46rem);
+  font-weight: 400;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ii-role-subtitle {
+  position: absolute;
+  z-index: 0;
+  top: 58px;
+  left: 34px;
+  width: 283px;
+  height: 28px;
+  margin: 0;
+  padding: 2px 0 0 74px;
+  color: #fff;
+  font-family: "Tektur", sans-serif;
+  font-size: 1.145rem;
+  font-weight: 500;
+  line-height: 1.25;
+  text-shadow: 0 0 11px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 38%, transparent), transparent 90%);
+}
+
+.ii-role-names {
+  display: grid;
+  grid-template-columns: repeat(var(--name-columns), minmax(0, 1fr));
+  gap: 21px 22px;
+  align-items: center;
+  justify-items: center;
+  color: #fff;
+  font-family: "Russo One", "Tektur", sans-serif;
+  font-size: clamp(1.15rem, 2.08vw, 1.875rem);
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.ii-role-names span {
+  width: 100%;
+}
+
+.ii-wide-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 56px;
+}
+
+.ii-role-card.is-wide {
+  margin-left: 54px;
+}
+
+.ii-committee-section > .ii-role-card.is-wide {
+  margin-top: 64px;
+}
+
+@media (max-width: 1100px) {
+  .ii-information-section {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+
+  .ii-information-card {
+    min-height: 0;
+    padding: 64px 42px 38px;
+  }
+
+  .ii-committee-columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 42px 20px;
+  }
+
+  .ii-committee-column:last-child {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 20px;
+  }
+}
+
+@media (max-width: 760px) {
+  .ii-display-heading {
+    font-size: clamp(2.6rem, 13vw, 4.4rem);
+    line-height: 0.82;
+    letter-spacing: -0.065em;
+    text-shadow:
+      4.5px 4px 0 #ac4afd,
+      0 0 5px #fff;
+  }
+
+  .ii-information-section {
+    padding: 108px 16px 112px;
+  }
+
+  .ii-information-heading {
+    margin-bottom: 64px;
+  }
+
+  .ii-information-list {
+    gap: 52px;
+  }
+
+  .ii-information-card,
+  .ii-information-card.is-right {
+    margin-top: 38px;
+    padding: 54px 22px 28px;
+    border-width: 4px;
+    border-radius: 18px;
+    text-align: left;
+    box-shadow: 0 0 24px var(--accent);
+  }
+
+  .ii-information-label,
+  .ii-information-card.is-right .ii-information-label {
+    top: -40px;
+    right: auto;
+    left: 14px;
+    min-width: 0;
+    width: calc(100% - 28px);
+    height: 65px;
+    padding: 12px 18px;
+    border-width: 3px;
+    font-size: clamp(1.6rem, 8.4vw, 2.1rem);
+    white-space: normal;
+    transform: rotate(-1.5deg) skewX(-2deg);
+  }
+
+  .ii-information-copy,
+  .ii-schedule-intro,
+  .ii-schedule-item p {
+    font-size: 1.25rem;
+  }
+
+  .ii-information-copy p + p {
+    margin-top: 0.45em;
+  }
+
+  .ii-schedule-section {
+    padding: 76px 20px 84px;
+  }
+
+  .ii-schedule-heading {
+    margin-bottom: 52px;
+  }
+
+  .ii-schedule-intro {
+    margin-bottom: 34px;
+  }
+
+  .ii-schedule-item {
+    padding: 28px 0 25px;
+  }
+
+  .ii-schedule-item h3 {
+    font-size: 1.75rem;
+    line-height: 1.08;
+  }
+
+  .ii-schedule-item time {
+    margin-top: 6px;
+    font-size: 1.25rem;
+    line-height: 1.1;
+  }
+
+  .ii-committee-section {
+    padding: 112px 16px 88px;
+  }
+
+  .ii-committee-heading {
+    margin-bottom: 74px;
+  }
+
+  .ii-committee-columns,
+  .ii-committee-column:last-child,
+  .ii-wide-card-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .ii-wide-card-grid {
+    margin-top: 32px;
+  }
+
+  .ii-role-card,
+  .ii-role-card.is-wide {
+    margin-left: 44px;
+    padding-right: 14px;
+    padding-left: 14px;
+    border-width: 5px;
+    border-radius: 19px;
+    box-shadow: 0 0 25px var(--accent);
+  }
+
+  .ii-role-header {
+    left: -50px;
+  }
+
+  .ii-role-title-wrap {
+    width: min(255px, calc(100vw - 112px));
+  }
+
+  .ii-role-title-wrap h3 {
+    font-size: 1rem;
+  }
+
+  .ii-role-subtitle {
+    width: min(283px, calc(100vw - 96px));
+    padding-left: 66px;
+    font-size: 0.92rem;
+  }
+
+  .ii-role-names {
+    grid-template-columns: 1fr;
+    font-size: 1.16rem;
+  }
+
+  .ii-committee-section > .ii-role-card.is-wide {
+    margin-top: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ii-page *,
+  .ii-page *::before,
+  .ii-page *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}

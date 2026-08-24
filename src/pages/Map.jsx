@@ -1,605 +1,462 @@
-import { useState } from "react";
-import BackgroundPattern from "../components/layout/BackgroundPattern";
+import "../styles/map-page.css";
 
-/* ============================================================
-   MAP DATA — titik-titik lokasi kegiatan Interface 2026
-   Koordinat dalam persen relatif terhadap map container
-============================================================ */
-const LOCATIONS = {
-  hari1: [
-    {
-      id: "reg",
-      label: "Registrasi & Pembekalan",
-      short: "Gedung D4",
-      top: "18%",
-      left: "48%",
-      color: "#FF59FB",
-      description: "Tempat registrasi peserta dan sesi pembekalan awal. Gedung D4 FMIPA, Lantai 3.",
-    },
-    {
-      id: "icebreak",
-      label: "Ice Breaking",
-      short: "Lapangan",
-      top: "42%",
-      left: "30%",
-      color: "#9513FF",
-      description: "Area ice breaking dan perkenalan antar kelompok. Lapangan terbuka kampus.",
-    },
-    {
-      id: "tour1",
-      label: "City Tour — Pos 1",
-      short: "Pos 1",
-      top: "30%",
-      left: "65%",
-      color: "#189CF4",
-      description: "Pos pertama City Tour. Tantangan trivia dan foto kreatif.",
-    },
-    {
-      id: "tour2",
-      label: "City Tour — Pos 2",
-      short: "Pos 2",
-      top: "60%",
-      left: "55%",
-      color: "#189CF4",
-      description: "Pos kedua City Tour. Mini-game kelompok.",
-    },
-    {
-      id: "tour3",
-      label: "City Tour — Pos 3",
-      short: "Pos 3",
-      top: "70%",
-      left: "25%",
-      color: "#189CF4",
-      description: "Pos ketiga dan terakhir City Tour. Checkpoint final.",
-    },
-  ],
-  hari2: [
-    {
-      id: "pkmmpd",
-      label: "Sesi PKMMPD",
-      short: "Gedung D4",
-      top: "20%",
-      left: "50%",
-      color: "#189CF4",
-      description: "Ruang utama sesi PKMMPD. Gedung D4 FMIPA, Lantai 3.",
-    },
-    {
-      id: "diskusi",
-      label: "Diskusi Kelompok",
-      short: "Lobby",
-      top: "50%",
-      left: "35%",
-      color: "#FF59FB",
-      description: "Area diskusi kelompok dan penyusunan presentasi.",
-    },
-    {
-      id: "presentasi",
-      label: "Ruang Presentasi",
-      short: "Aula",
-      top: "55%",
-      left: "65%",
-      color: "#9513FF",
-      description: "Tempat presentasi hasil diskusi kelompok.",
-    },
-  ],
-  makrab: [
-    {
-      id: "base",
-      label: "Base Camp Utama",
-      short: "Yon Zipur 4",
-      top: "25%",
-      left: "50%",
-      color: "#FFD900",
-      description: "Pusat kegiatan Malam Keakraban. Area utama Yon Zipur 4.",
-      zone: "green",
-    },
-    {
-      id: "api",
-      label: "Api Unggun",
-      short: "Area Tengah",
-      top: "45%",
-      left: "45%",
-      color: "#FF6B35",
-      description: "Lokasi api unggun dan sharing session malam hari.",
-      zone: "green",
-    },
-    {
-      id: "pentas",
-      label: "Panggung Utama",
-      short: "Panggung",
-      top: "35%",
-      left: "70%",
-      color: "#FFD900",
-      description: "Panggung pertunjukan seni dan kompetisi antar kelompok.",
-      zone: "green",
-    },
-    {
-      id: "kompetisi",
-      label: "Arena Kompetisi",
-      short: "Lapangan",
-      top: "65%",
-      left: "30%",
-      color: "#FF3B3B",
-      description: "Area kompetisi outdoor dan tantangan fisik kelompok.",
-      zone: "red",
-    },
-    {
-      id: "terlarang",
-      label: "Zona Terbatas",
-      short: "Area Militer",
-      top: "75%",
-      left: "70%",
-      color: "#FF3B3B",
-      description: "⚠️ Area ini adalah zona militer aktif. Dilarang masuk tanpa izin.",
-      zone: "red",
-    },
-  ],
-};
+const PANEL_WIDTH = 1179.452;
+const PANEL_HEIGHT = 948.725;
 
-const TABS = [
-  { key: "hari1", label: "Day 1", emoji: "📅", color: "#FF59FB" },
-  { key: "hari2", label: "Day 2", emoji: "📅", color: "#189CF4" },
-  { key: "makrab", label: "Makrab", emoji: "🌙", color: "#FFD900" },
+function panelBox(x, y, width, height) {
+  return {
+    left: `${(x / PANEL_WIDTH) * 100}%`,
+    top: `${(y / PANEL_HEIGHT) * 100}%`,
+    width: `${(width / PANEL_WIDTH) * 100}%`,
+    height: `${(height / PANEL_HEIGHT) * 100}%`,
+  };
+}
+
+const FMIPA_ROADS = [
+  [122.63, 99.23, 926.136, 61.312, "top"],
+  [252.51, 246.06, 17.748, 353.352],
+  [300.11, 242.83, 17.748, 353.352],
+  [304.95, 402.56, 8.874, 353.352],
+  [455, 242.83, 17.748, 172.642],
+  [554.23, 425.15, 17.748, 150.86],
+  [945.5, 425.15, 17.748, 150.86],
+  [897.9, 572.79, 17.748, 162.154],
+  [509.05, 571.98, 17.748, 150.86],
+  [855.15, 184.74, 17.748, 230.727],
+  [623.61, 408.21, 17.748, 29.043],
+  [554.23, 726.87, 17.748, 29.043],
+  [122.63, 242.83, 363.839, 15.328],
+  [312.21, 342.87, 174.256, 15.328],
+  [122.63, 595.37, 402.563, 15.328],
+  [455, 400.14, 409.017, 15.328],
+  [554.23, 424.35, 409.017, 15.328],
+  [509.05, 719.61, 393.689, 15.328],
+  [122.63, 743.82, 689.762, 15.328],
+  [517.12, 571.98, 446.126, 15.328],
+  [261.39, 460.65, 47.598, 15.328],
+  [261.39, 356.58, 47.598, 15.328],
+  [477.59, 169.42, 406.596, 15.328],
+  [300.11, 140.37, 26.622, 102.456],
+  [459.84, 140.37, 26.622, 102.456],
+  [876.12, 140.37, 26.622, 44.371],
 ];
 
-/* ---- PIN SVG inline ---- */
-function Pin({ color }) {
+const ZIPUR_ROADS = [
+  [296.19, 72.6, 27.4, 410.1],
+  [351, 72.6, 27.4, 410.1],
+  [296.19, 463, 765.895, 36],
+  [339, 482, 36, 111],
+  [488.28, 482, 543.9, 36.2],
+  [1032.18, 482, 29.9, 370.3],
+];
+
+function SectionHeading({ type }) {
+  const fmipa = type === "fmipa";
+
   return (
-    <svg width="24" height="32" viewBox="0 0 24 32" fill="none">
-      <ellipse cx="12" cy="30" rx="5" ry="2" fill="rgba(0,0,0,0.3)" />
-      <path
-        d="M12 0C6.48 0 2 4.48 2 10c0 7.5 10 22 10 22s10-14.5 10-22C22 4.48 17.52 0 12 0Z"
-        fill={color}
-      />
-      <circle cx="12" cy="10" r="4" fill="rgba(255,255,255,0.85)" />
-    </svg>
+    <header className={`map-design-heading map-design-heading--${type}`}>
+      <div className="map-design-heading__badge">DENAH</div>
+
+      <h2 className="map-design-heading__title">
+        <span className="map-design-heading__initial">
+          {fmipa ? "F" : "Y"}
+        </span>
+
+        <span>{fmipa ? "MIPA " : "ON "}</span>
+
+        <span className="map-design-heading__initial">
+          {fmipa ? "U" : "Z"}
+        </span>
+
+        <span>{fmipa ? "NNES" : "IPUR"}</span>
+      </h2>
+    </header>
   );
 }
 
-/* ---- GRID BACKGROUND ---- */
-function MapGrid() {
+function FmipaMap() {
   return (
-    <svg
-      className="map-grid"
-      style={{
-        position: "absolute",
-        inset: 0,
-        width: "100%",
-        height: "100%",
-        pointerEvents: "none",
-      }}
+    <div
+      className="figma-map figma-map--fmipa"
+      role="img"
+      aria-label="Denah FMIPA UNNES"
     >
-      <defs>
-        <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
-          <path
-            d="M 48 0 L 0 0 0 48"
-            fill="none"
-            stroke="rgba(255,255,255,0.04)"
-            strokeWidth="1"
-          />
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#grid)" />
-    </svg>
+      {FMIPA_ROADS.map(([x, y, width, height, type], index) => (
+        <div
+          key={`${x}-${y}-${index}`}
+          className={`fmipa-road ${
+            type === "top" ? "fmipa-road--top" : ""
+          }`}
+          style={panelBox(x, y, width, height)}
+        />
+      ))}
+
+      <div
+        className="fmipa-dashed-line"
+        style={panelBox(122.63, 129.48, 911.615, 2.42)}
+      />
+
+      <div
+        className="fmipa-gate"
+        style={panelBox(1016.49, 96.81, 94.388, 67.766)}
+      >
+        <span>Gerbang</span>
+        <span>Utama</span>
+      </div>
+
+      <div
+        className="fmipa-label"
+        style={panelBox(466, 201, 355, 43)}
+      >
+        Parkiran FMIPA
+      </div>
+
+      <div
+        className="fmipa-building fmipa-building--parking-side"
+        style={panelBox(884.19, 214.59, 120.204, 200.878)}
+      >
+        <span>Parkiran</span>
+        <span>FMIPA</span>
+      </div>
+
+      <div
+        className="fmipa-building fmipa-building--d6"
+        style={panelBox(122.63, 260.58, 122.624, 302.527)}
+      >
+        Gedung D6
+      </div>
+
+      <div
+        className="fmipa-building fmipa-building--d5"
+        style={panelBox(323.5, 362.23, 119.397, 183.13)}
+      >
+        <span>Gedung</span>
+        <span>D5</span>
+      </div>
+
+      <div
+        className="fmipa-building"
+        style={panelBox(486.47, 271.87, 361.419, 124.238)}
+      >
+        Gedung D1
+      </div>
+
+      <div
+        className="fmipa-building"
+        style={panelBox(577.63, 443.71, 361.419, 124.238)}
+      >
+        Gedung D2
+      </div>
+
+      <div
+        className="fmipa-building"
+        style={panelBox(534.06, 591.34, 361.419, 124.238)}
+      >
+        Gedung D3
+      </div>
+
+      <div
+        className="fmipa-building fmipa-building--d4"
+        style={panelBox(442.9, 767.21, 369.486, 116.17)}
+      >
+        <span>Gedung D4</span>
+        <strong>(Gedung Utama)</strong>
+      </div>
+
+      <div
+        className="fmipa-block fmipa-block--gold"
+        style={panelBox(470.33, 439.67, 77.447, 100.842)}
+      />
+
+      <div
+        className="fmipa-block fmipa-block--yellow"
+        style={panelBox(375.14, 283.17, 45.984, 57.278)}
+      />
+
+      <div
+        className="fmipa-garden"
+        style={panelBox(323.5, 620.38, 171.835, 114.557)}
+      >
+        Taman FMIPA
+      </div>
+
+      <div
+        className="fmipa-mosque"
+        style={panelBox(172.28, 609.1, 126.872, 107.432)}
+      >
+        <span>Mushola</span>
+        <span>FMIPA</span>
+      </div>
+    </div>
+  );
+}
+
+function ZipurMap() {
+  return (
+    <div
+      className="figma-map figma-map--zipur"
+      role="img"
+      aria-label="Denah YON ZIPUR"
+    >
+      {ZIPUR_ROADS.map(([x, y, width, height], index) => (
+        <div
+          key={`${x}-${y}-${index}`}
+          className="zipur-road"
+          style={panelBox(x, y, width, height)}
+        />
+      ))}
+
+      <div
+        className="zipur-restricted"
+        style={panelBox(518.96, 72.6, 585.468, 409.184)}
+      >
+        <div className="zipur-restricted__title">
+          DAERAH TERLARANG
+        </div>
+      </div>
+
+      <div
+        className="zipur-field"
+        style={panelBox(524.68, 199.72, 451, 279)}
+      >
+        Lapangan
+      </div>
+
+      <div
+        className="zipur-barrack-strip"
+        style={panelBox(430.59, 102.98, 61.677, 389.391)}
+      />
+
+      <div
+        className="zipur-room"
+        style={panelBox(439.79, 127.84, 39.583, 50.63)}
+      >
+        B5
+      </div>
+
+      <div
+        className="zipur-room"
+        style={panelBox(439.79, 198.72, 39.583, 50.63)}
+      >
+        B4
+      </div>
+
+      <div
+        className="zipur-room"
+        style={panelBox(439.79, 271.44, 39.583, 50.63)}
+      >
+        B3
+      </div>
+
+      <div
+        className="zipur-room"
+        style={panelBox(439.79, 345.09, 39.583, 50.63)}
+      >
+        B2
+      </div>
+
+      <div
+        className="zipur-wc"
+        style={panelBox(402.05, 231.86, 24.855, 17.49)}
+      >
+        WC
+      </div>
+
+      <div
+        className="zipur-wc"
+        style={panelBox(402.05, 304.58, 24.855, 17.49)}
+      >
+        WC
+      </div>
+
+      <div
+        className="zipur-wc"
+        style={panelBox(402.05, 378.23, 24.855, 17.49)}
+      >
+        WC
+      </div>
+
+      <div
+        className="zipur-room"
+        style={panelBox(230.83, 412.29, 58.915, 69.041)}
+      >
+        B6
+      </div>
+
+      <div
+        className="zipur-wc"
+        style={panelBox(202.29, 463.84, 24.855, 17.49)}
+      >
+        WC
+      </div>
+
+      <div
+        className="zipur-office"
+        style={panelBox(1021.58, 246.59, 55.233, 123.353)}
+      >
+        Kantor
+      </div>
+
+      <div
+        className="zipur-main-gate"
+        style={panelBox(1052.79, 474.36, 75.833, 55.665)}
+      >
+        <span>Gerbang</span>
+        <span>Utama</span>
+      </div>
+
+      <div
+        className="zipur-middle-strip"
+        style={panelBox(509.75, 518.15, 479.605, 95.2)}
+      />
+
+      <div
+        className="zipur-room"
+        style={panelBox(624.82, 530.11, 48.789, 52.471)}
+      />
+
+      <div
+        className="zipur-room"
+        style={panelBox(700.31, 530.11, 48.789, 52.471)}
+      />
+
+      <div
+        className="zipur-room"
+        style={panelBox(775.79, 530.11, 48.789, 52.471)}
+      >
+        B1
+      </div>
+
+      <div
+        className="zipur-room"
+        style={panelBox(833.79, 530.11, 29.457, 52.471)}
+      >
+        T
+      </div>
+
+      <div
+        className="zipur-room"
+        style={panelBox(880.73, 530.11, 48.789, 52.471)}
+      />
+
+      <div
+        className="zipur-wc"
+        style={panelBox(775.79, 586.27, 24.855, 17.49)}
+      >
+        WC
+      </div>
+
+      <div
+        className="zipur-mosque"
+        style={panelBox(366.15, 528.27, 114.148, 96.657)}
+      >
+        Masjid
+      </div>
+
+      <div
+        className="zipur-aula"
+        style={panelBox(1037.47, 588.92, 59.699, 121.818)}
+      >
+        Aula
+      </div>
+
+      <div
+        className="zipur-wc"
+        style={panelBox(1037.23, 712.73, 25.688, 19.9)}
+      >
+        WC
+      </div>
+
+      <div
+        className="zipur-garage-yard"
+        style={panelBox(339.83, 620.3, 692.35, 231.95)}
+      />
+
+      <div
+        className="zipur-garage"
+        style={panelBox(528.16, 693.05, 155.572, 51.551)}
+      >
+        Garasi
+      </div>
+
+      <div
+        className="zipur-garage"
+        style={panelBox(528.16, 752.89, 155.572, 51.551)}
+      >
+        Garasi
+      </div>
+
+      <div
+        className="zipur-garage"
+        style={panelBox(815.37, 693.05, 155.572, 51.551)}
+      >
+        Garasi
+      </div>
+
+      <div
+        className="zipur-garage"
+        style={panelBox(815.37, 752.89, 155.572, 51.551)}
+      >
+        Garasi
+      </div>
+
+      <div
+        className="zipur-field"
+        style={panelBox(97.68, 737.72, 328, 152)}
+      >
+        Lapangan
+      </div>
+    </div>
+  );
+}
+
+function MapBoard({ type, children, nodeId }) {
+  return (
+    <section
+      className={`map-design-board map-design-board--${type}`}
+      data-figma-node={nodeId}
+    >
+      <SectionHeading type={type} />
+
+      <div className="map-design-frame">
+        {children}
+      </div>
+    </section>
   );
 }
 
 export default function Map() {
-  const [activeTab, setActiveTab] = useState("hari1");
-  const [activePin, setActivePin] = useState(null);
-
-  const locations = LOCATIONS[activeTab];
-  const activeTabData = TABS.find((t) => t.key === activeTab);
-
-  const isMakrab = activeTab === "makrab";
-
   return (
     <main
-      className="map-page"
-      style={{ paddingTop: "76px" }}
+      className="map-design-page"
+      data-figma-node="749:1479"
     >
-      <style>{`
-        /* ========== MAP PAGE ========== */
-        .map-page {
-          width: 100%;
-          min-height: 100vh;
-          padding-bottom: 80px;
-        }
-
-        /* HERO */
-        .map-hero {
-          text-align: center;
-          padding: 60px 24px 32px;
-        }
-
-        .map-hero__eyebrow {
-          display: inline-block;
-          font-family: 'Tektur', sans-serif;
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 3px;
-          color: #FFD900;
-          background: rgba(255,217,0,0.12);
-          border: 1px solid rgba(255,217,0,0.3);
-          border-radius: 100px;
-          padding: 6px 16px;
-          margin-bottom: 20px;
-        }
-
-        .map-hero__title {
-          font-family: 'Tektur', sans-serif;
-          font-size: clamp(28px, 5.5vw, 60px);
-          font-weight: 900;
-          color: #fff;
-          line-height: 1.1;
-          margin: 0 0 12px;
-          text-shadow: 0 0 40px rgba(255,217,0,0.3);
-        }
-
-        .map-hero__title span {
-          color: #FFD900;
-        }
-
-        .map-hero__subtitle {
-          font-family: 'Sora', sans-serif;
-          font-size: clamp(13px, 1.8vw, 15px);
-          color: rgba(255,255,255,0.55);
-          max-width: 480px;
-          margin: 0 auto;
-          line-height: 1.6;
-        }
-
-        /* BODY */
-        .map-body {
-          max-width: 1100px;
-          margin: 0 auto;
-          padding: 0 24px;
-        }
-
-        /* TABS */
-        .map-tabs {
-          display: flex;
-          gap: 10px;
-          margin-bottom: 24px;
-          flex-wrap: wrap;
-        }
-
-        .map-tab {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          padding: 10px 20px;
-          border-radius: 100px;
-          background: rgba(255,255,255,0.07);
-          border: 1.5px solid rgba(255,255,255,0.12);
-          color: rgba(255,255,255,0.55);
-          font-family: 'Tektur', sans-serif;
-          font-size: 13px;
-          font-weight: 700;
-          cursor: pointer;
-          transition: all 0.2s ease;
-        }
-
-        .map-tab:hover {
-          background: rgba(255,255,255,0.12);
-          color: #fff;
-        }
-
-        .map-tab.is-active {
-          background: rgba(255,255,255,0.12);
-          color: var(--tab-color);
-          border-color: var(--tab-color);
-          box-shadow: 0 0 20px rgba(255,255,255,0.05);
-        }
-
-        /* MAP WRAPPER */
-        .map-wrapper {
-          display: grid;
-          grid-template-columns: 1fr 300px;
-          gap: 20px;
-          align-items: start;
-        }
-
-        /* MAP CANVAS */
-        .map-canvas {
-          position: relative;
-          width: 100%;
-          aspect-ratio: 16/9;
-          border-radius: 20px;
-          overflow: hidden;
-          border: 1.5px solid rgba(255,255,255,0.12);
-          background: linear-gradient(135deg, #1a1040 0%, #251850 50%, #1a1040 100%);
-        }
-
-        /* Road/path visual */
-        .map-canvas::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background:
-            radial-gradient(ellipse at 50% 100%, rgba(149,19,255,0.1) 0%, transparent 60%),
-            radial-gradient(ellipse at 0% 50%, rgba(255,89,251,0.08) 0%, transparent 50%);
-          pointer-events: none;
-        }
-
-        /* PIN */
-        .map-pin {
-          position: absolute;
-          transform: translate(-50%, -100%);
-          cursor: pointer;
-          transition: transform 0.2s ease, filter 0.2s ease;
-          z-index: 10;
-        }
-
-        .map-pin:hover {
-          transform: translate(-50%, -100%) scale(1.25);
-          filter: drop-shadow(0 4px 12px rgba(255,255,255,0.2));
-        }
-
-        .map-pin.is-active {
-          transform: translate(-50%, -100%) scale(1.3);
-          filter: drop-shadow(0 6px 16px rgba(255,255,255,0.3));
-          z-index: 20;
-        }
-
-        .map-pin__label {
-          position: absolute;
-          bottom: calc(100% + 4px);
-          left: 50%;
-          transform: translateX(-50%);
-          background: rgba(10,5,30,0.9);
-          color: #fff;
-          font-family: 'Tektur', sans-serif;
-          font-size: 10px;
-          font-weight: 700;
-          white-space: nowrap;
-          padding: 3px 8px;
-          border-radius: 6px;
-          pointer-events: none;
-          opacity: 0;
-          transition: opacity 0.15s;
-        }
-
-        .map-pin:hover .map-pin__label,
-        .map-pin.is-active .map-pin__label {
-          opacity: 1;
-        }
-
-        /* ZONE indicator on makrab */
-        .map-pin__zone {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -25%);
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          opacity: 0.15;
-          pointer-events: none;
-          z-index: -1;
-        }
-
-        /* SIDEBAR */
-        .map-sidebar {
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-        }
-
-        .map-info-card {
-          background: rgba(255,255,255,0.06);
-          border: 1.5px solid rgba(255,255,255,0.1);
-          border-radius: 16px;
-          padding: 18px;
-          transition: border-color 0.2s;
-        }
-
-        .map-info-card.is-active {
-          border-color: var(--pin-color);
-          box-shadow: 0 0 20px rgba(255,255,255,0.04);
-        }
-
-        .map-info-card__title {
-          font-family: 'Tektur', sans-serif;
-          font-size: 14px;
-          font-weight: 800;
-          color: #fff;
-          margin: 0 0 6px;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-
-        .map-info-card__dot {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          flex-shrink: 0;
-        }
-
-        .map-info-card__desc {
-          font-family: 'Sora', sans-serif;
-          font-size: 12px;
-          color: rgba(255,255,255,0.6);
-          line-height: 1.55;
-          margin: 0;
-        }
-
-        .map-info-card__zone-tag {
-          display: inline-flex;
-          align-items: center;
-          gap: 4px;
-          margin-top: 8px;
-          font-family: 'Tektur', sans-serif;
-          font-size: 10px;
-          font-weight: 700;
-          padding: 3px 8px;
-          border-radius: 100px;
-        }
-
-        /* LEGEND */
-        .map-legend {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-          flex-wrap: wrap;
-          margin-top: 16px;
-          padding: 12px 16px;
-          background: rgba(255,255,255,0.04);
-          border-radius: 12px;
-          border: 1px solid rgba(255,255,255,0.07);
-        }
-
-        .map-legend__title {
-          font-family: 'Tektur', sans-serif;
-          font-size: 11px;
-          color: rgba(255,255,255,0.4);
-          font-weight: 700;
-          letter-spacing: 1px;
-          margin-right: 4px;
-        }
-
-        .map-legend__item {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          font-family: 'Sora', sans-serif;
-          font-size: 11px;
-          color: rgba(255,255,255,0.6);
-        }
-
-        .map-legend__dot {
-          width: 10px;
-          height: 10px;
-          border-radius: 50%;
-          flex-shrink: 0;
-        }
-
-        @media (max-width: 768px) {
-          .map-wrapper {
-            grid-template-columns: 1fr;
-          }
-
-          .map-canvas {
-            aspect-ratio: 4/3;
-          }
-
-          .map-hero {
-            padding: 40px 20px 24px;
-          }
-        }
-      `}</style>
-
-      {/* HERO */}
-      <header className="map-hero">
-        <span className="map-hero__eyebrow">📍 Interface 2026</span>
-        <h1 className="map-hero__title">
-          LOCATION <span>MAP</span>
+      <div className="map-design-page__inner">
+        <h1
+          className="map-design-page__title"
+          data-figma-node="794:2291"
+        >
+          <span className="map-design-page__initial">M</span>
+          <span>AP/</span>
+          <span className="map-design-page__initial">D</span>
+          <span>ENAH</span>
         </h1>
-        <p className="map-hero__subtitle">
-          Peta interaktif lokasi kegiatan Interface 2026. Pilih hari untuk melihat pos dan lokasi masing-masing.
-        </p>
-      </header>
 
-      {/* BODY */}
-      <div className="map-body">
-        {/* TABS */}
-        <div className="map-tabs">
-          {TABS.map((tab) => (
-            <button
-              key={tab.key}
-              className={`map-tab ${activeTab === tab.key ? "is-active" : ""}`}
-              style={{ "--tab-color": tab.color }}
-              onClick={() => {
-                setActiveTab(tab.key);
-                setActivePin(null);
-              }}
-            >
-              <span>{tab.emoji}</span>
-              <span>{tab.label}</span>
-            </button>
-          ))}
+        <div className="map-design-sections">
+          <MapBoard
+            type="fmipa"
+            nodeId="794:2289"
+          >
+            <FmipaMap />
+          </MapBoard>
+
+          <MapBoard
+            type="zipur"
+            nodeId="794:2290"
+          >
+            <ZipurMap />
+          </MapBoard>
         </div>
-
-        {/* MAP + SIDEBAR */}
-        <div className="map-wrapper">
-          {/* MAP CANVAS */}
-          <div className="map-canvas">
-            <MapGrid />
-
-            {locations.map((loc) => (
-              <button
-                key={loc.id}
-                className={`map-pin ${activePin === loc.id ? "is-active" : ""}`}
-                style={{
-                  top: loc.top,
-                  left: loc.left,
-                  "--pin-color": loc.color,
-                  background: "none",
-                  border: "none",
-                  padding: 0,
-                }}
-                onClick={() => setActivePin(activePin === loc.id ? null : loc.id)}
-                title={loc.label}
-              >
-                <span className="map-pin__label">{loc.short}</span>
-                {isMakrab && loc.zone && (
-                  <div
-                    className="map-pin__zone"
-                    style={{ background: loc.zone === "red" ? "#FF3B3B" : "#00FF88" }}
-                  />
-                )}
-                <Pin color={loc.color} />
-              </button>
-            ))}
-          </div>
-
-          {/* SIDEBAR */}
-          <div className="map-sidebar">
-            {locations.map((loc) => (
-              <div
-                key={loc.id}
-                className={`map-info-card ${activePin === loc.id ? "is-active" : ""}`}
-                style={{ "--pin-color": loc.color }}
-                onClick={() => setActivePin(activePin === loc.id ? null : loc.id)}
-              >
-                <div className="map-info-card__title">
-                  <span className="map-info-card__dot" style={{ background: loc.color }} />
-                  {loc.label}
-                </div>
-                <p className="map-info-card__desc">{loc.description}</p>
-
-                {isMakrab && loc.zone && (
-                  <span
-                    className="map-info-card__zone-tag"
-                    style={{
-                      background: loc.zone === "red" ? "rgba(255,59,59,0.15)" : "rgba(0,255,136,0.1)",
-                      color: loc.zone === "red" ? "#FF6B6B" : "#00E87A",
-                      border: `1px solid ${loc.zone === "red" ? "rgba(255,59,59,0.3)" : "rgba(0,255,136,0.2)"}`,
-                    }}
-                  >
-                    {loc.zone === "red" ? "🔴 Zona Merah" : "🟢 Zona Hijau"}
-                  </span>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* LEGEND for makrab */}
-        {isMakrab && (
-          <div className="map-legend">
-            <span className="map-legend__title">LEGENDA</span>
-            <div className="map-legend__item">
-              <span className="map-legend__dot" style={{ background: "#00E87A" }} />
-              Zona Hijau — Boleh diakses peserta
-            </div>
-            <div className="map-legend__item">
-              <span className="map-legend__dot" style={{ background: "#FF3B3B" }} />
-              Zona Merah — Terbatas / dilarang masuk
-            </div>
-          </div>
-        )}
       </div>
     </main>
   );

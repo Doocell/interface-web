@@ -8,7 +8,6 @@ import {
   useLocation,
 } from "react-router-dom";
 
-
 import Navbar from "./components/layout/Navbar";
 import BackgroundPattern from "./components/layout/BackgroundPattern";
 
@@ -27,7 +26,6 @@ import InterfaceInfo from "./pages/InterfaceInfo";
 function RouteScrollReset() {
   const location = useLocation();
 
-
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -36,6 +34,71 @@ function RouteScrollReset() {
     });
   }, [location.pathname]);
 
+  return null;
+}
+
+
+/*
+  Menghilangkan border/garis bawaan browser
+  ketika sebuah gambar gagal dimuat.
+
+  visibility: hidden digunakan agar ukuran dan
+  posisi elemen tetap sama sehingga desain tidak bergeser.
+*/
+function BrokenImageGuard() {
+  useEffect(() => {
+    const hideBrokenImage = (image) => {
+      image.style.setProperty(
+        "visibility",
+        "hidden",
+        "important",
+      );
+
+      image.setAttribute(
+        "aria-hidden",
+        "true",
+      );
+    };
+
+    const handleImageError = (event) => {
+      const target = event.target;
+
+      if (target instanceof HTMLImageElement) {
+        hideBrokenImage(target);
+      }
+    };
+
+    const checkExistingImages = () => {
+      const images =
+        document.querySelectorAll("img");
+
+      images.forEach((image) => {
+        const imageFailed =
+          image.complete &&
+          image.naturalWidth === 0;
+
+        if (imageFailed) {
+          hideBrokenImage(image);
+        }
+      });
+    };
+
+    document.addEventListener(
+      "error",
+      handleImageError,
+      true,
+    );
+
+    checkExistingImages();
+
+    return () => {
+      document.removeEventListener(
+        "error",
+        handleImageError,
+        true,
+      );
+    };
+  }, []);
 
   return null;
 }
@@ -46,86 +109,63 @@ function AppRoutes() {
     <>
       <RouteScrollReset />
 
+      <BrokenImageGuard />
+
       <BackgroundPattern />
 
       <Navbar />
 
       <Routes>
-
-        {/* HOME */}
         <Route
           path="/"
           element={<Home />}
         />
 
-
-        {/* TIMELINE */}
         <Route
           path="/timeline"
           element={<Timeline />}
         />
 
-
-        {/* BUKU PANDUAN */}
         <Route
           path="/buku-panduan"
           element={<BukuPanduan />}
         />
 
-
-        {/* LEADERBOARD */}
         <Route
           path="/leaderboard"
           element={<Leaderboard />}
         />
 
-
-        {/* QUEST COLLECT */}
         <Route
           path="/quest-collect"
           element={<QuestCollect />}
         />
 
-
-        {/* VOTE */}
         <Route
           path="/vote"
           element={<Vote />}
         />
 
-
-        {/* GAME DESCRIPTION */}
         <Route
           path="/game-description"
           element={<GameDescription />}
         />
 
-
-        {/* MAP */}
         <Route
           path="/map"
           element={<Map />}
         />
 
-
-        {/* FAQ */}
         <Route
           path="/faq"
           element={<FAQ />}
         />
 
-
-        {/* INTERFACE INFO */}
         <Route
           path="/info"
           element={<InterfaceInfo />}
         />
 
-
-        {/*
-          Route lain belum dibuat pada tahap ini.
-          Jangan tampilkan halaman kosong.
-        */}
         <Route
           path="*"
           element={
@@ -135,7 +175,6 @@ function AppRoutes() {
             />
           }
         />
-
       </Routes>
     </>
   );

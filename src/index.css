@@ -1,5 +1,8 @@
 @import "tailwindcss";
 @import url(
+  "https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&family=Russo+One&family=Sora:wght@400;500;600;700&family=Tektur:wght@400;500;600;700;800;900&display=swap"
+);
+@import url(
   "https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@400;900&family=Sora:wght@400;500;600;700&family=Tektur:wght@400;500;600;700;800;900&display=swap"
 );
 
@@ -156,4 +159,13 @@ select {
     0;
 
   /* Background dihapus - pakai BackgroundPattern global */
+}
+/* Hilangkan garis horizontal global */
+hr {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
 }

@@ -1,405 +1,620 @@
-import BackgroundPattern from "../components/layout/BackgroundPattern";
+import "../styles/interface-info.css";
+import "../styles/interface-info.css";
 
-// Assets from Figma
-const imgElemenLingkaran = "https://www.figma.com/api/mcp/asset/d51580ab-3eb4-4bbb-b607-3d8ca7601567.svg";
-const imgWeuiArrowFilled = "https://www.figma.com/api/mcp/asset/07bdeb0b-fe11-4e3e-97a7-3c22bb656ac3.svg";
+// Import icon images
+import chairpersonIcon from "../assets/icons/chairperson.png";
+import consumptionIcon from "../assets/icons/consumption.png";
+import creativeIcon from "../assets/icons/creative.png";
+import equipmentIcon from "../assets/icons/equipment.png";
+import eventIcon from "../assets/icons/event.png";
+import facilitatorIcon from "../assets/icons/facilitator.png";
+import fieldCommanderIcon from "../assets/icons/field-commander.png";
+import healthIcon from "../assets/icons/health.png";
+import mentorIcon from "../assets/icons/mentor.png";
+import pddIcon from "../assets/icons/pdd.png";
+import publicRelationsIcon from "../assets/icons/public-relations.png";
+import secretaryIcon from "../assets/icons/secretary.png";
+import sponsorIcon from "../assets/icons/sponsor.png";
+import steeringCommitteeIcon from "../assets/icons/steering-committee.png";
+import treasurerIcon from "../assets/icons/treasurer.png";
+
+const COLORS = {
+  pink: "#ff59fb",
+  purple: "#9513ff",
+  blue: "#189cf4",
+  yellow: "#ffd900",
+};
+
+const informationSections = [
+  {
+    title: "Tentang Interface",
+    color: COLORS.yellow,
+    labelFill: "#fff7c7",
+    align: "left",
+    paragraphs: [
+      "Introduction of Computer Science atau yang lebih dikenal dengan INTERFACE, adalah program kerja tahunan Himpunan Mahasiswa Ilmu Komputer (HIMA ILKOM) Universitas Negeri Semarang yang menjadi gerbang awal bagi mahasiswa baru untuk mengenal dunia rumpun Ilmu Komputer secara menyeluruh.",
+      "Program ini menjadi jembatan transisi dari dunia sekolah menuju dunia perkuliahan melalui serangkaian kegiatan yang terstruktur dan berkesinambungan. Selain aspek akademik dan lingkungan kampus, Interface juga mengenalkan budaya, nilai, dan dinamika kehidupan sebagai bagian dari keluarga besar Ilmu Komputer, menjadikannya fondasi awal sebelum mahasiswa baru melangkah lebih jauh dalam perjalanan akademik dan profesionalnya.",
+    ],
+  },
+  {
+    title: "Konsep Interface",
+    color: COLORS.blue,
+    labelFill: "#cceeff",
+    align: "right",
+    paragraphs: [
+      "Berbeda dari orientasi jurusan pada umumnya, Interface 2026 dirancang sebagai perjalanan pengenalan yang utuh: mahasiswa baru memulainya sebagai player dan menyelesaikannya sebagai programmer, sebuah proses yang mengantarkan mereka memahami lingkungan akademik, membangun relasi, serta menemukan jati diri di tengah komunitas Ilmu Komputer.",
+      "Perjalanan ini diwujudkan melalui konsep Game In Real Life, pendekatan yang menghadirkan narasi permainan ke dalam rangkaian kegiatan orientasi. Setiap mahasiswa baru diposisikan sebagai player yang menjalani tiap tahapan sebagai satu kesatuan perjalanan yang saling berkaitan, di mana setiap momen menjadi bagian dari proses pembentukan diri yang berkelanjutan. Karena itu, keikutsertaan pada setiap tahap menjadi bagian penting dari keutuhan perjalanan tersebut.",
+    ],
+  },
+  {
+    title: "Tema & Makna",
+    color: COLORS.purple,
+    labelFill: "#e6c4ff",
+    align: "left",
+    paragraphs: [
+      <>
+        Tema: <strong>&quot;Building Terrain: Hello World!&quot;</strong>
+        <br />
+        Tagline: <strong>Ready? Go!</strong>
+      </>,
+      "Tema ini merepresentasikan proses awal mahasiswa baru dalam membangun fondasi (terrain) di dunia perkuliahan Ilmu Komputer UNNES. Sebagaimana sebuah dunia yang terbentuk dari titik nol, mahasiswa baru datang dengan potensi yang akan dibentuk melalui proses pengenalan lingkungan, pembangunan relasi, dan penguatan identitas sebagai bagian dari keluarga besar Ilmu Komputer.",
+      'Frasa "Hello, World!" merepresentasikan output pertama dari proses tersebut, yakni pernyataan kesiapan mahasiswa baru untuk memasuki dan menjalani dunia perkuliahan Ilmu Komputer.',
+    ],
+  },
+  {
+    title: "Tujuan Interface",
+    color: COLORS.pink,
+    labelFill: "#ffd2fd",
+    align: "right",
+    paragraphs: [
+      "Interface 2026 bertujuan menjadikan dirinya sebagai wadah kolaborasi strategis dan interaktif yang menyatukan mahasiswa Ilmu Komputer dalam semangat kekeluargaan, sekaligus mempersiapkan mentalitas mahasiswa yang tangguh, adaptif, dan suportif dalam menjalani dinamika dunia perkuliahan. Nilai-nilai inti yang ditanamkan melalui pencapaian tujuan tersebut meliputi kebersamaan, adaptabilitas, ketahanan mental, kolaborasi, dan sense of belonging.",
+    ],
+  },
+];
+
+const schedule = [
+  {
+    title: "Prologue: Patch Notes!",
+    date: "Sabtu, 29 Agustus 2026",
+    color: COLORS.pink,
+    description:
+      "Sesi penyampaian informasi teknis mengenai aturan, ketentuan, dan susunan acara yang perlu dipahami mahasiswa baru sebelum resmi memasuki rangkaian kegiatan Interface 2026.",
+  },
+  {
+    title: "Chapter 1: Spawn Point",
+    date: "Sabtu, 5 September 2026",
+    color: COLORS.purple,
+    description:
+      "Merupakan titik awal keberangkatan mahasiswa baru dalam rangkaian Interface 2026, sekaligus momen pertama mahasiswa baru berpijak di lingkungan Ilmu Komputer UNNES sebagai fondasi perjalanan berikutnya.",
+  },
+  {
+    title: "Chapter 2: Questline PKMMPD",
+    date: "Minggu, 6 September 2026",
+    color: COLORS.blue,
+    description:
+      "Pelatihan Kepemimpinan dan Manajemen Mahasiswa Pra Dasar (PKMMPD) yang dirancang untuk mengembangkan kapasitas kepemimpinan dan manajemen mahasiswa baru secara bertahap, layaknya karakter yang terus berkembang dalam permainan.",
+  },
+  {
+    title: "Connection Chapter",
+    date: "Kamis, 10 September 2026",
+    color: "#00ef8d",
+    description:
+      "Kegiatan yang dirancang khusus untuk memperkenalkan jajaran dosen Ilmu Komputer kepada mahasiswa baru. Dosen merupakan salah satu komponen penting dalam dunia perkuliahan yang akan dijalani mahasiswa baru, sehingga kegiatan ini menjadi sarana membangun koneksi sejak tahap awal.",
+  },
+  {
+    title: "Next Chapter: Into The Komputek Verse",
+    date: "Jum’at–Minggu, 11–13 September 2026",
+    color: COLORS.yellow,
+    description:
+      'Tahap puncak yang menandai peleburan penuh mahasiswa baru sebagai bagian dari keluarga besar Komputek. Penamaan "Next Chapter", bukan "Chapter 3", dimaksudkan untuk menegaskan bahwa tahap ini bukan merupakan penutup, melainkan awal dari babak baru yang akan terus berlanjut.',
+  },
+];
+
+const committeeColumns = [
+  [
+    {
+      title: "Archiever",
+      role: "Sekretaris",
+      badge: "S",
+      count: 2,
+      names: [
+        "Zahra Tus",
+        "Jenifer",
+      ],
+      color: COLORS.pink,
+      icon: secretaryIcon,
+    },
+    {
+      title: "Game Architect",
+      role: "Sie. Acara",
+      badge: "A",
+      count: 7,
+      names: [
+        "Damar",
+        "Silfia",
+        "Selma",
+        "Jalita",
+        "Rafif",
+        "Rangga",
+        "Ibru",
+      ],
+      color: COLORS.pink,
+      icon: eventIcon,
+    },
+    {
+      title: "Guild Messenger",
+      role: "Sie. Humas",
+      badge: "H",
+      count: 6,
+      names: [
+        "Raza",
+        "Alya Fuji",
+        "Tamma",
+        "Samudra",
+        "Putri",
+        "Amelia",
+      ],
+      color: COLORS.pink,
+      icon: publicRelationsIcon,
+    },
+    {
+      title: "Healer",
+      role: "Sie. Kesehatan",
+      badge: "+",
+      count: 8,
+      names: [
+        "Lulik",
+        "Okta",
+        "Sabilla",
+        "Graselia",
+        "Nabila",
+        "Indah",
+        "Adrian",
+      ],
+      color: COLORS.blue,
+      icon: healthIcon,
+    },
+  ],
+  [
+    {
+      title: "High Council",
+      role: "Steering Committee",
+      badge: "SC",
+      count: 2,
+      names: [
+        "Yaafi",
+        "Sabar",
+      ],
+      color: COLORS.yellow,
+      icon: steeringCommitteeIcon,
+    },
+    {
+      title: "Game Master",
+      role: "Ketua Pelaksana",
+      badge: "GM",
+      count: 1,
+      names: [
+        "Evo",
+      ],
+      color: COLORS.yellow,
+      icon: chairpersonIcon,
+    },
+    {
+      title: "Artisan",
+      role: "Sie. PDD",
+      badge: "P",
+      count: 9,
+      names: [
+        "Hakim",
+        "Afza",
+        "Aurelia",
+        "Rafi",
+        "Dani",
+        "Raiska",
+        "Hafid",
+        "Satria",
+        "Yakaria",
+      ],
+      color: COLORS.blue,
+      icon: pddIcon,
+    },
+    {
+      title: "Game Resources",
+      role: "Sie. Perkap",
+      badge: "R",
+      count: 10,
+      names: [
+        "Haridar",
+        "Rizki",
+        "Batara",
+        "Dariel",
+        "Agner",
+        "Avicenna",
+        "Noya",
+        "Miftah",
+        "Docil",
+      ],
+      color: COLORS.blue,
+      icon: equipmentIcon,
+    },
+  ],
+  [
+    {
+      title: "Gold Steward",
+      role: "Bendahara",
+      badge: "$",
+      count: 2,
+      names: [
+        "Ryan A",
+        "Tika",
+      ],
+      color: COLORS.pink,
+      icon: treasurerIcon,
+    },
+    {
+      title: "Game Designer",
+      role: "Sie. Kreatif",
+      badge: "K",
+      count: 8,
+      names: [
+        "Lintang",
+        "Mutia",
+        "Azzel",
+        "Vani",
+        "Elisa",
+        "Sufi",
+        "Pelita",
+        "Sulthan",
+      ],
+      color: COLORS.pink,
+      icon: creativeIcon,
+    },
+    {
+      title: "Hunger Keeper",
+      role: "Sie. Konsumsi",
+      badge: "C",
+      count: 7,
+      names: [
+        "Ibrahim",
+        "Raras",
+        "Alice",
+        "Farida",
+        "Maulidia",
+        "Moses",
+        "Zahra Ahya",
+      ],
+      color: COLORS.pink,
+      icon: consumptionIcon,
+    },
+    {
+      title: "Merchant Guild",
+      role: "Sie. Sponsor",
+      badge: "SP",
+      count: 6,
+      names: [
+        "Azza",
+        "Rafa",
+        "Caca",
+        "Zhafira",
+        "Abigail",
+        "Fardhan",
+      ],
+      color: COLORS.blue,
+      icon: sponsorIcon,
+    },
+  ],
+];
+
+const wideCommitteeCards = [
+  {
+    title: "Field Commander",
+    role: "Sie. Korlap",
+    badge: "FC",
+    count: 7,
+    names: [
+      "Nouval Almuzacky",
+      "Saghita",
+      "Wira",
+      "Elizabeth",
+      "Adila",
+      "Alvin",
+      "Rakha",
+    ],
+    columns: 2,
+    color: COLORS.blue,
+    icon: fieldCommanderIcon,
+  },
+  {
+    title: "Narrator",
+    role: "Fasilitator",
+    badge: "N",
+    count: 10,
+    names: [
+      "Syalmuita",
+      "Rosita",
+      "Bintang",
+      "Dika",
+      "Marca",
+      "Nouval Ar-Rizqy",
+    ],
+    columns: 2,
+    color: COLORS.blue,
+    icon: facilitatorIcon,
+  },
+];
+
+const mentorCard = {
+  title: "Guild Mentor",
+  role: "Pendamping",
+  badge: "M",
+  count: 24,
+  names: [
+    "Adjie",
+    "Nadine",
+    "Naila",
+    "Marsanda",
+    "Ryan S",
+    "Huwalda",
+    "Yosea",
+    "Oryza",
+    "Ardin",
+    "Diandra",
+    "Reza",
+    "Fadhil",
+    "Rayya",
+    "Hafidz",
+    "Helmi",
+    "Adinda",
+    "Karina",
+    "Yusuf",
+    "Hema",
+    "Nadin",
+    "Alya",
+    "Aska",
+    "Gaska",
+    "Ridho",
+  ],
+  columns: 4,
+  color: COLORS.purple,
+  icon: mentorIcon,
+};
+
+function DisplayHeading({
+  children,
+  className = "",
+  as: Tag = "h2",
+}) {
+  return (
+    <Tag className={`ii-display-heading ${className}`.trim()}>
+      {children}
+    </Tag>
+  );
+}
+
+function InformationCard({ section }) {
+  const isRight = section.align === "right";
+
+  return (
+    <article
+      className={`ii-information-card ${isRight ? "is-right" : ""}`}
+      style={{
+        "--accent": section.color,
+        "--label-fill": section.labelFill,
+      }}
+    >
+      <h3 className="ii-information-label">
+        {section.title}
+      </h3>
+
+      <div className="ii-information-copy">
+        {section.paragraphs.map((paragraph, index) => (
+          <p key={`${section.title}-${index}`}>
+            {paragraph}
+          </p>
+        ))}
+      </div>
+    </article>
+  );
+}
+
+function RoleCard({ card, wide = false }) {
+  const columns = card.columns ?? 1;
+  const rows = Math.ceil(card.count / columns);
+  const minimumHeight =
+    card.count === 1 ? 136 : 96 + rows * 57;
+
+  const names = card.names ?? [];
+
+  return (
+    <article
+      className={`ii-role-card ${wide ? "is-wide" : ""}`}
+      style={{
+        "--accent": card.color,
+        "--card-min-height": `${minimumHeight}px`,
+        "--name-columns": columns,
+      }}
+    >
+      <div className="ii-role-header">
+        {card.icon && (
+          <div className="ii-role-icon">
+            <img src={card.icon} alt={card.title} />
+          </div>
+        )}
+        <div className="ii-role-badge" aria-hidden="true">
+          <span>{card.badge}</span>
+        </div>
+
+        <div className="ii-role-title-wrap">
+          <h3>{card.title}</h3>
+        </div>
+
+        <p className="ii-role-subtitle">
+          {card.role}
+        </p>
+      </div>
+
+      <div className="ii-role-names">
+        {names.map((name, index) => (
+          <span key={`${card.title}-${name}-${index}`}>
+            {name}
+          </span>
+        ))}
+      </div>
+    </article>
+  );
+}
 
 export default function InterfaceInfo() {
   return (
-    <>
-      <main className="interface-info-page">
-      {/* Background Pattern Global */}
-      <BackgroundPattern />
-      
-      <style>{`
-        .interface-info-page {
-          position: relative;
-          min-height: 100vh;
-          background: #685abb;
-          overflow-x: hidden;
-          padding-top: 120px;
-          padding-bottom: 80px;
-        }
-
-        /* Decorative elements */
-        .info-decor-square {
-          position: absolute;
-          right: 5%;
-          top: 30%;
-          width: 200px;
-          height: 200px;
-          pointer-events: none;
-          z-index: 1;
-          animation: floatSquare 6s ease-in-out infinite;
-        }
-
-        .info-decor-circle {
-          position: absolute;
-          left: 3%;
-          top: 55%;
-          width: 200px;
-          height: 200px;
-          pointer-events: none;
-          z-index: 1;
-          animation: floatCircle 7s ease-in-out infinite;
-        }
-
-        @keyframes floatSquare {
-          0%, 100% { transform: translate(0, 0) rotate(64.35deg); }
-          50% { transform: translate(-10px, -15px) rotate(70deg); }
-        }
-
-        @keyframes floatCircle {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          50% { transform: translate(10px, -10px) scale(1.05); }
-        }
-
-        /* Main content */
-        .info-content {
-          position: relative;
-          z-index: 10;
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 24px;
-        }
-
-        /* Title */
-        .info-title {
-          font-family: 'Tektur', sans-serif;
-          font-weight: 800;
-          text-align: center;
-          text-transform: uppercase;
-          margin-bottom: clamp(60px, 10vw, 100px);
-        }
-
-        .info-title h1 {
-          margin: 0;
-          line-height: 1.1;
-        }
-
-        .info-title-line {
-          display: block;
-          margin-bottom: 8px;
-        }
-
-        .info-title-yellow {
-          font-size: clamp(50px, 8vw, 100px);
-          color: #FFD900;
-          text-shadow: 6px 5px 0px #AC4AFD, 0px 0px 8px rgba(255,255,255,0.5);
-        }
-
-        .info-title-white {
-          font-size: clamp(50px, 8vw, 100px);
-          color: #ffffff;
-          text-shadow: 6px 5px 0px #AC4AFD, 0px 0px 8px rgba(255,255,255,0.5);
-        }
-
-        /* Info section */
-        .info-section {
-          position: relative;
-          max-width: 900px;
-          margin: 0 auto clamp(80px, 12vw, 160px);
-        }
-
-        .info-label-wrapper {
-          position: relative;
-          z-index: 2;
-          margin-bottom: -25px;
-          animation: labelIn 0.6s ease both;
-        }
-
-        .info-label-wrapper.align-left {
-          display: flex;
-          justify-content: flex-start;
-          padding-left: clamp(20px, 5vw, 60px);
-        }
-
-        .info-label-wrapper.align-right {
-          display: flex;
-          justify-content: flex-end;
-          padding-right: clamp(20px, 5vw, 60px);
-        }
-
-        @keyframes labelIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px) rotate(0deg);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .info-label {
-          display: inline-block;
-          padding: 12px 32px;
-          border-radius: 12px;
-          font-family: 'Londrina Solid', cursive;
-          font-weight: 900;
-          font-size: clamp(22px, 3.5vw, 38px);
-          text-transform: uppercase;
-          text-align: center;
-          text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
-          white-space: nowrap;
-          transition: transform 0.3s ease;
-        }
-
-        .info-label:hover {
-          transform: rotate(0deg) scale(1.05);
-        }
-
-        .info-label.yellow {
-          background: #FFFBE4;
-          border: 5px solid #FFD900;
-          color: #DFB009;
-          box-shadow: 0 0 30px rgba(255, 217, 0, 0.6);
-          transform: rotate(-2.5deg);
-        }
-
-        .info-label.blue {
-          background: #D5EEFF;
-          border: 5px solid #189CF4;
-          color: #189CF4;
-          box-shadow: 0 0 25px rgba(24, 156, 244, 0.6);
-          transform: rotate(-2.8deg);
-        }
-
-        .info-box {
-          position: relative;
-          background: rgba(41, 54, 62, 0.7);
-          backdrop-filter: blur(10px);
-          border-radius: clamp(16px, 3vw, 28px);
-          padding: clamp(32px, 5vw, 60px);
-          animation: boxIn 0.7s ease 0.2s both;
-        }
-
-        @keyframes boxIn {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .info-box.yellow {
-          border: 6px solid #FFD900;
-          box-shadow: 0 0 40px rgba(255, 217, 0, 0.5);
-        }
-
-        .info-box.blue {
-          border: 6px solid #189CF4;
-          box-shadow: 0 0 40px rgba(24, 156, 244, 0.5);
-        }
-
-        .info-text {
-          font-family: 'Londrina Solid', cursive;
-          font-weight: 300;
-          font-size: clamp(16px, 2vw, 28px);
-          line-height: 1.6;
-          color: #ffffff;
-          margin: 0;
-        }
-
-        .info-text.align-right {
-          text-align: right;
-        }
-
-        /* More button */
-        .info-more-button-wrapper {
-          display: flex;
-          justify-content: center;
-          margin-top: clamp(60px, 10vw, 100px);
-        }
-
-        .info-more-button {
-          position: relative;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 12px;
-          width: clamp(180px, 25vw, 240px);
-          height: clamp(70px, 10vw, 90px);
-          background: #FFD900;
-          border: none;
-          border-radius: 14px;
-          box-shadow: 
-            inset -4px -4px 4px 0px rgba(0,0,0,0.25),
-            inset 5px 4px 4px 0px #FCEB8A,
-            0 6px 15px rgba(0,0,0,0.3);
-          cursor: pointer;
-          transform: rotate(0.5deg);
-          transition: all 0.3s ease;
-        }
-
-        .info-more-button:hover {
-          transform: rotate(0.5deg) translateY(-4px) scale(1.05);
-          box-shadow: 
-            inset -4px -4px 4px 0px rgba(0,0,0,0.25),
-            inset 5px 4px 4px 0px #FCEB8A,
-            0 10px 25px rgba(0,0,0,0.4);
-        }
-
-        .info-more-button:active {
-          transform: rotate(0.5deg) translateY(-2px) scale(1.02);
-        }
-
-        .info-more-text {
-          font-family: 'Tektur', sans-serif;
-          font-weight: 800;
-          font-size: clamp(24px, 3.5vw, 34px);
-          color: #ffffff;
-          text-transform: uppercase;
-          text-shadow: 0px 5px 3px rgba(0,0,0,0.4), 0px 3px 0px #AC4AFD;
-          line-height: 1;
-        }
-
-        .info-more-arrow {
-          width: clamp(24px, 3.5vw, 32px);
-          height: auto;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-          .interface-info-page {
-            padding-top: 100px;
-            padding-bottom: 60px;
-          }
-
-          .info-content {
-            padding: 0 20px;
-          }
-
-          .info-label-wrapper.align-left,
-          .info-label-wrapper.align-right {
-            justify-content: center;
-            padding: 0;
-          }
-
-          .info-text.align-right {
-            text-align: left;
-          }
-
-          .info-decor-square,
-          .info-decor-circle {
-            width: 120px;
-            height: 120px;
-            opacity: 0.5;
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .info-decor-square,
-          .info-decor-circle {
-            animation: none !important;
-          }
-          
-          .info-label-wrapper,
-          .info-box {
-            animation: none !important;
-          }
-        }
-      `}</style>
-
-      {/* Decorative Square */}
-      <div className="info-decor-square" aria-hidden="true">
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}>
-          <div style={{
-            width: '80%',
-            height: '80%',
-            background: '#FF59FB',
-            borderRadius: '25px',
-            transform: 'rotate(64.35deg)'
-          }} />
-        </div>
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}>
-          <div style={{
-            width: '65%',
-            height: '65%',
-            border: '10px solid white',
-            borderRadius: '15px',
-            transform: 'rotate(64.35deg)'
-          }} />
-        </div>
-      </div>
-
-      {/* Decorative Circle */}
-      <div className="info-decor-circle" aria-hidden="true">
-        <img src={imgElemenLingkaran} alt="" style={{ width: '100%', height: '100%' }} />
-      </div>
-
-      {/* Main Content */}
-      <div className="info-content">
-        {/* Title */}
-        <div className="info-title">
-          <h1>
-            <span className="info-title-line">
-              <span className="info-title-yellow">I</span>
-              <span className="info-title-white">NTERFACE</span>
+    <main className="ii-page">
+      <section
+        className="ii-information-section"
+        aria-labelledby="interface-information-title"
+      >
+        <DisplayHeading
+          as="h1"
+          className="ii-information-heading"
+        >
+          <span className="ii-heading-line">
+            <span className="ii-heading-accent">
+              I
             </span>
-            <span className="info-title-line">
-              <span className="info-title-yellow">I</span>
-              <span className="info-title-white">NFORMATION</span>
+            nterface
+          </span>
+
+          <span className="ii-heading-line">
+            <span className="ii-heading-accent">
+              I
             </span>
-          </h1>
-        </div>
+            nformation
+          </span>
+        </DisplayHeading>
 
-        {/* Section 1: Apa Itu Interface */}
-        <div className="info-section">
-          <div className="info-label-wrapper align-left">
-            <div className="info-label yellow">
-              Apa itu interface?
-            </div>
-          </div>
-          <div className="info-box yellow">
-            <p className="info-text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-          </div>
-        </div>
-
-        {/* Section 2: Tujuan Interface */}
-        <div className="info-section">
-          <div className="info-label-wrapper align-right">
-            <div className="info-label blue">
-              Tujuan interface
-            </div>
-          </div>
-          <div className="info-box blue">
-            <p className="info-text align-right">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-          </div>
-        </div>
-
-        {/* More Button */}
-        <div className="info-more-button-wrapper">
-          <button className="info-more-button" aria-label="Lihat lebih banyak informasi">
-            <span className="info-more-text">More</span>
-            <img 
-              src={imgWeuiArrowFilled} 
-              alt="" 
-              className="info-more-arrow"
+        <div className="ii-information-list">
+          {informationSections.map((section) => (
+            <InformationCard
+              key={section.title}
+              section={section}
             />
-          </button>
+          ))}
         </div>
-      </div>
+      </section>
+
+      <section
+        className="ii-schedule-section"
+        aria-labelledby="interface-schedule-title"
+      >
+        <div className="ii-schedule-inner">
+          <DisplayHeading
+            className="ii-schedule-heading"
+          >
+            <span className="ii-heading-line">
+              <span className="ii-heading-accent">
+                S
+              </span>
+              truktur
+            </span>
+
+            <span className="ii-heading-line">
+              <span className="ii-heading-accent">
+                R
+              </span>
+              angkaian{" "}
+              <span className="ii-heading-accent">
+                A
+              </span>
+              cara
+            </span>
+          </DisplayHeading>
+
+          <h2
+            id="interface-schedule-title"
+            className="ii-visually-hidden"
+          >
+            Struktur Rangkaian Acara
+          </h2>
+
+          <p className="ii-schedule-intro">
+            Penamaan rangkaian kegiatan Interface 2026
+            mengikuti struktur narasi yang lazim
+            ditemukan pada game bergenre RPG
+            (Role-Playing Game), yang terbagi ke dalam
+            beberapa babak sebagai berikut.
+          </p>
+
+          <div className="ii-schedule-list">
+            {schedule.map((item) => (
+              <article
+                key={item.title}
+                className="ii-schedule-item"
+                style={{ "--accent": item.color }}
+              >
+                <h3>{item.title}</h3>
+                <time>{item.date}</time>
+                <p>{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="ii-committee-section"
+        aria-labelledby="interface-committee-title"
+      >
+        <DisplayHeading className="ii-committee-heading">
+          <span className="ii-heading-line">
+            <span className="ii-heading-accent">
+              S
+            </span>
+            truktur
+          </span>
+
+          <span className="ii-heading-line">
+            <span className="ii-heading-accent">
+              K
+            </span>
+            epanitiaan
+          </span>
+        </DisplayHeading>
+
+        <h2
+          id="interface-committee-title"
+          className="ii-visually-hidden"
+        >
+          Struktur Kepanitiaan
+        </h2>
+
+        <div className="ii-committee-columns">
+          {committeeColumns.map(
+            (column, columnIndex) => (
+              <div
+                className="ii-committee-column"
+                key={`committee-column-${columnIndex}`}
+              >
+                {column.map((card) => (
+                  <RoleCard
+                    card={card}
+                    key={card.title}
+                  />
+                ))}
+              </div>
+            ),
+          )}
+        </div>
+
+        <div className="ii-wide-card-grid">
+          {wideCommitteeCards.map((card) => (
+            <RoleCard
+              card={card}
+              key={card.title}
+              wide
+            />
+          ))}
+        </div>
+
+        <RoleCard card={mentorCard} wide />
+      </section>
     </main>
-    </>
   );
 }
