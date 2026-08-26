@@ -1,0 +1,214 @@
+.figma-navbar {
+  height: 76px;
+  background: #26353c;
+  border-bottom: 0;
+}
+
+.figma-navbar__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 78px;
+  max-width: none;
+  object-fit: fill;
+  pointer-events: none;
+  user-select: none;
+}
+
+.figma-navbar__canvas {
+  z-index: 2;
+}
+
+.figma-navbar__toggle,
+.figma-navbar__backdrop {
+  display: none;
+}
+
+.figma-navbar__brand:focus-visible,
+.figma-navbar__link:focus-visible,
+.figma-navbar__guidebook:focus-visible,
+.figma-navbar__toggle:focus-visible {
+  outline: 3px solid #ffd900;
+  outline-offset: 3px;
+}
+
+.figma-navbar__guidebook.is-active {
+  filter:
+    brightness(1.12)
+    drop-shadow(0 0 8px rgba(255, 89, 251, 0.65));
+}
+
+@media (max-width: 1279px) {
+  .figma-navbar,
+  .figma-navbar__canvas {
+    height: 76px;
+  }
+
+  .figma-navbar__canvas {
+    width: 100%;
+  }
+
+  .figma-navbar__brand {
+    left: 24px;
+    top: 14px;
+  }
+
+  .figma-navbar__toggle {
+    position: absolute;
+    top: 14px;
+    right: 24px;
+    z-index: 40;
+    display: flex;
+    width: 48px;
+    height: 48px;
+    padding: 12px 10px;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    border-radius: 8px;
+    background: rgba(104, 90, 187, 0.2);
+    color: #ffffff;
+    cursor: pointer;
+  }
+
+  .figma-navbar__toggle span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    border-radius: 999px;
+    background: currentColor;
+    transition:
+      transform 180ms ease,
+      opacity 180ms ease;
+  }
+
+  .figma-navbar__toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(9.5px) rotate(45deg);
+  }
+
+  .figma-navbar__toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .figma-navbar__toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-9.5px) rotate(-45deg);
+  }
+
+  .figma-navbar__backdrop {
+    position: fixed;
+    inset: 76px 0 0;
+    z-index: 1;
+    display: block;
+    padding: 0;
+    border: 0;
+    background: rgba(13, 18, 21, 0.62);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 180ms ease,
+      visibility 180ms ease;
+  }
+
+  .figma-navbar__backdrop.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .figma-navbar__menu {
+    position: fixed;
+    inset: 76px 0 0 auto;
+    z-index: 30;
+    display: flex;
+    width: min(360px, 90vw);
+    height: calc(100dvh - 76px);
+    padding: 24px 20px 32px;
+    flex-direction: column;
+    gap: 4px;
+    overflow-y: auto;
+    background: rgba(38, 53, 60, 0.99);
+    border-left: 2px solid #9513ff;
+    box-shadow: -16px 0 36px rgba(0, 0, 0, 0.28);
+    transform: translateX(105%);
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      transform 220ms ease,
+      visibility 220ms ease;
+  }
+
+  .figma-navbar__menu.is-open {
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .figma-navbar__menu .figma-navbar__link {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    min-height: 52px;
+    height: auto;
+    padding: 0 14px;
+    justify-content: flex-start;
+    flex: 0 0 auto;
+    font-size: 18px;
+    line-height: 1.25;
+    text-align: left;
+  }
+
+  .figma-navbar__menu .figma-navbar__link.is-active {
+    background: rgba(24, 156, 244, 0.1);
+  }
+
+  .figma-navbar__menu .figma-navbar__link.is-active::after {
+    left: 0;
+    top: 9px;
+    width: 2px;
+    height: calc(100% - 18px);
+  }
+
+  .figma-navbar__menu .figma-navbar__guidebook {
+    position: relative;
+    inset: auto;
+    width: 121.819px;
+    height: 48.116px;
+    margin: 12px auto 0;
+    flex: 0 0 48.116px;
+  }
+}
+
+@media (max-width: 768px) {
+  .figma-navbar,
+  .figma-navbar__canvas {
+    height: 76px;
+  }
+
+  .figma-navbar__brand {
+    left: 20px;
+    top: 14px;
+    width: 170px;
+    height: 46px;
+  }
+
+  .figma-navbar__toggle {
+    top: 14px;
+    right: 16px;
+  }
+
+  .figma-navbar__menu {
+    width: min(340px, 92vw);
+    padding: 20px 16px 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .figma-navbar__toggle span,
+  .figma-navbar__backdrop,
+  .figma-navbar__menu {
+    transition: none;
+  }
+}

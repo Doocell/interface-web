@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
-import BackgroundPattern from "../components/layout/BackgroundPattern";
 
 // Floating geometric shapes from leaderboard
 import elemenX from "../assets/leaderboard/elemen-x.svg";
@@ -137,13 +136,10 @@ export default function Vote() {
     <main
       className="relative min-h-screen overflow-x-hidden text-white flex flex-col justify-between selection:bg-[#ff59fb] selection:text-white"
       style={{
-        background: "#685ABB",
+        background: "transparent",
         paddingTop: "76px",
       }}
     >
-      {/* Background Pattern Global */}
-      <BackgroundPattern />
-
       {/* ========================================================================= */}
       {/* FLOATING DECORATIVE FIGMA ELEMENTS (MATCHING FIGMA NODE 405:5627) */}
       {/* ========================================================================= */}

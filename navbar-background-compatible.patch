@@ -1,0 +1,1115 @@
+diff --git a/src/App.jsx b/src/App.jsx
+index 99cffb1..8f360e4 100644
+--- a/src/App.jsx
++++ b/src/App.jsx
+@@ -115,67 +115,69 @@ function AppRoutes() {
+ 
+       <Navbar />
+ 
+-      <Routes>
+-        <Route
+-          path="/"
+-          element={<Home />}
+-        />
+-
+-        <Route
+-          path="/timeline"
+-          element={<Timeline />}
+-        />
+-
+-        <Route
+-          path="/buku-panduan"
+-          element={<BukuPanduan />}
+-        />
+-
+-        <Route
+-          path="/leaderboard"
+-          element={<Leaderboard />}
+-        />
+-
+-        <Route
+-          path="/quest-collect"
+-          element={<QuestCollect />}
+-        />
+-
+-        <Route
+-          path="/vote"
+-          element={<Vote />}
+-        />
+-
+-        <Route
+-          path="/game-description"
+-          element={<GameDescription />}
+-        />
+-
+-        <Route
+-          path="/map"
+-          element={<Map />}
+-        />
+-
+-        <Route
+-          path="/faq"
+-          element={<FAQ />}
+-        />
+-
+-        <Route
+-          path="/info"
+-          element={<InterfaceInfo />}
+-        />
+-
+-        <Route
+-          path="*"
+-          element={
+-            <Navigate
+-              to="/"
+-              replace
+-            />
+-          }
+-        />
+-      </Routes>
++      <div className="app-content">
++        <Routes>
++          <Route
++            path="/"
++            element={<Home />}
++          />
++
++          <Route
++            path="/timeline"
++            element={<Timeline />}
++          />
++
++          <Route
++            path="/buku-panduan"
++            element={<BukuPanduan />}
++          />
++
++          <Route
++            path="/leaderboard"
++            element={<Leaderboard />}
++          />
++
++          <Route
++            path="/quest-collect"
++            element={<QuestCollect />}
++          />
++
++          <Route
++            path="/vote"
++            element={<Vote />}
++          />
++
++          <Route
++            path="/game-description"
++            element={<GameDescription />}
++          />
++
++          <Route
++            path="/map"
++            element={<Map />}
++          />
++
++          <Route
++            path="/faq"
++            element={<FAQ />}
++          />
++
++          <Route
++            path="/info"
++            element={<InterfaceInfo />}
++          />
++
++          <Route
++            path="*"
++            element={
++              <Navigate
++                to="/"
++                replace
++              />
++            }
++          />
++        </Routes>
++      </div>
+     </>
+   );
+ }
+diff --git a/src/components/layout/BackgroundPattern.jsx b/src/components/layout/BackgroundPattern.jsx
+index b734b6e..e85c138 100644
+--- a/src/components/layout/BackgroundPattern.jsx
++++ b/src/components/layout/BackgroundPattern.jsx
+@@ -1,59 +1,26 @@
+-/*
+- * Background pattern untuk seluruh aplikasi
+- * FIGMA SOURCE: J1XqDOh4KLCNq2Ns9WjPyu | Node: 303:944
+- */
++import patternTop from "../../assets/layout/background-pattern-top.svg";
++import patternBottom from "../../assets/layout/background-pattern-bottom.svg";
++
++import "../../styles/background-pattern.css";
+ 
+-const ASSETS = {
+-  patternTop:
+-    "https://www.figma.com/api/mcp/asset/6b385835-1e46-4e06-a30a-b3ae0d8156df.svg",
+-  patternBottom:
+-    "https://www.figma.com/api/mcp/asset/6aa5b922-82c0-40d6-9339-80fa50d7e8cd.svg",
+-};
+ 
+ export default function BackgroundPattern() {
+   return (
+     <div
+-      className="fixed inset-0 pointer-events-none overflow-hidden"
+-      style={{
+-        background: "#685ABB",
+-        zIndex: 0,
+-      }}
++      className="global-background"
+       aria-hidden="true"
++      data-figma-node="715:446"
+     >
+-      {/* Pattern Top */}
+       <img
+-        style={{
+-          position: "absolute",
+-          left: "50%",
+-          top: "-206px",
+-          width: "calc(100vw + 286.339px)",
+-          height: "716.798px",
+-          maxWidth: "none",
+-          transform: "translateX(-50%)",
+-          objectFit: "fill",
+-          userSelect: "none",
+-          pointerEvents: "none",
+-        }}
+-        src={ASSETS.patternTop}
++        className="global-background__pattern global-background__pattern--top"
++        src={patternTop}
+         alt=""
+         draggable="false"
+       />
+ 
+-      {/* Pattern Bottom */}
+       <img
+-        style={{
+-          position: "absolute",
+-          left: "50%",
+-          top: "532.256px",
+-          width: "calc(100vw + 286.339px)",
+-          height: "716.798px",
+-          maxWidth: "none",
+-          transform: "translateX(-50%)",
+-          objectFit: "fill",
+-          userSelect: "none",
+-          pointerEvents: "none",
+-        }}
+-        src={ASSETS.patternBottom}
++        className="global-background__pattern global-background__pattern--bottom"
++        src={patternBottom}
+         alt=""
+         draggable="false"
+       />
+diff --git a/src/components/layout/Navbar.jsx b/src/components/layout/Navbar.jsx
+index 5e09cdf..097e622 100644
+--- a/src/components/layout/Navbar.jsx
++++ b/src/components/layout/Navbar.jsx
+@@ -1,9 +1,15 @@
++import { useEffect, useRef, useState } from "react";
+ import {
+   Link,
+   NavLink,
++  useLocation,
+ } from "react-router-dom";
+ 
++import navbarBackground from "../../assets/layout/navbar-background.svg";
++import guidebookButton from "../../assets/layout/guidebook-button.svg";
++
+ import "../../styles/landing-start.css";
++import "../../styles/navbar.css";
+ 
+ 
+ const navigation = [
+@@ -12,43 +18,36 @@ const navigation = [
+     to: "/info",
+     className: "nav-information",
+   },
+-
+   {
+     label: "Timeline",
+     to: "/timeline",
+     className: "nav-timeline",
+   },
+-
+   {
+     label: "Leaderboard",
+     to: "/leaderboard",
+     className: "nav-leaderboard",
+   },
+-
+   {
+     label: "Vote",
+     to: "/vote",
+     className: "nav-vote",
+   },
+-
+   {
+     label: "Map",
+     to: "/map",
+     className: "nav-map",
+   },
+-
+   {
+     label: "Game Description",
+     to: "/game-description",
+     className: "nav-game-description",
+   },
+-
+   {
+     label: "Quest Collect",
+     to: "/quest-collect",
+     className: "nav-quest-collect",
+   },
+-
+   {
+     label: "FAQ",
+     to: "/faq",
+@@ -58,17 +57,114 @@ const navigation = [
+ 
+ 
+ export default function Navbar() {
++  const location = useLocation();
++  const menuRef = useRef(null);
++  const toggleRef = useRef(null);
++  const [isMenuOpen, setIsMenuOpen] = useState(false);
++
++  const closeMenu = () => {
++    setIsMenuOpen(false);
++  };
++
++  useEffect(() => {
++    setIsMenuOpen(false);
++  }, [location.pathname]);
++
++  useEffect(() => {
++    const desktopMedia = window.matchMedia("(min-width: 1280px)");
++
++    const handleDesktopChange = (event) => {
++      if (event.matches) {
++        setIsMenuOpen(false);
++      }
++    };
++
++    desktopMedia.addEventListener("change", handleDesktopChange);
++
++    return () => {
++      desktopMedia.removeEventListener("change", handleDesktopChange);
++    };
++  }, []);
++
++  useEffect(() => {
++    if (!isMenuOpen) {
++      return undefined;
++    }
++
++    const previousOverflow = document.body.style.overflow;
++    const menuLinks = Array.from(
++      menuRef.current?.querySelectorAll("a[href]") ?? [],
++    );
++
++    document.body.style.overflow = "hidden";
++
++    requestAnimationFrame(() => {
++      menuLinks[0]?.focus();
++    });
++
++    const handleKeyDown = (event) => {
++      if (event.key === "Escape") {
++        event.preventDefault();
++        closeMenu();
++
++        requestAnimationFrame(() => {
++          toggleRef.current?.focus();
++        });
++
++        return;
++      }
++
++      if (event.key !== "Tab") {
++        return;
++      }
++
++      const focusableElements = [
++        toggleRef.current,
++        ...menuLinks,
++      ].filter(Boolean);
++
++      const firstElement = focusableElements[0];
++      const lastElement = focusableElements.at(-1);
++
++      if (
++        event.shiftKey &&
++        document.activeElement === firstElement
++      ) {
++        event.preventDefault();
++        lastElement?.focus();
++      } else if (
++        !event.shiftKey &&
++        document.activeElement === lastElement
++      ) {
++        event.preventDefault();
++        firstElement?.focus();
++      }
++    };
++
++    document.addEventListener("keydown", handleKeyDown);
++
++    return () => {
++      document.body.style.overflow = previousOverflow;
++      document.removeEventListener("keydown", handleKeyDown);
++    };
++  }, [isMenuOpen]);
++
+   return (
+     <header className="figma-navbar">
++      <img
++        className="figma-navbar__background"
++        src={navbarBackground}
++        alt=""
++        aria-hidden="true"
++        draggable="false"
++      />
+ 
+       <div className="figma-navbar__canvas">
+-
+-        {/* LOGO */}
+-
+         <Link
+           to="/"
+           className="figma-navbar__brand"
+           aria-label="INTERFACE 2026 Home"
++          onClick={closeMenu}
+         >
+           <img
+             src="/Logo Interface w Border.png"
+@@ -77,79 +173,87 @@ export default function Navbar() {
+           />
+         </Link>
+ 
+-
+-        {/* NAVIGATION */}
++        <button
++          ref={toggleRef}
++          type="button"
++          className="figma-navbar__toggle"
++          aria-label={
++            isMenuOpen
++              ? "Tutup menu navigasi"
++              : "Buka menu navigasi"
++          }
++          aria-expanded={isMenuOpen}
++          aria-controls="primary-navigation"
++          onClick={() => {
++            setIsMenuOpen((currentValue) => !currentValue);
++          }}
++        >
++          <span aria-hidden="true" />
++          <span aria-hidden="true" />
++          <span aria-hidden="true" />
++        </button>
+ 
+         <nav
+-          className="figma-navbar__menu"
+-          aria-label="Main Navigation"
++          ref={menuRef}
++          id="primary-navigation"
++          className={`figma-navbar__menu${
++            isMenuOpen ? " is-open" : ""
++          }`}
++          aria-label="Navigasi utama"
+         >
+-
+           {navigation.map((item) => (
+             <NavLink
+               key={item.to}
+-
+               to={item.to}
+-
+-              end={item.end}
+-
+               className={({ isActive }) =>
+                 [
+                   "figma-navbar__link",
+                   item.className,
+-                  isActive
+-                    ? "is-active"
+-                    : "",
++                  isActive ? "is-active" : "",
+                 ]
+                   .filter(Boolean)
+                   .join(" ")
+               }
++              onClick={closeMenu}
+             >
+               {item.label}
+             </NavLink>
+           ))}
+ 
+-
+-          {/* BUKU PANDUAN */}
+-
+           <NavLink
+             to="/buku-panduan"
+-
+             className={({ isActive }) =>
+               [
+                 "figma-navbar__guidebook",
+-                isActive
+-                  ? "is-active"
+-                  : "",
++                isActive ? "is-active" : "",
+               ]
+                 .filter(Boolean)
+                 .join(" ")
+             }
++            onClick={closeMenu}
+           >
+-
+             <img
+               className="figma-navbar__guidebook-bg"
+-
+-              src="https://www.figma.com/api/mcp/asset/b8e61e81-3450-41ec-8108-48ad8316c2fa.svg"
+-
++              src={guidebookButton}
+               alt=""
+-
+               aria-hidden="true"
+-
+               draggable="false"
+             />
+ 
+-
+-            <span>
+-              BUKU PANDUAN
+-            </span>
+-
++            <span>BUKU PANDUAN</span>
+           </NavLink>
+-
+         </nav>
+-
+       </div>
+ 
++      <button
++        type="button"
++        tabIndex={-1}
++        className={`figma-navbar__backdrop${
++          isMenuOpen ? " is-open" : ""
++        }`}
++        aria-label="Tutup menu navigasi"
++        onClick={closeMenu}
++      />
+     </header>
+   );
+ }
+diff --git a/src/components/sections/InformationSection.jsx b/src/components/sections/InformationSection.jsx
+index 47042b1..4f2fe99 100644
+--- a/src/components/sections/InformationSection.jsx
++++ b/src/components/sections/InformationSection.jsx
+@@ -1,5 +1,3 @@
+-import BackgroundPattern from "../layout/BackgroundPattern";
+-
+ const ABOUT_TEXT =
+   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+ 
+@@ -857,9 +855,6 @@ export default function InformationSection() {
+         id="information"
+         className="ii-section"
+       >
+-        {/* Background Pattern Global */}
+-        <BackgroundPattern />
+-
+         <div className="ii-frame">
+ 
+ 
+diff --git a/src/components/sections/TimelineSection.jsx b/src/components/sections/TimelineSection.jsx
+index b917341..5c8b3ee 100644
+--- a/src/components/sections/TimelineSection.jsx
++++ b/src/components/sections/TimelineSection.jsx
+@@ -1,5 +1,4 @@
+ import "../../styles/timeline-section.css";
+-import BackgroundPattern from "../layout/BackgroundPattern";
+ 
+ /*
+  * FIGMA SOURCE
+@@ -148,12 +147,6 @@ export default function TimelineSection() {
+       className="timeline-section"
+       aria-label="Timeline Kegiatan"
+     >
+-      {/* ==========================================
+-          BACKGROUND PATTERN
+-      ========================================== */}
+-      
+-      <BackgroundPattern />
+-
+       {/* ==========================================
+           DECORATION LEFT
+       ========================================== */}
+diff --git a/src/pages/BukuPanduan.jsx b/src/pages/BukuPanduan.jsx
+index e326b0b..a34870f 100644
+--- a/src/pages/BukuPanduan.jsx
++++ b/src/pages/BukuPanduan.jsx
+@@ -1,10 +1,8 @@
+-import BackgroundPattern from "../components/layout/BackgroundPattern";
+ import GuidebookSection from "../components/sections/GuidebookSection";
+ 
+ export default function BukuPanduan() {
+   return (
+     <main className="buku-panduan-page" style={{ paddingTop: "76px" }}>
+-      <BackgroundPattern />
+       <GuidebookSection />
+     </main>
+   );
+diff --git a/src/pages/GameDescription.jsx b/src/pages/GameDescription.jsx
+index e9a9c47..561c041 100644
+--- a/src/pages/GameDescription.jsx
++++ b/src/pages/GameDescription.jsx
+@@ -1,5 +1,4 @@
+ import { useState } from "react";
+-import BackgroundPattern from "../components/layout/BackgroundPattern";
+ 
+ const GAMES = [
+   {
+diff --git a/src/pages/Leaderboard.jsx b/src/pages/Leaderboard.jsx
+index 79bd037..cf5db54 100644
+--- a/src/pages/Leaderboard.jsx
++++ b/src/pages/Leaderboard.jsx
+@@ -1,6 +1,5 @@
+ import { useState, useEffect } from "react";
+ import { supabase } from "../lib/supabase";
+-import BackgroundPattern from "../components/layout/BackgroundPattern";
+ 
+ // Figma Assets
+ import crown1 from "../assets/leaderboard/crown-1.svg";
+@@ -84,13 +83,10 @@ export default function Leaderboard() {
+     <main
+       className="relative min-h-screen overflow-x-hidden text-white selection:bg-[#ff59fb] selection:text-white"
+       style={{
+-        background: "#685ABB",
++        background: "transparent",
+         paddingTop: "76px",
+       }}
+     >
+-      {/* Background Pattern Global */}
+-      <BackgroundPattern />
+-
+       {/* ========================================================================= */}
+       {/* FLOATING DECORATIVE FIGMA ELEMENTS WITH SUBTLE AMBIENT ANIMATIONS */}
+       {/* ========================================================================= */}
+diff --git a/src/pages/Vote.jsx b/src/pages/Vote.jsx
+index 07e78e3..fe57d6e 100644
+--- a/src/pages/Vote.jsx
++++ b/src/pages/Vote.jsx
+@@ -1,6 +1,5 @@
+ import { useState, useEffect } from "react";
+ import { supabase } from "../lib/supabase";
+-import BackgroundPattern from "../components/layout/BackgroundPattern";
+ 
+ // Floating geometric shapes from leaderboard
+ import elemenX from "../assets/leaderboard/elemen-x.svg";
+@@ -137,13 +136,10 @@ export default function Vote() {
+     <main
+       className="relative min-h-screen overflow-x-hidden text-white flex flex-col justify-between selection:bg-[#ff59fb] selection:text-white"
+       style={{
+-        background: "#685ABB",
++        background: "transparent",
+         paddingTop: "76px",
+       }}
+     >
+-      {/* Background Pattern Global */}
+-      <BackgroundPattern />
+-
+       {/* ========================================================================= */}
+       {/* FLOATING DECORATIVE FIGMA ELEMENTS (MATCHING FIGMA NODE 405:5627) */}
+       {/* ========================================================================= */}
+diff --git a/src/styles/timeline-section.css b/src/styles/timeline-section.css
+index e2ce5b1..ba45216 100644
+--- a/src/styles/timeline-section.css
++++ b/src/styles/timeline-section.css
+@@ -25,7 +25,7 @@
+ 
+   overflow: hidden;
+ 
+-  background: #685abb;
++  background: transparent;
+ 
+   isolation: isolate;
+ }
+diff --git a/src/styles/navbar.css b/src/styles/navbar.css
+new file mode 100644
+index 0000000..2d224a2
+--- /dev/null
++++ b/src/styles/navbar.css
+@@ -0,0 +1,214 @@
++.figma-navbar {
++  height: 76px;
++  background: #26353c;
++  border-bottom: 0;
++}
++
++.figma-navbar__background {
++  position: absolute;
++  top: 0;
++  left: 0;
++  z-index: 0;
++  width: 100%;
++  height: 78px;
++  max-width: none;
++  object-fit: fill;
++  pointer-events: none;
++  user-select: none;
++}
++
++.figma-navbar__canvas {
++  z-index: 2;
++}
++
++.figma-navbar__toggle,
++.figma-navbar__backdrop {
++  display: none;
++}
++
++.figma-navbar__brand:focus-visible,
++.figma-navbar__link:focus-visible,
++.figma-navbar__guidebook:focus-visible,
++.figma-navbar__toggle:focus-visible {
++  outline: 3px solid #ffd900;
++  outline-offset: 3px;
++}
++
++.figma-navbar__guidebook.is-active {
++  filter:
++    brightness(1.12)
++    drop-shadow(0 0 8px rgba(255, 89, 251, 0.65));
++}
++
++@media (max-width: 1279px) {
++  .figma-navbar,
++  .figma-navbar__canvas {
++    height: 76px;
++  }
++
++  .figma-navbar__canvas {
++    width: 100%;
++  }
++
++  .figma-navbar__brand {
++    left: 24px;
++    top: 14px;
++  }
++
++  .figma-navbar__toggle {
++    position: absolute;
++    top: 14px;
++    right: 24px;
++    z-index: 40;
++    display: flex;
++    width: 48px;
++    height: 48px;
++    padding: 12px 10px;
++    flex-direction: column;
++    justify-content: space-between;
++    border: 1px solid rgba(255, 255, 255, 0.72);
++    border-radius: 8px;
++    background: rgba(104, 90, 187, 0.2);
++    color: #ffffff;
++    cursor: pointer;
++  }
++
++  .figma-navbar__toggle span {
++    display: block;
++    width: 100%;
++    height: 3px;
++    border-radius: 999px;
++    background: currentColor;
++    transition:
++      transform 180ms ease,
++      opacity 180ms ease;
++  }
++
++  .figma-navbar__toggle[aria-expanded="true"] span:nth-child(1) {
++    transform: translateY(9.5px) rotate(45deg);
++  }
++
++  .figma-navbar__toggle[aria-expanded="true"] span:nth-child(2) {
++    opacity: 0;
++  }
++
++  .figma-navbar__toggle[aria-expanded="true"] span:nth-child(3) {
++    transform: translateY(-9.5px) rotate(-45deg);
++  }
++
++  .figma-navbar__backdrop {
++    position: fixed;
++    inset: 76px 0 0;
++    z-index: 1;
++    display: block;
++    padding: 0;
++    border: 0;
++    background: rgba(13, 18, 21, 0.62);
++    opacity: 0;
++    visibility: hidden;
++    pointer-events: none;
++    transition:
++      opacity 180ms ease,
++      visibility 180ms ease;
++  }
++
++  .figma-navbar__backdrop.is-open {
++    opacity: 1;
++    visibility: visible;
++    pointer-events: auto;
++  }
++
++  .figma-navbar__menu {
++    position: fixed;
++    inset: 76px 0 0 auto;
++    z-index: 30;
++    display: flex;
++    width: min(360px, 90vw);
++    height: calc(100dvh - 76px);
++    padding: 24px 20px 32px;
++    flex-direction: column;
++    gap: 4px;
++    overflow-y: auto;
++    background: rgba(38, 53, 60, 0.99);
++    border-left: 2px solid #9513ff;
++    box-shadow: -16px 0 36px rgba(0, 0, 0, 0.28);
++    transform: translateX(105%);
++    visibility: hidden;
++    pointer-events: none;
++    transition:
++      transform 220ms ease,
++      visibility 220ms ease;
++  }
++
++  .figma-navbar__menu.is-open {
++    transform: translateX(0);
++    visibility: visible;
++    pointer-events: auto;
++  }
++
++  .figma-navbar__menu .figma-navbar__link {
++    position: relative;
++    inset: auto;
++    width: 100%;
++    min-height: 52px;
++    height: auto;
++    padding: 0 14px;
++    justify-content: flex-start;
++    flex: 0 0 auto;
++    font-size: 18px;
++    line-height: 1.25;
++    text-align: left;
++  }
++
++  .figma-navbar__menu .figma-navbar__link.is-active {
++    background: rgba(24, 156, 244, 0.1);
++  }
++
++  .figma-navbar__menu .figma-navbar__link.is-active::after {
++    left: 0;
++    top: 9px;
++    width: 2px;
++    height: calc(100% - 18px);
++  }
++
++  .figma-navbar__menu .figma-navbar__guidebook {
++    position: relative;
++    inset: auto;
++    width: 121.819px;
++    height: 48.116px;
++    margin: 12px auto 0;
++    flex: 0 0 48.116px;
++  }
++}
++
++@media (max-width: 768px) {
++  .figma-navbar,
++  .figma-navbar__canvas {
++    height: 76px;
++  }
++
++  .figma-navbar__brand {
++    left: 20px;
++    top: 14px;
++    width: 170px;
++    height: 46px;
++  }
++
++  .figma-navbar__toggle {
++    top: 14px;
++    right: 16px;
++  }
++
++  .figma-navbar__menu {
++    width: min(340px, 92vw);
++    padding: 20px 16px 28px;
++  }
++}
++
++@media (prefers-reduced-motion: reduce) {
++  .figma-navbar__toggle span,
++  .figma-navbar__backdrop,
++  .figma-navbar__menu {
++    transition: none;
++  }
++}
+diff --git a/src/styles/background-pattern.css b/src/styles/background-pattern.css
+new file mode 100644
+index 0000000..943d2ef
+--- /dev/null
++++ b/src/styles/background-pattern.css
+@@ -0,0 +1,33 @@
++.global-background {
++  position: fixed;
++  inset: 0;
++  z-index: 0;
++  overflow: hidden;
++  background: #685abb;
++  pointer-events: none;
++}
++
++.global-background__pattern {
++  position: absolute;
++  left: 50%;
++  width: calc(100vw + 286.339px);
++  height: 716.798px;
++  max-width: none;
++  object-fit: fill;
++  transform: translateX(-50%);
++  user-select: none;
++}
++
++.global-background__pattern--top {
++  top: -206px;
++}
++
++.global-background__pattern--bottom {
++  top: 532.256px;
++}
++
++.app-content {
++  position: relative;
++  z-index: 1;
++  min-height: 100vh;
++}
+diff --git a/src/assets/layout/navbar-background.svg b/src/assets/layout/navbar-background.svg
+new file mode 100644
+index 0000000..9016919
+--- /dev/null
++++ b/src/assets/layout/navbar-background.svg
+@@ -0,0 +1,16 @@
++<svg width="1440" height="78" viewBox="0 0 1440 78" fill="none" xmlns="http://www.w3.org/2000/svg">
++<g filter="url(#filter0_d_860_851)">
++<path d="M0.00634766 0H1439.9L1440 76H-0.000147008L0.00634766 0Z" fill="#26353C"/>
++</g>
++<defs>
++<filter id="filter0_d_860_851" x="0" y="0" width="1440" height="78" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
++<feFlood flood-opacity="0" result="BackgroundImageFix"/>
++<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
++<feOffset dy="2"/>
++<feComposite in2="hardAlpha" operator="out"/>
++<feColorMatrix type="matrix" values="0 0 0 0 0.58307 0 0 0 0 0.0734887 0 0 0 0 1 0 0 0 1 0"/>
++<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_860_851"/>
++<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_860_851" result="shape"/>
++</filter>
++</defs>
++</svg>
+diff --git a/src/assets/layout/guidebook-button.svg b/src/assets/layout/guidebook-button.svg
+new file mode 100644
+index 0000000..8bf50e0
+--- /dev/null
++++ b/src/assets/layout/guidebook-button.svg
+@@ -0,0 +1,24 @@
++<svg width="150" height="65" viewBox="0 0 150 65" fill="none" xmlns="http://www.w3.org/2000/svg">
++<g filter="url(#filter0_di_303_54)">
++<path d="M131.388 49.5244L18.1419 49.5244C16.0339 49.5244 14.3917 47.6959 14.6174 45.6001L17.3613 20.1211C17.552 18.3499 19.0276 16.9954 20.8087 16.9567L129.322 14.5977C131.211 14.5567 132.8 16.0045 132.935 17.8891L134.924 45.7271C135.07 47.779 133.445 49.5244 131.388 49.5244Z" fill="#F4E4FF"/>
++<path d="M18.1423 48.0649L131.387 48.0643C132.597 48.0643 133.554 47.0382 133.468 45.8312L131.48 17.9927C131.4 16.8845 130.465 16.0327 129.354 16.0566L20.8405 18.4159C19.793 18.4387 18.9253 19.2354 18.8129 20.277L16.0689 45.7568C15.9364 46.9894 16.9024 48.0649 18.1423 48.0649Z" stroke="#9513FF" stroke-width="2.91932"/>
++</g>
++<defs>
++<filter id="filter0_di_303_54" x="7.62939e-05" y="7.62939e-05" width="149.529" height="64.1209" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
++<feFlood flood-opacity="0" result="BackgroundImageFix"/>
++<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
++<feOffset/>
++<feGaussianBlur stdDeviation="7.2983"/>
++<feComposite in2="hardAlpha" operator="out"/>
++<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 0.350274 0 0 0 0 0.983757 0 0 0 1 0"/>
++<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_303_54"/>
++<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_303_54" result="shape"/>
++<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
++<feOffset dy="-16.3061"/>
++<feGaussianBlur stdDeviation="0.70896"/>
++<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
++<feColorMatrix type="matrix" values="0 0 0 0 0.794009 0 0 0 0 0.701817 0 0 0 0 0.923077 0 0 0 1 0"/>
++<feBlend mode="normal" in2="shape" result="effect2_innerShadow_303_54"/>
++</filter>
++</defs>
++</svg>
+diff --git a/src/assets/layout/background-pattern-top.svg b/src/assets/layout/background-pattern-top.svg
+new file mode 100644
+index 0000000..83bc63d
+--- /dev/null
++++ b/src/assets/layout/background-pattern-top.svg
+@@ -0,0 +1,74 @@
++<svg width="1727" height="717" viewBox="0 0 1727 717" fill="none" xmlns="http://www.w3.org/2000/svg">
++<circle opacity="0.3" cx="39.9669" cy="52.3379" r="28.9944" transform="rotate(-7.68867 39.9669 52.3379)" fill="#4F429F"/>
++<circle opacity="0.3" cx="637.306" cy="52.337" r="28.9944" transform="rotate(-7.68867 637.306 52.337)" fill="#4F429F"/>
++<circle opacity="0.3" cx="1234.65" cy="52.337" r="28.9944" transform="rotate(-7.68867 1234.65 52.337)" fill="#4F429F"/>
++<circle opacity="0.3" cx="39.9669" cy="295.51" r="28.9944" transform="rotate(-7.68867 39.9669 295.51)" fill="#4F429F"/>
++<circle opacity="0.3" cx="637.306" cy="295.51" r="28.9944" transform="rotate(-7.68867 637.306 295.51)" fill="#4F429F"/>
++<circle opacity="0.3" cx="1234.65" cy="295.511" r="28.9944" transform="rotate(-7.68867 1234.65 295.511)" fill="#4F429F"/>
++<circle opacity="0.3" cx="39.9669" cy="538.682" r="28.9944" transform="rotate(-7.68867 39.9669 538.682)" fill="#4F429F"/>
++<circle opacity="0.3" cx="637.307" cy="538.682" r="28.9944" transform="rotate(-7.68867 637.307 538.682)" fill="#4F429F"/>
++<circle opacity="0.3" cx="1234.65" cy="538.682" r="28.9944" transform="rotate(-7.68867 1234.65 538.682)" fill="#4F429F"/>
++<circle opacity="0.3" cx="28.9944" cy="28.9944" r="28.9944" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 524.305 146.462)" fill="#4F429F"/>
++<circle opacity="0.3" cx="28.9944" cy="28.9944" r="28.9944" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 1121.65 146.462)" fill="#4F429F"/>
++<circle opacity="0.3" cx="28.9944" cy="28.9944" r="28.9944" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 1718.98 146.462)" fill="#4F429F"/>
++<circle opacity="0.3" cx="28.9944" cy="28.9944" r="28.9944" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 524.305 395.313)" fill="#4F429F"/>
++<circle opacity="0.3" cx="28.9944" cy="28.9944" r="28.9944" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 1121.65 395.314)" fill="#4F429F"/>
++<circle opacity="0.3" cx="28.9944" cy="28.9944" r="28.9944" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 1718.98 395.314)" fill="#4F429F"/>
++<circle opacity="0.3" cx="28.9944" cy="28.9944" r="28.9944" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 524.306 644.169)" fill="#4F429F"/>
++<circle opacity="0.3" cx="28.9944" cy="28.9944" r="28.9944" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 1121.65 644.168)" fill="#4F429F"/>
++<circle opacity="0.3" cx="28.9944" cy="28.9944" r="28.9944" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 1718.99 644.166)" fill="#4F429F"/>
++<path opacity="0.3" d="M178.515 22.535C180.757 17.0719 188.072 16.0843 191.682 20.7573L220.414 57.947C224.024 62.62 221.222 69.4489 215.37 70.2389L168.797 76.5265C162.944 77.3166 158.432 71.4753 160.673 66.0122L178.515 22.535Z" fill="#4F429F"/>
++<path opacity="0.3" d="M775.854 22.534C778.096 17.0709 785.411 16.0833 789.021 20.7564L817.753 57.946C821.363 62.6191 818.561 69.4479 812.709 70.238L766.136 76.5255C760.284 77.3156 755.771 71.4743 758.013 66.0112L775.854 22.534Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1373.2 22.535C1375.44 17.0719 1382.75 16.0843 1386.36 20.7573L1415.09 57.947C1418.71 62.62 1415.9 69.4489 1410.05 70.2389L1363.48 76.5265C1357.63 77.3166 1353.11 71.4753 1355.35 66.0122L1373.2 22.535Z" fill="#4F429F"/>
++<path opacity="0.3" d="M178.515 265.709C180.757 260.246 188.072 259.258 191.682 263.931L220.414 301.121C224.024 305.794 221.222 312.623 215.37 313.413L168.797 319.7C162.944 320.49 158.432 314.649 160.673 309.186L178.515 265.709Z" fill="#4F429F"/>
++<path opacity="0.3" d="M775.854 265.709C778.096 260.246 785.411 259.258 789.021 263.931L817.753 301.121C821.363 305.794 818.561 312.623 812.709 313.413L766.136 319.7C760.284 320.49 755.771 314.649 758.013 309.186L775.854 265.709Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1373.2 265.709C1375.44 260.246 1382.75 259.258 1386.36 263.931L1415.09 301.121C1418.71 305.794 1415.9 312.623 1410.05 313.413L1363.48 319.7C1357.63 320.49 1353.11 314.649 1355.35 309.186L1373.2 265.709Z" fill="#4F429F"/>
++<path opacity="0.3" d="M178.514 508.882C180.756 503.419 188.071 502.431 191.682 507.104L220.413 544.294C224.023 548.967 221.221 555.796 215.369 556.586L168.796 562.873C162.944 563.663 158.431 557.822 160.673 552.359L178.514 508.882Z" fill="#4F429F"/>
++<path opacity="0.3" d="M775.856 508.882C778.097 503.419 785.413 502.431 789.023 507.104L817.755 544.294C821.365 548.967 818.562 555.796 812.71 556.586L766.137 562.873C760.285 563.663 755.772 557.822 758.014 552.359L775.856 508.882Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1373.2 508.88C1375.44 503.417 1382.75 502.429 1386.36 507.102L1415.09 544.292C1418.7 548.965 1415.9 555.794 1410.05 556.584L1363.48 562.871C1357.63 563.661 1353.11 557.82 1355.35 552.357L1373.2 508.88Z" fill="#4F429F"/>
++<path opacity="0.3" d="M348.016 141.514C345.774 136.051 338.459 135.064 334.849 139.737L306.117 176.927C302.507 181.6 305.309 188.428 311.161 189.218L357.734 195.506C363.586 196.296 368.099 190.455 365.857 184.992L348.016 141.514Z" fill="#4F429F"/>
++<path opacity="0.3" d="M945.356 141.514C943.114 136.051 935.799 135.064 932.189 139.737L903.457 176.927C899.847 181.6 902.649 188.428 908.501 189.218L955.075 195.506C960.927 196.296 965.439 190.455 963.198 184.992L945.356 141.514Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1542.69 141.514C1540.45 136.051 1533.14 135.064 1529.53 139.737L1500.8 176.927C1497.19 181.6 1499.99 188.428 1505.84 189.218L1552.41 195.506C1558.27 196.296 1562.78 190.455 1560.54 184.992L1542.69 141.514Z" fill="#4F429F"/>
++<path opacity="0.3" d="M348.016 390.368C345.774 384.905 338.459 383.917 334.849 388.59L306.117 425.78C302.507 430.453 305.309 437.282 311.161 438.072L357.734 444.36C363.586 445.15 368.099 439.308 365.857 433.845L348.016 390.368Z" fill="#4F429F"/>
++<path opacity="0.3" d="M945.357 390.367C943.115 384.904 935.8 383.916 932.19 388.589L903.458 425.779C899.848 430.452 902.65 437.281 908.502 438.071L955.075 444.359C960.927 445.149 965.44 439.307 963.198 433.844L945.357 390.367Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1542.69 390.367C1540.45 384.904 1533.14 383.916 1529.53 388.589L1500.8 425.779C1497.19 430.452 1499.99 437.281 1505.84 438.071L1552.41 444.359C1558.26 445.149 1562.78 439.307 1560.54 433.844L1542.69 390.367Z" fill="#4F429F"/>
++<path opacity="0.3" d="M348.016 639.221C345.774 633.757 338.459 632.77 334.849 637.443L306.117 674.633C302.507 679.306 305.309 686.134 311.161 686.925L357.734 693.212C363.586 694.002 368.099 688.161 365.857 682.698L348.016 639.221Z" fill="#4F429F"/>
++<path opacity="0.3" d="M945.355 639.22C943.113 633.756 935.798 632.769 932.188 637.442L903.456 674.632C899.846 679.305 902.648 686.133 908.501 686.924L955.074 693.211C960.926 694.001 965.438 688.16 963.197 682.697L945.355 639.22Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1542.7 639.219C1540.45 633.755 1533.14 632.768 1529.53 637.441L1500.8 674.631C1497.19 679.304 1499.99 686.132 1505.84 686.923L1552.41 693.21C1558.27 694 1562.78 688.159 1560.54 682.696L1542.7 639.219Z" fill="#4F429F"/>
++<rect opacity="0.3" x="305.903" y="24.7852" width="56.3397" height="56.3397" rx="8.79007" transform="rotate(-7.68867 305.903 24.7852)" fill="#4F429F"/>
++<rect opacity="0.3" x="903.243" y="24.7861" width="56.3397" height="56.3397" rx="8.79007" transform="rotate(-7.68867 903.243 24.7861)" fill="#4F429F"/>
++<rect opacity="0.3" x="1500.58" y="24.7871" width="56.3397" height="56.3397" rx="8.79007" transform="rotate(-7.68867 1500.58 24.7871)" fill="#4F429F"/>
++<rect opacity="0.3" x="305.903" y="267.96" width="56.3397" height="56.3397" rx="8.79007" transform="rotate(-7.68867 305.903 267.96)" fill="#4F429F"/>
++<rect opacity="0.3" x="903.243" y="267.959" width="56.3397" height="56.3397" rx="8.79007" transform="rotate(-7.68867 903.243 267.959)" fill="#4F429F"/>
++<rect opacity="0.3" x="1500.58" y="267.959" width="56.3397" height="56.3397" rx="8.79007" transform="rotate(-7.68867 1500.58 267.959)" fill="#4F429F"/>
++<rect opacity="0.3" x="305.903" y="511.131" width="56.3397" height="56.3397" rx="8.79007" transform="rotate(-7.68867 305.903 511.131)" fill="#4F429F"/>
++<rect opacity="0.3" x="903.243" y="511.132" width="56.3397" height="56.3397" rx="8.79007" transform="rotate(-7.68867 903.243 511.132)" fill="#4F429F"/>
++<rect opacity="0.3" x="1500.58" y="511.132" width="56.3397" height="56.3397" rx="8.79007" transform="rotate(-7.68867 1500.58 511.132)" fill="#4F429F"/>
++<rect opacity="0.3" width="56.3397" height="56.3397" rx="8.79007" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 220.627 143.766)" fill="#4F429F"/>
++<rect opacity="0.3" width="56.3397" height="56.3397" rx="8.79007" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 817.968 143.766)" fill="#4F429F"/>
++<rect opacity="0.3" width="56.3397" height="56.3397" rx="8.79007" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 1415.31 143.767)" fill="#4F429F"/>
++<rect opacity="0.3" width="56.3397" height="56.3397" rx="8.79007" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 220.627 392.618)" fill="#4F429F"/>
++<rect opacity="0.3" width="56.3397" height="56.3397" rx="8.79007" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 817.968 392.618)" fill="#4F429F"/>
++<rect opacity="0.3" width="56.3397" height="56.3397" rx="8.79007" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 1415.31 392.618)" fill="#4F429F"/>
++<rect opacity="0.3" width="56.3397" height="56.3397" rx="8.79007" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 220.628 641.473)" fill="#4F429F"/>
++<rect opacity="0.3" width="56.3397" height="56.3397" rx="8.79007" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 817.967 641.471)" fill="#4F429F"/>
++<rect opacity="0.3" width="56.3397" height="56.3397" rx="8.79007" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 1415.31 641.47)" fill="#4F429F"/>
++<path opacity="0.3" d="M501.446 14.6743L512.523 23.1255L497.9 42.3132L517.032 56.8933L507.344 69.5662L488.233 55.0018L473.627 74.1671L462.547 65.7155L476.703 47.1394C469.251 41.4374 464.928 38.1315 457.477 32.4295L467.144 19.7844L486.351 34.4791L501.446 14.6743Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1098.79 14.6753L1109.86 23.1265L1095.24 42.3141L1114.37 56.8943L1104.68 69.5672L1085.57 55.0028L1070.97 74.168L1059.89 65.7164L1074.04 47.1404C1066.59 41.4384 1062.27 38.1325 1054.82 32.4305L1064.48 19.7854L1083.69 34.4801L1098.79 14.6753Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1696.13 14.6743L1707.2 23.1255L1692.58 42.3132L1711.71 56.8933L1702.02 69.5662L1682.91 55.0018L1668.31 74.1671L1657.23 65.7155L1671.38 47.1394C1663.93 41.4374 1659.61 38.1315 1652.16 32.4295L1661.82 19.7844L1681.03 34.4791L1696.13 14.6743Z" fill="#4F429F"/>
++<path opacity="0.3" d="M501.446 257.847L512.523 266.298L497.9 285.486L517.032 300.066L507.344 312.739L488.233 298.175L473.627 317.34L462.547 308.888L476.703 290.312C469.251 284.61 464.928 281.304 457.477 275.602L467.144 262.957L486.351 277.652L501.446 257.847Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1098.79 257.847L1109.86 266.298L1095.24 285.486L1114.37 300.066L1104.68 312.739L1085.57 298.175L1070.97 317.34L1059.89 308.888L1074.04 290.312C1066.59 284.61 1062.27 281.304 1054.82 275.602L1064.48 262.957L1083.69 277.652L1098.79 257.847Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1696.13 257.847L1707.2 266.298L1692.58 285.486L1711.71 300.066L1702.02 312.739L1682.91 298.175L1668.31 317.34L1657.23 308.888L1671.38 290.312C1663.93 284.61 1659.61 281.304 1652.16 275.602L1661.82 262.957L1681.03 277.652L1696.13 257.847Z" fill="#4F429F"/>
++<path opacity="0.3" d="M501.446 501.02L512.523 509.471L497.9 528.659L517.032 543.239L507.344 555.912L488.233 541.348L473.627 560.513L462.547 552.061L476.703 533.485C469.251 527.783 464.928 524.477 457.477 518.775L467.144 506.13L486.351 520.825L501.446 501.02Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1098.79 501.02L1109.86 509.471L1095.24 528.659L1114.37 543.239L1104.68 555.912L1085.57 541.348L1070.97 560.513L1059.89 552.061L1074.04 533.485C1066.59 527.783 1062.27 524.477 1054.82 518.775L1064.49 506.13L1083.69 520.825L1098.79 501.02Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1696.12 501.02L1707.2 509.471L1692.58 528.659L1711.71 543.239L1702.02 555.912L1682.91 541.348L1668.3 560.513L1657.23 552.061L1671.38 533.485C1663.93 527.783 1659.61 524.477 1652.15 518.775L1661.82 506.13L1681.03 520.825L1696.12 501.02Z" fill="#4F429F"/>
++<path opacity="0.3" d="M30.2134 133.655L19.1368 142.106L33.7599 161.294L14.6273 175.874L24.3162 188.547L43.427 173.982L58.0331 193.148L69.1122 184.696L54.957 166.12C62.4082 160.418 66.7319 157.112 74.183 151.41L64.5154 138.765L45.3085 153.46L30.2134 133.655Z" fill="#4F429F"/>
++<path opacity="0.3" d="M627.552 133.654L616.476 142.105L631.099 161.293L611.966 175.873L621.655 188.546L640.766 173.981L655.372 193.147L666.451 184.695L652.296 166.119C659.747 160.417 664.071 157.111 671.522 151.409L661.854 138.764L642.647 153.459L627.552 133.654Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1224.9 133.655L1213.82 142.106L1228.44 161.294L1209.31 175.874L1219 188.547L1238.11 173.982L1252.71 193.148L1263.79 184.696L1249.64 166.12C1257.09 160.418 1261.41 157.112 1268.86 151.41L1259.2 138.765L1239.99 153.46L1224.9 133.655Z" fill="#4F429F"/>
++<path opacity="0.3" d="M30.2134 382.507L19.1368 390.958L33.7599 410.146L14.6273 424.726L24.3162 437.399L43.427 422.835L58.0331 442L69.1122 433.548L54.957 414.972C62.4082 409.27 66.7319 405.965 74.183 400.262L64.5154 387.617L45.3085 402.312L30.2134 382.507Z" fill="#4F429F"/>
++<path opacity="0.3" d="M627.553 382.507L616.477 390.958L631.1 410.146L611.967 424.726L621.656 437.399L640.767 422.835L655.373 442L666.452 433.548L652.297 414.972C659.748 409.27 664.072 405.965 671.523 400.262L661.855 387.617L642.648 402.312L627.553 382.507Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1224.89 382.506L1213.82 390.958L1228.44 410.145L1209.31 424.725L1219 437.398L1238.11 422.834L1252.71 441.999L1263.79 433.547L1249.64 414.971C1257.09 409.269 1261.41 405.964 1268.86 400.262L1259.2 387.616L1239.99 402.311L1224.89 382.506Z" fill="#4F429F"/>
++<path opacity="0.3" d="M30.2134 631.362L19.1368 639.813L33.7599 659.001L14.6273 673.581L24.3162 686.254L43.427 671.689L58.0331 690.855L69.1122 682.403L54.957 663.827C62.4082 658.125 66.7319 654.819 74.183 649.117L64.5154 636.472L45.3085 651.167L30.2134 631.362Z" fill="#4F429F"/>
++<path opacity="0.3" d="M627.552 631.36L616.476 639.811L631.099 658.999L611.966 673.579L621.655 686.252L640.766 671.687L655.372 690.853L666.451 682.401L652.296 663.825C659.747 658.123 664.071 654.817 671.522 649.115L661.854 636.47L642.647 651.165L627.552 631.36Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1224.9 631.358L1213.82 639.809L1228.44 658.997L1209.31 673.577L1219 686.25L1238.11 671.685L1252.72 690.851L1263.79 682.399L1249.64 663.823C1257.09 658.121 1261.41 654.815 1268.87 649.113L1259.2 636.468L1239.99 651.163L1224.9 631.358Z" fill="#4F429F"/>
++</svg>
+diff --git a/src/assets/layout/background-pattern-bottom.svg b/src/assets/layout/background-pattern-bottom.svg
+new file mode 100644
+index 0000000..cff8c40
+--- /dev/null
++++ b/src/assets/layout/background-pattern-bottom.svg
+@@ -0,0 +1,74 @@
++<svg width="1727" height="717" viewBox="0 0 1727 717" fill="none" xmlns="http://www.w3.org/2000/svg">
++<circle opacity="0.3" cx="39.9674" cy="52.3379" r="28.9944" transform="rotate(-7.68867 39.9674 52.3379)" fill="#4F429F"/>
++<circle opacity="0.3" cx="637.306" cy="52.337" r="28.9944" transform="rotate(-7.68867 637.306 52.337)" fill="#4F429F"/>
++<circle opacity="0.3" cx="1234.65" cy="52.337" r="28.9944" transform="rotate(-7.68867 1234.65 52.337)" fill="#4F429F"/>
++<circle opacity="0.3" cx="39.9669" cy="295.51" r="28.9944" transform="rotate(-7.68867 39.9669 295.51)" fill="#4F429F"/>
++<circle opacity="0.3" cx="637.306" cy="295.51" r="28.9944" transform="rotate(-7.68867 637.306 295.51)" fill="#4F429F"/>
++<circle opacity="0.3" cx="1234.65" cy="295.511" r="28.9944" transform="rotate(-7.68867 1234.65 295.511)" fill="#4F429F"/>
++<circle opacity="0.3" cx="39.9669" cy="538.682" r="28.9944" transform="rotate(-7.68867 39.9669 538.682)" fill="#4F429F"/>
++<circle opacity="0.3" cx="637.307" cy="538.682" r="28.9944" transform="rotate(-7.68867 637.307 538.682)" fill="#4F429F"/>
++<circle opacity="0.3" cx="1234.65" cy="538.682" r="28.9944" transform="rotate(-7.68867 1234.65 538.682)" fill="#4F429F"/>
++<circle opacity="0.3" cx="28.9944" cy="28.9944" r="28.9944" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 524.305 146.462)" fill="#4F429F"/>
++<circle opacity="0.3" cx="28.9944" cy="28.9944" r="28.9944" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 1121.65 146.462)" fill="#4F429F"/>
++<circle opacity="0.3" cx="28.9944" cy="28.9944" r="28.9944" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 1718.98 146.462)" fill="#4F429F"/>
++<circle opacity="0.3" cx="28.9944" cy="28.9944" r="28.9944" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 524.306 395.313)" fill="#4F429F"/>
++<circle opacity="0.3" cx="28.9944" cy="28.9944" r="28.9944" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 1121.65 395.314)" fill="#4F429F"/>
++<circle opacity="0.3" cx="28.9944" cy="28.9944" r="28.9944" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 1718.98 395.314)" fill="#4F429F"/>
++<circle opacity="0.3" cx="28.9944" cy="28.9944" r="28.9944" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 524.306 644.169)" fill="#4F429F"/>
++<circle opacity="0.3" cx="28.9944" cy="28.9944" r="28.9944" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 1121.65 644.168)" fill="#4F429F"/>
++<circle opacity="0.3" cx="28.9944" cy="28.9944" r="28.9944" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 1718.99 644.166)" fill="#4F429F"/>
++<path opacity="0.3" d="M178.515 22.535C180.757 17.0719 188.072 16.0843 191.682 20.7573L220.414 57.947C224.024 62.62 221.222 69.4489 215.37 70.2389L168.797 76.5265C162.944 77.3166 158.432 71.4753 160.673 66.0122L178.515 22.535Z" fill="#4F429F"/>
++<path opacity="0.3" d="M775.854 22.535C778.096 17.0719 785.411 16.0843 789.021 20.7573L817.753 57.947C821.363 62.62 818.561 69.4489 812.709 70.2389L766.136 76.5265C760.284 77.3166 755.771 71.4753 758.013 66.0122L775.854 22.535Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1373.2 22.535C1375.44 17.0719 1382.75 16.0843 1386.36 20.7573L1415.09 57.947C1418.71 62.62 1415.9 69.4489 1410.05 70.2389L1363.48 76.5265C1357.63 77.3166 1353.11 71.4753 1355.35 66.0122L1373.2 22.535Z" fill="#4F429F"/>
++<path opacity="0.3" d="M178.515 265.709C180.757 260.246 188.072 259.258 191.682 263.931L220.414 301.121C224.024 305.794 221.222 312.623 215.37 313.413L168.797 319.7C162.944 320.49 158.432 314.649 160.673 309.186L178.515 265.709Z" fill="#4F429F"/>
++<path opacity="0.3" d="M775.855 265.709C778.096 260.246 785.412 259.258 789.022 263.931L817.754 301.121C821.364 305.794 818.562 312.623 812.709 313.413L766.136 319.7C760.284 320.49 755.771 314.649 758.013 309.186L775.855 265.709Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1373.2 265.709C1375.44 260.246 1382.75 259.258 1386.36 263.931L1415.09 301.121C1418.71 305.794 1415.9 312.623 1410.05 313.413L1363.48 319.7C1357.63 320.49 1353.11 314.649 1355.35 309.186L1373.2 265.709Z" fill="#4F429F"/>
++<path opacity="0.3" d="M178.514 508.881C180.756 503.418 188.071 502.43 191.682 507.103L220.413 544.293C224.023 548.966 221.221 555.795 215.369 556.585L168.796 562.872C162.944 563.662 158.431 557.821 160.673 552.358L178.514 508.881Z" fill="#4F429F"/>
++<path opacity="0.3" d="M775.856 508.881C778.097 503.418 785.413 502.43 789.023 507.103L817.755 544.293C821.365 548.966 818.562 555.795 812.71 556.585L766.137 562.872C760.285 563.662 755.772 557.821 758.014 552.358L775.856 508.881Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1373.2 508.88C1375.44 503.417 1382.75 502.429 1386.36 507.102L1415.09 544.292C1418.7 548.965 1415.9 555.794 1410.05 556.584L1363.48 562.871C1357.63 563.661 1353.11 557.82 1355.35 552.357L1373.2 508.88Z" fill="#4F429F"/>
++<path opacity="0.3" d="M348.016 141.514C345.774 136.051 338.459 135.064 334.849 139.737L306.117 176.927C302.507 181.6 305.309 188.428 311.161 189.218L357.734 195.506C363.586 196.296 368.099 190.455 365.857 184.992L348.016 141.514Z" fill="#4F429F"/>
++<path opacity="0.3" d="M945.356 141.514C943.114 136.051 935.799 135.064 932.189 139.737L903.457 176.927C899.847 181.6 902.649 188.428 908.501 189.218L955.075 195.506C960.927 196.296 965.439 190.455 963.198 184.992L945.356 141.514Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1542.69 141.514C1540.45 136.051 1533.14 135.064 1529.53 139.737L1500.8 176.927C1497.19 181.6 1499.99 188.428 1505.84 189.218L1552.41 195.506C1558.27 196.296 1562.78 190.455 1560.54 184.992L1542.69 141.514Z" fill="#4F429F"/>
++<path opacity="0.3" d="M348.016 390.368C345.774 384.905 338.459 383.917 334.849 388.59L306.117 425.78C302.507 430.453 305.309 437.282 311.161 438.072L357.734 444.36C363.586 445.15 368.099 439.308 365.857 433.845L348.016 390.368Z" fill="#4F429F"/>
++<path opacity="0.3" d="M945.357 390.367C943.115 384.904 935.8 383.916 932.19 388.589L903.458 425.779C899.848 430.452 902.65 437.281 908.502 438.071L955.075 444.359C960.927 445.149 965.44 439.307 963.198 433.844L945.357 390.367Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1542.69 390.367C1540.45 384.904 1533.14 383.916 1529.53 388.589L1500.8 425.779C1497.19 430.452 1499.99 437.281 1505.84 438.071L1552.41 444.359C1558.26 445.149 1562.78 439.307 1560.54 433.844L1542.69 390.367Z" fill="#4F429F"/>
++<path opacity="0.3" d="M348.016 639.221C345.774 633.757 338.459 632.77 334.849 637.443L306.117 674.633C302.507 679.306 305.309 686.134 311.161 686.925L357.734 693.212C363.586 694.002 368.099 688.161 365.857 682.698L348.016 639.221Z" fill="#4F429F"/>
++<path opacity="0.3" d="M945.355 639.22C943.113 633.756 935.798 632.769 932.188 637.442L903.456 674.632C899.846 679.305 902.648 686.133 908.501 686.924L955.074 693.211C960.926 694.001 965.438 688.16 963.197 682.697L945.355 639.22Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1542.7 639.219C1540.45 633.755 1533.14 632.768 1529.53 637.441L1500.8 674.631C1497.19 679.304 1499.99 686.132 1505.84 686.923L1552.41 693.21C1558.27 694 1562.78 688.159 1560.54 682.696L1542.7 639.219Z" fill="#4F429F"/>
++<rect opacity="0.3" x="305.903" y="24.7852" width="56.3397" height="56.3397" rx="8.79007" transform="rotate(-7.68867 305.903 24.7852)" fill="#4F429F"/>
++<rect opacity="0.3" x="903.243" y="24.7861" width="56.3397" height="56.3397" rx="8.79007" transform="rotate(-7.68867 903.243 24.7861)" fill="#4F429F"/>
++<rect opacity="0.3" x="1500.58" y="24.7871" width="56.3397" height="56.3397" rx="8.79007" transform="rotate(-7.68867 1500.58 24.7871)" fill="#4F429F"/>
++<rect opacity="0.3" x="305.903" y="267.96" width="56.3397" height="56.3397" rx="8.79007" transform="rotate(-7.68867 305.903 267.96)" fill="#4F429F"/>
++<rect opacity="0.3" x="903.243" y="267.959" width="56.3397" height="56.3397" rx="8.79007" transform="rotate(-7.68867 903.243 267.959)" fill="#4F429F"/>
++<rect opacity="0.3" x="1500.58" y="267.959" width="56.3397" height="56.3397" rx="8.79007" transform="rotate(-7.68867 1500.58 267.959)" fill="#4F429F"/>
++<rect opacity="0.3" x="305.903" y="511.131" width="56.3397" height="56.3397" rx="8.79007" transform="rotate(-7.68867 305.903 511.131)" fill="#4F429F"/>
++<rect opacity="0.3" x="903.243" y="511.132" width="56.3397" height="56.3397" rx="8.79007" transform="rotate(-7.68867 903.243 511.132)" fill="#4F429F"/>
++<rect opacity="0.3" x="1500.58" y="511.132" width="56.3397" height="56.3397" rx="8.79007" transform="rotate(-7.68867 1500.58 511.132)" fill="#4F429F"/>
++<rect opacity="0.3" width="56.3397" height="56.3397" rx="8.79007" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 220.627 143.766)" fill="#4F429F"/>
++<rect opacity="0.3" width="56.3397" height="56.3397" rx="8.79007" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 817.968 143.766)" fill="#4F429F"/>
++<rect opacity="0.3" width="56.3397" height="56.3397" rx="8.79007" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 1415.31 143.767)" fill="#4F429F"/>
++<rect opacity="0.3" width="56.3397" height="56.3397" rx="8.79007" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 220.627 392.618)" fill="#4F429F"/>
++<rect opacity="0.3" width="56.3397" height="56.3397" rx="8.79007" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 817.968 392.618)" fill="#4F429F"/>
++<rect opacity="0.3" width="56.3397" height="56.3397" rx="8.79007" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 1415.31 392.618)" fill="#4F429F"/>
++<rect opacity="0.3" width="56.3397" height="56.3397" rx="8.79007" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 220.628 641.473)" fill="#4F429F"/>
++<rect opacity="0.3" width="56.3397" height="56.3397" rx="8.79007" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 817.967 641.471)" fill="#4F429F"/>
++<rect opacity="0.3" width="56.3397" height="56.3397" rx="8.79007" transform="matrix(-0.99101 -0.13379 -0.13379 0.99101 1415.31 641.47)" fill="#4F429F"/>
++<path opacity="0.3" d="M501.446 14.6743L512.523 23.1255L497.9 42.3132L517.032 56.8933L507.344 69.5662L488.233 55.0018L473.627 74.1671L462.547 65.7155L476.703 47.1394C469.251 41.4374 464.928 38.1315 457.477 32.4295L467.144 19.7844L486.351 34.4791L501.446 14.6743Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1098.79 14.6753L1109.86 23.1265L1095.24 42.3141L1114.37 56.8943L1104.68 69.5672L1085.57 55.0028L1070.97 74.168L1059.89 65.7164L1074.04 47.1404C1066.59 41.4384 1062.27 38.1325 1054.82 32.4305L1064.48 19.7854L1083.69 34.4801L1098.79 14.6753Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1696.13 14.6743L1707.2 23.1255L1692.58 42.3132L1711.71 56.8933L1702.02 69.5662L1682.91 55.0018L1668.31 74.1671L1657.23 65.7155L1671.38 47.1394C1663.93 41.4374 1659.61 38.1315 1652.16 32.4295L1661.82 19.7844L1681.03 34.4791L1696.13 14.6743Z" fill="#4F429F"/>
++<path opacity="0.3" d="M501.446 257.847L512.523 266.298L497.9 285.486L517.032 300.066L507.344 312.739L488.233 298.175L473.627 317.34L462.547 308.888L476.703 290.312C469.251 284.61 464.928 281.304 457.477 275.602L467.144 262.957L486.351 277.652L501.446 257.847Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1098.79 257.847L1109.86 266.298L1095.24 285.486L1114.37 300.066L1104.68 312.739L1085.57 298.175L1070.97 317.34L1059.89 308.888L1074.04 290.312C1066.59 284.61 1062.27 281.304 1054.82 275.602L1064.48 262.957L1083.69 277.652L1098.79 257.847Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1696.13 257.847L1707.2 266.298L1692.58 285.486L1711.71 300.066L1702.02 312.739L1682.91 298.175L1668.31 317.34L1657.23 308.888L1671.38 290.312C1663.93 284.61 1659.61 281.304 1652.16 275.602L1661.82 262.957L1681.03 277.652L1696.13 257.847Z" fill="#4F429F"/>
++<path opacity="0.3" d="M501.446 501.02L512.523 509.471L497.9 528.659L517.032 543.239L507.344 555.912L488.233 541.348L473.627 560.513L462.547 552.061L476.703 533.485C469.251 527.783 464.928 524.477 457.477 518.775L467.144 506.13L486.351 520.825L501.446 501.02Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1098.79 501.02L1109.86 509.471L1095.24 528.659L1114.37 543.239L1104.68 555.912L1085.57 541.348L1070.97 560.513L1059.89 552.061L1074.04 533.485C1066.59 527.783 1062.27 524.477 1054.82 518.775L1064.49 506.13L1083.69 520.825L1098.79 501.02Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1696.12 501.02L1707.2 509.471L1692.58 528.659L1711.71 543.239L1702.02 555.912L1682.91 541.348L1668.3 560.513L1657.23 552.061L1671.38 533.485C1663.93 527.783 1659.61 524.477 1652.15 518.775L1661.82 506.13L1681.03 520.825L1696.12 501.02Z" fill="#4F429F"/>
++<path opacity="0.3" d="M30.2134 133.655L19.1368 142.106L33.7599 161.294L14.6273 175.874L24.3162 188.547L43.427 173.982L58.0331 193.148L69.1122 184.696L54.957 166.12C62.4082 160.418 66.7319 157.112 74.183 151.41L64.5154 138.765L45.3085 153.46L30.2134 133.655Z" fill="#4F429F"/>
++<path opacity="0.3" d="M627.553 133.654L616.476 142.105L631.099 161.293L611.967 175.873L621.656 188.546L640.766 173.981L655.372 193.147L666.452 184.695L652.296 166.119C659.748 160.417 664.071 157.111 671.522 151.409L661.855 138.764L642.648 153.459L627.553 133.654Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1224.9 133.655L1213.82 142.106L1228.44 161.294L1209.31 175.874L1219 188.547L1238.11 173.982L1252.71 193.148L1263.79 184.696L1249.64 166.12C1257.09 160.418 1261.41 157.112 1268.86 151.41L1259.2 138.765L1239.99 153.46L1224.9 133.655Z" fill="#4F429F"/>
++<path opacity="0.3" d="M30.2134 382.507L19.1368 390.958L33.7599 410.146L14.6273 424.726L24.3162 437.399L43.427 422.835L58.0331 442L69.1122 433.548L54.957 414.972C62.4082 409.27 66.7319 405.965 74.183 400.262L64.5154 387.617L45.3085 402.312L30.2134 382.507Z" fill="#4F429F"/>
++<path opacity="0.3" d="M627.553 382.507L616.477 390.958L631.1 410.146L611.967 424.726L621.656 437.399L640.767 422.835L655.373 442L666.452 433.548L652.297 414.972C659.748 409.27 664.072 405.965 671.523 400.262L661.855 387.617L642.648 402.312L627.553 382.507Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1224.89 382.506L1213.82 390.958L1228.44 410.145L1209.31 424.725L1219 437.398L1238.11 422.834L1252.71 441.999L1263.79 433.547L1249.64 414.971C1257.09 409.269 1261.41 405.964 1268.86 400.262L1259.2 387.616L1239.99 402.311L1224.89 382.506Z" fill="#4F429F"/>
++<path opacity="0.3" d="M30.2134 631.362L19.1368 639.813L33.7599 659.001L14.6273 673.581L24.3162 686.254L43.427 671.689L58.0331 690.855L69.1122 682.403L54.957 663.827C62.4082 658.125 66.7319 654.819 74.183 649.117L64.5154 636.472L45.3085 651.167L30.2134 631.362Z" fill="#4F429F"/>
++<path opacity="0.3" d="M627.552 631.36L616.476 639.811L631.099 658.999L611.966 673.579L621.655 686.252L640.766 671.687L655.372 690.853L666.451 682.401L652.296 663.825C659.747 658.123 664.071 654.817 671.522 649.115L661.854 636.47L642.647 651.165L627.552 631.36Z" fill="#4F429F"/>
++<path opacity="0.3" d="M1224.9 631.358L1213.82 639.809L1228.44 658.997L1209.31 673.577L1219 686.25L1238.11 671.685L1252.72 690.851L1263.79 682.399L1249.64 663.823C1257.09 658.121 1261.41 654.815 1268.87 649.113L1259.2 636.468L1239.99 651.163L1224.9 631.358Z" fill="#4F429F"/>
++</svg>

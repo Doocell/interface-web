@@ -1,59 +1,26 @@
-/*
- * Background pattern untuk seluruh aplikasi
- * FIGMA SOURCE: J1XqDOh4KLCNq2Ns9WjPyu | Node: 303:944
- */
+import patternTop from "../../assets/layout/background-pattern-top.svg";
+import patternBottom from "../../assets/layout/background-pattern-bottom.svg";
 
-const ASSETS = {
-  patternTop:
-    "https://www.figma.com/api/mcp/asset/6b385835-1e46-4e06-a30a-b3ae0d8156df.svg",
-  patternBottom:
-    "https://www.figma.com/api/mcp/asset/6aa5b922-82c0-40d6-9339-80fa50d7e8cd.svg",
-};
+import "../../styles/background-pattern.css";
+
 
 export default function BackgroundPattern() {
   return (
     <div
-      className="fixed inset-0 pointer-events-none overflow-hidden"
-      style={{
-        background: "#685ABB",
-        zIndex: 0,
-      }}
+      className="global-background"
       aria-hidden="true"
+      data-figma-node="715:446"
     >
-      {/* Pattern Top */}
       <img
-        style={{
-          position: "absolute",
-          left: "50%",
-          top: "-206px",
-          width: "calc(100vw + 286.339px)",
-          height: "716.798px",
-          maxWidth: "none",
-          transform: "translateX(-50%)",
-          objectFit: "fill",
-          userSelect: "none",
-          pointerEvents: "none",
-        }}
-        src={ASSETS.patternTop}
+        className="global-background__pattern global-background__pattern--top"
+        src={patternTop}
         alt=""
         draggable="false"
       />
 
-      {/* Pattern Bottom */}
       <img
-        style={{
-          position: "absolute",
-          left: "50%",
-          top: "532.256px",
-          width: "calc(100vw + 286.339px)",
-          height: "716.798px",
-          maxWidth: "none",
-          transform: "translateX(-50%)",
-          objectFit: "fill",
-          userSelect: "none",
-          pointerEvents: "none",
-        }}
-        src={ASSETS.patternBottom}
+        className="global-background__pattern global-background__pattern--bottom"
+        src={patternBottom}
         alt=""
         draggable="false"
       />

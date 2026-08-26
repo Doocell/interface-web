@@ -1,5 +1,4 @@
 import { useState } from "react";
-import BackgroundPattern from "../components/layout/BackgroundPattern";
 
 const GAMES = [
   {

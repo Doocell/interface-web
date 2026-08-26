@@ -1,5 +1,4 @@
 import "../../styles/timeline-section.css";
-import BackgroundPattern from "../layout/BackgroundPattern";
 
 /*
  * FIGMA SOURCE
@@ -148,12 +147,6 @@ export default function TimelineSection() {
       className="timeline-section"
       aria-label="Timeline Kegiatan"
     >
-      {/* ==========================================
-          BACKGROUND PATTERN
-      ========================================== */}
-      
-      <BackgroundPattern />
-
       {/* ==========================================
           DECORATION LEFT
       ========================================== */}

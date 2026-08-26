@@ -1,0 +1,33 @@
+.global-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: #685abb;
+  pointer-events: none;
+}
+
+.global-background__pattern {
+  position: absolute;
+  left: 50%;
+  width: calc(100vw + 286.339px);
+  height: 716.798px;
+  max-width: none;
+  object-fit: fill;
+  transform: translateX(-50%);
+  user-select: none;
+}
+
+.global-background__pattern--top {
+  top: -206px;
+}
+
+.global-background__pattern--bottom {
+  top: 532.256px;
+}
+
+.app-content {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}

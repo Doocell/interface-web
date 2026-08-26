@@ -115,67 +115,69 @@ function AppRoutes() {
 
       <Navbar />
 
-      <Routes>
-        <Route
-          path="/"
-          element={<Home />}
-        />
+      <div className="app-content">
+        <Routes>
+          <Route
+            path="/"
+            element={<Home />}
+          />
 
-        <Route
-          path="/timeline"
-          element={<Timeline />}
-        />
+          <Route
+            path="/timeline"
+            element={<Timeline />}
+          />
 
-        <Route
-          path="/buku-panduan"
-          element={<BukuPanduan />}
-        />
+          <Route
+            path="/buku-panduan"
+            element={<BukuPanduan />}
+          />
 
-        <Route
-          path="/leaderboard"
-          element={<Leaderboard />}
-        />
+          <Route
+            path="/leaderboard"
+            element={<Leaderboard />}
+          />
 
-        <Route
-          path="/quest-collect"
-          element={<QuestCollect />}
-        />
+          <Route
+            path="/quest-collect"
+            element={<QuestCollect />}
+          />
 
-        <Route
-          path="/vote"
-          element={<Vote />}
-        />
+          <Route
+            path="/vote"
+            element={<Vote />}
+          />
 
-        <Route
-          path="/game-description"
-          element={<GameDescription />}
-        />
+          <Route
+            path="/game-description"
+            element={<GameDescription />}
+          />
 
-        <Route
-          path="/map"
-          element={<Map />}
-        />
+          <Route
+            path="/map"
+            element={<Map />}
+          />
 
-        <Route
-          path="/faq"
-          element={<FAQ />}
-        />
+          <Route
+            path="/faq"
+            element={<FAQ />}
+          />
 
-        <Route
-          path="/info"
-          element={<InterfaceInfo />}
-        />
+          <Route
+            path="/info"
+            element={<InterfaceInfo />}
+          />
 
-        <Route
-          path="*"
-          element={
-            <Navigate
-              to="/"
-              replace
-            />
-          }
-        />
-      </Routes>
+          <Route
+            path="*"
+            element={
+              <Navigate
+                to="/"
+                replace
+              />
+            }
+          />
+        </Routes>
+      </div>
     </>
   );
 }
