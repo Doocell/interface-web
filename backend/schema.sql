@@ -1,0 +1,52 @@
+CREATE TABLE IF NOT EXISTS grup (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS kelompok (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  grup_id INT NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  unique_code VARCHAR(100) NOT NULL UNIQUE,
+  max_uses INT NOT NULL,
+  used_count INT NOT NULL DEFAULT 0,
+  poin INT NOT NULL DEFAULT 0,
+  CONSTRAINT fk_kelompok_grup
+    FOREIGN KEY (grup_id) REFERENCES grup(id)
+    ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS voting_sessions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  token VARCHAR(255) NOT NULL UNIQUE,
+  kelompok_id INT NOT NULL,
+  has_voted TINYINT(1) NOT NULL DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_voting_sessions_kelompok
+    FOREIGN KEY (kelompok_id) REFERENCES kelompok(id)
+    ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS vote_record (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  voter_kelompok_id INT NOT NULL,
+  voted_kelompok_id INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_vote_record_voter
+    FOREIGN KEY (voter_kelompok_id) REFERENCES kelompok(id)
+    ON DELETE CASCADE,
+  CONSTRAINT fk_vote_record_voted
+    FOREIGN KEY (voted_kelompok_id) REFERENCES kelompok(id)
+    ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS questions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nama VARCHAR(100) NOT NULL,
+  kode_kelompok VARCHAR(100) NULL,
+  pertanyaan TEXT NOT NULL,
+  jawaban TEXT NULL,
+  status ENUM('pending', 'answered') NOT NULL DEFAULT 'pending',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
