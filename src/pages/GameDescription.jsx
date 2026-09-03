@@ -1,435 +1,781 @@
-import { useState } from "react";
-
-const GAMES = [
-  {
-    id: 1,
-    emoji: "🧊",
-    nama: "Ice Breaking",
-    chapter: "CHAPTER 1",
-    badge: "DAY 1",
-    badgeColor: "#FF59FB",
-    color: "#FF59FB",
-    glow: "rgba(255,89,251,0.3)",
-    durasi: "±2 Jam",
-    peserta: "Seluruh Peserta",
-    deskripsi:
-      "Sesi pembuka yang seru untuk memecahkan kecanggungan antar peserta baru. Melalui mini-game ringan dan icebreaker interaktif, kamu akan langsung merasa akrab dengan kelompokmu.",
-    aturan: [
-      "Semua peserta wajib berpartisipasi aktif dalam setiap game",
-      "Tidak ada yang boleh menolak tantangan dari panitia",
-      "Bersikap sportif dan menghargai sesama peserta",
-      "HP disimpan selama sesi berlangsung",
-    ],
-    kegiatan: [
-      "Perkenalan kreatif antar anggota kelompok",
-      "Two truths and a lie (game tebak fakta)",
-      "Mini-challenge antar kelompok",
-      "Yel-yel kelompok pertama",
-    ],
-  },
-  {
-    id: 2,
-    emoji: "🏛️",
-    nama: "City Tour",
-    chapter: "CHAPTER 1",
-    badge: "DAY 1",
-    badgeColor: "#9513FF",
-    color: "#9513FF",
-    glow: "rgba(149,19,255,0.3)",
-    durasi: "±3 Jam",
-    peserta: "Seluruh Kelompok",
-    deskripsi:
-      "Jelajahi berbagai titik penting di lingkungan kampus sambil menyelesaikan misi seru. Setiap pos memiliki tantangan unik yang harus diselesaikan bersama kelompok.",
-    aturan: [
-      "Kelompok wajib check-in di setiap pos dengan bukti foto",
-      "Tidak boleh meninggalkan anggota kelompok",
-      "Misi harus diselesaikan sebelum batas waktu",
-      "Dilarang curang atau melewati pos",
-    ],
-    kegiatan: [
-      "Eksplorasi Gedung D4 FMIPA",
-      "Check-in di 5 pos strategis",
-      "Tantangan trivia di setiap pos",
-      "Foto kreatif di spot ikonik kampus",
-    ],
-  },
-  {
-    id: 3,
-    emoji: "⚔️",
-    nama: "PKMMPD",
-    chapter: "CHAPTER 2",
-    badge: "DAY 2",
-    badgeColor: "#189CF4",
-    color: "#189CF4",
-    glow: "rgba(24,156,244,0.3)",
-    durasi: "±5 Jam",
-    peserta: "Seluruh Peserta",
-    deskripsi:
-      "Pengenalan Kehidupan Mahasiswa Matematika dan Data — rangkaian kegiatan akademik dan sosial untuk mempersiapkan kamu menjadi mahasiswa yang siap tempur di dunia perkuliahan.",
-    aturan: [
-      "Wajib hadir di semua sesi PKMMPD tanpa terkecuali",
-      "Aktif bertanya dan berpendapat saat sesi diskusi",
-      "Tidak boleh menggunakan HP saat sesi berlangsung",
-      "Harus menggunakan jas almamater",
-    ],
-    kegiatan: [
-      "Pengenalan program studi Matematika & Data",
-      "Sesi tanya jawab dengan kakak tingkat",
-      "Workshop: Cara bertahan di dunia perkuliahan",
-      "Diskusi kelompok & presentasi",
-    ],
-  },
-  {
-    id: 4,
-    emoji: "🌙",
-    nama: "Malam Keakraban",
-    chapter: "NEXT CHAPTER",
-    badge: "DAY 3–5",
-    badgeColor: "#FFD900",
-    color: "#FFD900",
-    glow: "rgba(255,217,0,0.3)",
-    durasi: "±6 Jam",
-    peserta: "Seluruh Peserta",
-    deskripsi:
-      "Puncak dari seluruh rangkaian Interface 2026! Malam bertema Komputek Verse ini dipenuhi dengan pertunjukan seni, kompetisi seru, api unggun, dan momen keakraban yang tak terlupakan.",
-    aturan: [
-      "Wajib mengikuti arahan zona hijau/merah dari panitia",
-      "Tidak boleh meninggalkan area tanpa izin",
-      "Pakai atribut kelompok yang sudah disiapkan",
-      "Jagalah kebersihan dan keamanan area Yon Zipur 4",
-    ],
-    kegiatan: [
-      "Opening ceremony & penampilan seni",
-      "Kompetisi antar kelompok (games & talent)",
-      "Api unggun dan sharing session",
-      "Pengumuman pemenang & penutupan",
-    ],
-  },
-];
-
-function GameCard({ game, index }) {
-  const [activeTab, setActiveTab] = useState("aturan");
-
-  return (
-    <article
-      className="game-card"
-      style={{
-        "--color": game.color,
-        "--glow": game.glow,
-        animationDelay: `${index * 0.1}s`,
-      }}
-    >
-      {/* Top accent line */}
-      <div className="game-card__top-line" style={{ background: game.color }} />
-
-      {/* Header */}
-      <div className="game-card__header">
-        <div className="game-card__emoji">{game.emoji}</div>
-        <div className="game-card__header-text">
-          <div className="game-card__meta-row">
-            <span
-              className="game-card__badge"
-              style={{
-                background: game.badgeColor,
-                color: game.badgeColor === "#FFD900" ? "#1a0a2e" : "#fff",
-              }}
-            >
-              {game.badge}
-            </span>
-            <span className="game-card__chapter">{game.chapter}</span>
-          </div>
-          <h3 className="game-card__name">{game.nama}</h3>
-          <div className="game-card__pills">
-            <span className="game-card__pill">⏱ {game.durasi}</span>
-            <span className="game-card__pill">👥 {game.peserta}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Description */}
-      <p className="game-card__desc">{game.deskripsi}</p>
-
-      {/* Tabs */}
-      <div className="game-card__tabs">
-        <button
-          className={`game-card__tab ${activeTab === "aturan" ? "is-active" : ""}`}
-          onClick={() => setActiveTab("aturan")}
-          style={activeTab === "aturan" ? { color: game.color, borderBottomColor: game.color } : {}}
-        >
-          📋 Aturan
-        </button>
-        <button
-          className={`game-card__tab ${activeTab === "kegiatan" ? "is-active" : ""}`}
-          onClick={() => setActiveTab("kegiatan")}
-          style={activeTab === "kegiatan" ? { color: game.color, borderBottomColor: game.color } : {}}
-        >
-          🗒 Kegiatan
-        </button>
-      </div>
-
-      {/* Tab Content */}
-      <ul className="game-card__list">
-        {(activeTab === "aturan" ? game.aturan : game.kegiatan).map((item, i) => (
-          <li key={i} className="game-card__list-item">
-            <span className="game-card__list-dot" style={{ background: game.color }} />
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
-    </article>
-  );
-}
+// src/pages/GameDescription.jsx - FIGMA: 921:1259 - 100% EXACT MATCH + FULLY RESPONSIVE
+import { useNavigate } from "react-router-dom";
+import Navbar from "../components/layout/Navbar";
+import BackgroundPattern from "../components/layout/BackgroundPattern";
 
 export default function GameDescription() {
+  const navigate = useNavigate();
+
   return (
-    <main
-      className="gamedesc-page"
-      style={{ paddingTop: "76px" }}
-    >
+    <>
+      <Navbar />
+      <BackgroundPattern />
+
       <style>{`
-        /* ========== GAME DESCRIPTION PAGE ========== */
-        .gamedesc-page {
-          width: 100%;
-          min-height: 100vh;
-          padding-bottom: 80px;
-        }
+        /* ============================================
+           GAME DESCRIPTION - FULLY RESPONSIVE
+           ============================================ */
 
-        /* HERO */
-        .gamedesc-hero {
-          text-align: center;
-          padding: 60px 24px 40px;
-        }
-
-        .gamedesc-hero__eyebrow {
-          display: inline-block;
-          font-family: 'Tektur', sans-serif;
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 3px;
-          color: #189CF4;
-          background: rgba(24,156,244,0.12);
-          border: 1px solid rgba(24,156,244,0.3);
-          border-radius: 100px;
-          padding: 6px 16px;
-          margin-bottom: 20px;
-        }
-
-        .gamedesc-hero__title {
-          font-family: 'Tektur', sans-serif;
-          font-size: clamp(28px, 5.5vw, 60px);
-          font-weight: 900;
-          color: #fff;
-          line-height: 1.1;
-          margin: 0 0 16px;
-          text-shadow: 0 0 40px rgba(24,156,244,0.4);
-        }
-
-        .gamedesc-hero__title span {
-          color: #189CF4;
-        }
-
-        .gamedesc-hero__subtitle {
-          font-family: 'Sora', sans-serif;
-          font-size: clamp(13px, 1.8vw, 16px);
-          color: rgba(255,255,255,0.6);
-          max-width: 500px;
-          margin: 0 auto;
-          line-height: 1.65;
-        }
-
-        /* GRID */
-        .gamedesc-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 24px;
-          max-width: 1100px;
-          margin: 0 auto;
-          padding: 0 24px;
-        }
-
-        /* CARD */
-        .game-card {
+        .game-description-container {
           position: relative;
-          background: rgba(255,255,255,0.05);
-          border: 1.5px solid rgba(255,255,255,0.1);
-          border-radius: 20px;
-          overflow: hidden;
-          padding: 0 0 24px;
-          transition: transform 0.25s ease, box-shadow 0.25s ease;
-          animation: gameCardIn 0.5s ease both;
-        }
-
-        @keyframes gameCardIn {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        .game-card:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 16px 50px var(--glow);
-          border-color: rgba(255,255,255,0.2);
-        }
-
-        .game-card__top-line {
-          height: 4px;
+          min-height: 100vh;
           width: 100%;
+          padding-top: 150px;
+          padding-bottom: 100px;
+          overflow-x: hidden;
         }
 
-        .game-card__header {
-          display: flex;
-          align-items: flex-start;
-          gap: 16px;
-          padding: 20px 20px 0;
+        /* ============================================
+           TITLE - Responsive dengan clamp
+           ============================================ */
+        .game-desc-title {
+          text-align: center;
+          margin: 0 auto 80px;
+          padding: 0 20px;
         }
 
-        .game-card__emoji {
-          font-size: 36px;
-          line-height: 1;
-          flex-shrink: 0;
-          width: 52px;
-          height: 52px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: rgba(255,255,255,0.06);
-          border-radius: 14px;
-        }
-
-        .game-card__header-text {
-          flex: 1;
-          min-width: 0;
-        }
-
-        .game-card__meta-row {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          margin-bottom: 6px;
-        }
-
-        .game-card__badge {
-          font-family: 'Tektur', sans-serif;
-          font-size: 9px;
+        .game-desc-title h1 {
+          font-family: "Tektur", sans-serif;
           font-weight: 800;
-          letter-spacing: 1px;
-          padding: 3px 9px;
-          border-radius: 100px;
+          font-size: clamp(60px, 8vw, 100px);
+          line-height: 0.85;
+          text-transform: uppercase;
+          margin: 0;
+          text-shadow: 8px 7px 0px #ac4afd, 0px 0px 10px white;
         }
 
-        .game-card__chapter {
-          font-family: 'Tektur', sans-serif;
-          font-size: 10px;
-          color: rgba(255,255,255,0.4);
-          letter-spacing: 2px;
-          font-weight: 700;
+        .game-desc-title .yellow {
+          color: #FFD900;
         }
 
-        .game-card__name {
-          font-family: 'Tektur', sans-serif;
-          font-size: clamp(16px, 2.5vw, 20px);
-          font-weight: 900;
-          color: #fff;
-          margin: 0 0 8px;
+        .game-desc-title .white {
+          color: #FFFFFF;
         }
 
-        .game-card__pills {
+        /* ============================================
+           BACK BUTTON - Fixed positioning responsive
+           ============================================ */
+        .game-desc-back {
+          position: fixed;
+          left: 50px;
+          top: 130px;
+          z-index: 100;
           display: flex;
-          gap: 6px;
-          flex-wrap: wrap;
-        }
-
-        .game-card__pill {
-          font-family: 'Sora', sans-serif;
-          font-size: 11px;
-          color: rgba(255,255,255,0.5);
-          background: rgba(255,255,255,0.06);
-          border-radius: 100px;
-          padding: 3px 10px;
-        }
-
-        .game-card__desc {
-          font-family: 'Sora', sans-serif;
-          font-size: 13px;
-          color: rgba(255,255,255,0.65);
-          line-height: 1.65;
-          margin: 16px 20px 0;
-        }
-
-        /* TABS */
-        .game-card__tabs {
-          display: flex;
-          border-bottom: 1px solid rgba(255,255,255,0.08);
-          margin: 16px 20px 0;
-        }
-
-        .game-card__tab {
-          background: none;
+          align-items: center;
+          gap: 10px;
+          background: rgba(255, 217, 0, 0.95);
           border: none;
-          border-bottom: 2px solid transparent;
-          padding: 8px 12px;
-          font-family: 'Tektur', sans-serif;
-          font-size: 12px;
-          font-weight: 700;
-          color: rgba(255,255,255,0.4);
+          padding: 12px 24px;
+          border-radius: 12px;
           cursor: pointer;
-          transition: color 0.2s, border-color 0.2s;
-          margin-bottom: -1px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+          transition: transform 0.2s;
         }
 
-        .game-card__tab:hover { color: rgba(255,255,255,0.75); }
-        .game-card__tab.is-active { color: var(--color); border-bottom-color: var(--color); }
+        .game-desc-back:hover {
+          transform: translateX(-4px);
+        }
 
-        /* LIST */
-        .game-card__list {
-          list-style: none;
-          margin: 12px 20px 0;
-          padding: 0;
+        .game-desc-back svg {
+          width: 24px;
+          height: 24px;
+          fill: #000;
+        }
+
+        .game-desc-back span {
+          font-family: "Londrina Solid", sans-serif;
+          font-size: 22px;
+          font-weight: 400;
+          color: #000;
+        }
+
+        /* ============================================
+           SECTIONS CONTAINER
+           ============================================ */
+        .game-desc-sections {
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 0 20px;
+        }
+
+        .game-desc-section {
+          position: relative;
+          margin-bottom: 100px;
           display: flex;
           flex-direction: column;
-          gap: 8px;
         }
 
-        .game-card__list-item {
-          display: flex;
+        /* Left aligned sections (1, 3) */
+        .game-desc-section.left {
           align-items: flex-start;
-          gap: 10px;
-          font-family: 'Sora', sans-serif;
-          font-size: 12.5px;
-          color: rgba(255,255,255,0.75);
+        }
+
+        /* Right aligned sections (2, 4) */
+        .game-desc-section.right {
+          align-items: flex-end;
+        }
+
+        /* ============================================
+           BADGE - Dengan rotation & overlap
+           ============================================ */
+        .game-desc-badge {
+          display: inline-block;
+          padding: 14px 50px;
+          background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.08));
+          border: 5px solid;
+          border-radius: 50px;
+          margin-bottom: -25px;
+          position: relative;
+          z-index: 10;
+          box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+          backdrop-filter: blur(8px);
+        }
+
+        .game-desc-section.left .game-desc-badge {
+          transform: rotate(-2.5deg);
+          margin-left: 50px;
+        }
+
+        .game-desc-section.right .game-desc-badge {
+          transform: rotate(1deg);
+          margin-right: 50px;
+        }
+
+        .game-desc-badge-text {
+          font-family: "Londrina Solid", sans-serif;
+          font-weight: 900;
+          font-size: 44px;
+          text-transform: uppercase;
+          letter-spacing: 1.5px;
+          text-shadow: 5px 5px 8px rgba(0,0,0,0.5);
+          margin: 0;
+          white-space: nowrap;
+        }
+
+        /* ============================================
+           CONTENT BOX - Background #29363E 60% opacity
+           ============================================ */
+        .game-desc-content {
+          width: 100%;
+          max-width: 1350px;
+          background: rgba(41, 54, 62, 0.6);
+          border: 5px solid;
+          border-radius: 30px;
+          padding: 50px 60px;
+          backdrop-filter: blur(12px);
+        }
+
+        /* ============================================
+           GLOW EFFECTS - Per POS warna
+           ============================================ */
+        .game-desc-section.color-review .game-desc-content {
+          box-shadow: 0 0 40px rgba(223, 176, 9, 0.4), 0 12px 48px rgba(0,0,0,0.6);
+        }
+
+        .game-desc-section.color-analyze .game-desc-content {
+          box-shadow: 0 0 40px rgba(24, 156, 244, 0.4), 0 12px 48px rgba(0,0,0,0.6);
+        }
+
+        .game-desc-section.color-improve .game-desc-content {
+          box-shadow: 0 0 40px rgba(149, 19, 255, 0.4), 0 12px 48px rgba(0,0,0,0.6);
+        }
+
+        .game-desc-section.color-deploy .game-desc-content {
+          box-shadow: 0 0 40px rgba(255, 89, 251, 0.4), 0 12px 48px rgba(0,0,0,0.6);
+        }
+
+        .game-desc-section.left .game-desc-content {
+          text-align: left;
+        }
+
+        .game-desc-section.right .game-desc-content {
+          text-align: right;
+        }
+
+        /* ============================================
+           TEXT CONTENT
+           ============================================ */
+        .game-desc-text {
+          font-family: "Londrina Solid", sans-serif;
+          font-weight: 300;
+          font-size: 30px;
           line-height: 1.5;
+          color: #FFFFFF;
+          margin: 0;
+          white-space: pre-line;
         }
 
-        .game-card__list-dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          flex-shrink: 0;
-          margin-top: 5px;
+        .game-desc-text a {
+          color: #FFD900;
+          text-decoration: underline;
+          cursor: pointer;
+          transition: color 0.2s;
+          font-weight: 300;
         }
 
+        .game-desc-text a:hover {
+          color: #FF59FB;
+        }
+
+        .game-desc-text .warning {
+          font-weight: 400;
+          display: block;
+          margin-top: 20px;
+          margin-bottom: 5px;
+        }
+
+        /* ============================================
+           COLORS - Border & Badge per POS
+           ============================================ */
+        .color-review .game-desc-badge,
+        .color-review .game-desc-content {
+          border-color: #DFB009;
+        }
+
+        .color-review .game-desc-badge-text {
+          color: #DFB009;
+        }
+
+        .color-analyze .game-desc-badge,
+        .color-analyze .game-desc-content {
+          border-color: #189CF4;
+        }
+
+        .color-analyze .game-desc-badge-text {
+          color: #189CF4;
+        }
+
+        .color-improve .game-desc-badge,
+        .color-improve .game-desc-content {
+          border-color: #9513FF;
+        }
+
+        .color-improve .game-desc-badge-text {
+          color: #9513FF;
+        }
+
+        .color-deploy .game-desc-badge,
+        .color-deploy .game-desc-content {
+          border-color: #FF59FB;
+        }
+
+        .color-deploy .game-desc-badge-text {
+          color: #FF59FB;
+        }
+
+        /* ============================================
+           RESPONSIVE BREAKPOINTS
+           ============================================ */
+
+        /* Extra Large Desktop (1400px - 1600px+) */
+        @media (min-width: 1600px) {
+          .game-desc-sections {
+            max-width: 1500px;
+          }
+        }
+
+        /* Large Desktop (1200px - 1400px) */
+        @media (max-width: 1400px) {
+          .game-desc-sections {
+            max-width: 1200px;
+          }
+
+          .game-desc-content {
+            max-width: 1200px;
+          }
+
+          .game-desc-badge-text {
+            font-size: 40px;
+          }
+
+          .game-desc-text {
+            font-size: 28px;
+          }
+
+          .game-desc-content {
+            padding: 45px 55px;
+          }
+        }
+
+        /* Desktop (1024px - 1200px) */
+        @media (max-width: 1200px) {
+          .game-desc-sections {
+            max-width: 1000px;
+          }
+
+          .game-desc-content {
+            max-width: 1000px;
+          }
+
+          .game-desc-badge-text {
+            font-size: 36px;
+          }
+
+          .game-desc-text {
+            font-size: 26px;
+          }
+
+          .game-desc-content {
+            padding: 40px 50px;
+          }
+
+          .game-desc-badge {
+            padding: 12px 45px;
+          }
+        }
+
+        /* Tablet Landscape (900px - 1024px) */
+        @media (max-width: 1024px) {
+          .game-desc-sections {
+            max-width: 900px;
+          }
+
+          .game-desc-content {
+            max-width: 900px;
+          }
+
+          .game-desc-badge {
+            padding: 12px 42px;
+          }
+
+          .game-desc-badge-text {
+            font-size: 34px;
+          }
+
+          .game-desc-text {
+            font-size: 24px;
+          }
+
+          .game-desc-content {
+            padding: 38px 45px;
+            border-radius: 26px;
+          }
+
+          .game-desc-section {
+            margin-bottom: 90px;
+          }
+
+          /* Maintain glow but reduce intensity */
+          .game-desc-section.color-review .game-desc-content {
+            box-shadow: 0 0 35px rgba(223, 176, 9, 0.35), 0 10px 40px rgba(0,0,0,0.6);
+          }
+
+          .game-desc-section.color-analyze .game-desc-content {
+            box-shadow: 0 0 35px rgba(24, 156, 244, 0.35), 0 10px 40px rgba(0,0,0,0.6);
+          }
+
+          .game-desc-section.color-improve .game-desc-content {
+            box-shadow: 0 0 35px rgba(149, 19, 255, 0.35), 0 10px 40px rgba(0,0,0,0.6);
+          }
+
+          .game-desc-section.color-deploy .game-desc-content {
+            box-shadow: 0 0 35px rgba(255, 89, 251, 0.35), 0 10px 40px rgba(0,0,0,0.6);
+          }
+        }
+
+        /* Tablet Portrait (768px - 900px) */
+        @media (max-width: 900px) {
+          .game-desc-back {
+            left: 25px;
+            top: 110px;
+          }
+
+          .game-desc-sections {
+            max-width: 750px;
+          }
+
+          .game-desc-section {
+            margin-bottom: 80px;
+          }
+
+          .game-desc-badge {
+            padding: 11px 38px;
+          }
+
+          .game-desc-badge-text {
+            font-size: 32px;
+            letter-spacing: 1.2px;
+          }
+
+          .game-desc-text {
+            font-size: 22px;
+          }
+
+          .game-desc-content {
+            padding: 36px 42px;
+          }
+        }
+
+        /* Tablet (768px and below) */
+        @media (max-width: 768px) {
+          .game-description-container {
+            padding-top: 120px;
+            padding-bottom: 60px;
+          }
+
+          .game-desc-title {
+            margin-bottom: 50px;
+          }
+
+          .game-desc-title h1 {
+            font-size: clamp(45px, 12vw, 65px);
+            line-height: 0.9;
+          }
+
+          .game-desc-back {
+            left: 20px;
+            top: 100px;
+            padding: 10px 20px;
+          }
+
+          .game-desc-back svg {
+            width: 20px;
+            height: 20px;
+          }
+
+          .game-desc-back span {
+            font-size: 18px;
+          }
+
+          .game-desc-sections {
+            max-width: 700px;
+          }
+
+          .game-desc-section {
+            margin-bottom: 70px;
+          }
+
+          .game-desc-badge {
+            padding: 10px 40px;
+            margin-bottom: -20px;
+            border-width: 4px;
+          }
+
+          /* Simplify alignment untuk tablet */
+          .game-desc-section.left .game-desc-badge,
+          .game-desc-section.right .game-desc-badge {
+            margin-left: 30px;
+            margin-right: 0;
+            transform: rotate(-2deg);
+          }
+
+          .game-desc-badge-text {
+            font-size: 30px;
+            letter-spacing: 1px;
+          }
+
+          .game-desc-content {
+            max-width: 100%;
+            padding: 35px 40px;
+            border-radius: 22px;
+            border-width: 4px;
+            text-align: left !important;
+          }
+
+          .game-desc-text {
+            font-size: 20px;
+            line-height: 1.55;
+          }
+
+          /* Reduce glow for tablet */
+          .game-desc-section.color-review .game-desc-content {
+            box-shadow: 0 0 30px rgba(223, 176, 9, 0.3), 0 8px 32px rgba(0,0,0,0.6);
+          }
+
+          .game-desc-section.color-analyze .game-desc-content {
+            box-shadow: 0 0 30px rgba(24, 156, 244, 0.3), 0 8px 32px rgba(0,0,0,0.6);
+          }
+
+          .game-desc-section.color-improve .game-desc-content {
+            box-shadow: 0 0 30px rgba(149, 19, 255, 0.3), 0 8px 32px rgba(0,0,0,0.6);
+          }
+
+          .game-desc-section.color-deploy .game-desc-content {
+            box-shadow: 0 0 30px rgba(255, 89, 251, 0.3), 0 8px 32px rgba(0,0,0,0.6);
+          }
+        }
+
+        /* Mobile Landscape (640px - 768px) */
         @media (max-width: 640px) {
-          .gamedesc-grid { grid-template-columns: 1fr; }
-          .gamedesc-hero { padding: 40px 20px 28px; }
+          .game-desc-sections {
+            max-width: 100%;
+            padding: 0 15px;
+          }
+
+          .game-desc-section {
+            margin-bottom: 60px;
+          }
+
+          .game-desc-badge {
+            padding: 9px 35px;
+          }
+
+          .game-desc-badge-text {
+            font-size: 26px;
+          }
+
+          .game-desc-content {
+            padding: 30px 30px;
+            border-width: 4px;
+            border-radius: 20px;
+          }
+
+          .game-desc-text {
+            font-size: 18px;
+          }
+
+          /* Subtle glow for mobile landscape */
+          .game-desc-section.color-review .game-desc-content {
+            box-shadow: 0 0 25px rgba(223, 176, 9, 0.25), 0 6px 24px rgba(0,0,0,0.6);
+          }
+
+          .game-desc-section.color-analyze .game-desc-content {
+            box-shadow: 0 0 25px rgba(24, 156, 244, 0.25), 0 6px 24px rgba(0,0,0,0.6);
+          }
+
+          .game-desc-section.color-improve .game-desc-content {
+            box-shadow: 0 0 25px rgba(149, 19, 255, 0.25), 0 6px 24px rgba(0,0,0,0.6);
+          }
+
+          .game-desc-section.color-deploy .game-desc-content {
+            box-shadow: 0 0 25px rgba(255, 89, 251, 0.25), 0 6px 24px rgba(0,0,0,0.6);
+          }
+        }
+
+        /* Mobile Portrait (480px - 640px) */
+        @media (max-width: 480px) {
+          .game-description-container {
+            padding-top: 110px;
+            padding-bottom: 50px;
+          }
+
+          .game-desc-title {
+            margin-bottom: 40px;
+          }
+
+          .game-desc-title h1 {
+            font-size: clamp(38px, 13vw, 50px);
+            line-height: 1;
+          }
+
+          .game-desc-back {
+            left: 10px;
+            top: 90px;
+            padding: 8px 16px;
+          }
+
+          .game-desc-back svg {
+            width: 18px;
+            height: 18px;
+          }
+
+          .game-desc-back span {
+            font-size: 16px;
+          }
+
+          .game-desc-sections {
+            padding: 0 12px;
+          }
+
+          .game-desc-section {
+            margin-bottom: 50px;
+            align-items: flex-start !important;
+          }
+
+          .game-desc-badge {
+            padding: 8px 28px;
+            margin-bottom: -18px;
+            border-width: 3px;
+            border-radius: 40px;
+          }
+
+          .game-desc-section.left .game-desc-badge,
+          .game-desc-section.right .game-desc-badge {
+            margin-left: 20px;
+            margin-right: 0;
+            transform: rotate(-2deg);
+          }
+
+          .game-desc-badge-text {
+            font-size: 22px;
+            letter-spacing: 0.8px;
+          }
+
+          .game-desc-content {
+            padding: 25px 22px;
+            border-width: 3px;
+            border-radius: 18px;
+          }
+
+          .game-desc-text {
+            font-size: 16px;
+            line-height: 1.6;
+          }
+
+          /* Minimal glow for mobile */
+          .game-desc-section.color-review .game-desc-content {
+            box-shadow: 0 0 20px rgba(223, 176, 9, 0.2), 0 5px 20px rgba(0,0,0,0.6);
+          }
+
+          .game-desc-section.color-analyze .game-desc-content {
+            box-shadow: 0 0 20px rgba(24, 156, 244, 0.2), 0 5px 20px rgba(0,0,0,0.6);
+          }
+
+          .game-desc-section.color-improve .game-desc-content {
+            box-shadow: 0 0 20px rgba(149, 19, 255, 0.2), 0 5px 20px rgba(0,0,0,0.6);
+          }
+
+          .game-desc-section.color-deploy .game-desc-content {
+            box-shadow: 0 0 20px rgba(255, 89, 251, 0.2), 0 5px 20px rgba(0,0,0,0.6);
+          }
+        }
+
+        /* Extra Small Mobile (360px - 480px) */
+        @media (max-width: 360px) {
+          .game-desc-sections {
+            padding: 0 10px;
+          }
+
+          .game-desc-badge {
+            padding: 7px 22px;
+            margin-left: 15px !important;
+          }
+
+          .game-desc-badge-text {
+            font-size: 19px;
+            letter-spacing: 0.5px;
+          }
+
+          .game-desc-content {
+            padding: 22px 18px;
+          }
+
+          .game-desc-text {
+            font-size: 15px;
+          }
+
+          .game-desc-title h1 {
+            font-size: clamp(32px, 15vw, 42px);
+          }
+
+          .game-desc-section {
+            margin-bottom: 45px;
+          }
+        }
+
+        /* Ultra Small Mobile (<360px) */
+        @media (max-width: 320px) {
+          .game-desc-badge {
+            padding: 6px 18px;
+            margin-left: 10px !important;
+          }
+
+          .game-desc-badge-text {
+            font-size: 17px;
+          }
+
+          .game-desc-content {
+            padding: 20px 15px;
+          }
+
+          .game-desc-text {
+            font-size: 14px;
+          }
         }
       `}</style>
 
-      {/* HERO */}
-      <header className="gamedesc-hero">
-        <span className="gamedesc-hero__eyebrow">🎮 Interface 2026</span>
-        <h1 className="gamedesc-hero__title">
-          GAME <span>DESCRIPTION</span>
-        </h1>
-        <p className="gamedesc-hero__subtitle">
-          Kenali setiap kegiatan Interface 2026 — aturan, misi, dan apa yang menanti kamu di setiap chapter!
-        </p>
-      </header>
+      <main className="game-description-container">
+        {/* Back Button */}
+        <button className="game-desc-back" onClick={() => navigate(-1)}>
+          <svg viewBox="0 0 24 24">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+          </svg>
+          <span>BACK</span>
+        </button>
 
-      {/* CARDS */}
-      <div className="gamedesc-grid">
-        {GAMES.map((game, index) => (
-          <GameCard key={game.id} game={game} index={index} />
-        ))}
-      </div>
-    </main>
+        {/* Title */}
+        <header className="game-desc-title">
+          <h1>
+            <span className="yellow">G</span>
+            <span className="white">AME</span>
+            <br />
+            <span className="yellow">D</span>
+            <span className="white">ESCRIPTION</span>
+          </h1>
+        </header>
+
+        {/* Sections */}
+        <div className="game-desc-sections">
+          {/* POS REVIEW - Left */}
+          <article className="game-desc-section left color-review">
+            <div className="game-desc-badge">
+              <h2 className="game-desc-badge-text">POS REVIEW</h2>
+            </div>
+            <div className="game-desc-content">
+              <p className="game-desc-text">
+                Introduction of Computer Science atau yang lebih dikenal dengan INTERFACE, adalah program kerja tahunan Himpunan Mahasiswa Ilmu Komputer (HIMA ILKOM) Universitas Negeri Semarang yang menjadi gerbang awal bagi mahasiswa baru untuk mengenal dunia rumpun Ilmu Komputer secara menyeluruh.
+                {'\n\n'}
+                Program ini menjadi jembatan transisi dari dunia sekolah menuju dunia perkuliahan melalui serangkaian kegiatan yang terstruktur dan berkesinambungan. Selain aspek akademik dan lingkungan kampus, Interface juga mengenalkan budaya, nilai, dan dinamika kehidupan sebagai bagian dari keluarga besar Ilmu Komputer, menjadikannya fondasi awal sebelum mahasiswa baru melangkah lebih jauh dalam perjalanan akademik dan profesionalnya.
+              </p>
+            </div>
+          </article>
+
+          {/* POS ANALYZE - Right */}
+          <article className="game-desc-section right color-analyze">
+            <div className="game-desc-badge">
+              <h2 className="game-desc-badge-text">POS ANALYZE</h2>
+            </div>
+            <div className="game-desc-content">
+              <p className="game-desc-text">
+                Pos kedua ini merupakan arena mengasah ingatan berdurasi 25 menit pelaksanaan dan 5 menit transisi yang mempertemukan 4 kelompok sekaligus dalam satu meja di masing-masing sub-pos paralel menggunakan permainan kartu DECK. Permainan ini berlangsung dalam dua ronde berdurasi maksimal 12 menit, dengan jeda 1 menit di antaranya untuk mengatur ulang line-up pemain, dan setiap kelompok wajib mengganti perwakilan di tiap giliran agar seluruh anggota mendapat kesempatan bermain. Misi utama tiap perwakilan adalah membuat total nilai empat kartu tertutup di deck kelompoknya sekecil mungkin, dengan mengambil kartu dari stock lalu menukar atau membuangnya, serta memanfaatkan skill khusus pada kartu 7 hingga K untuk mengintip atau menukar kartu milik sendiri maupun lawan. Melalui special rules "buang kartu kembar", kelompok mana pun boleh membuang kartu kapan saja jika yakin nilainya sama dengan kartu yang baru diletakkan, namun akan terkena hukuman tambahan kartu jika tebakannya salah. Ronde juga bisa diakhiri lebih awal lewat seruan "Bingo!" dari pemain yang sudah yakin dengan deck-nya. Setelah dua ronde selesai, panitia merekapitulasi nilai deck tiap kelompok menjadi poin turnamen, dan ditutup dengan evaluasi singkat serta persiapan transisi ke pos berikutnya. Aturan lengkap mengenai nilai kartu, skill, dan mekanisme detail lainnya dapat dibaca pada panduan permainan DECK melalui link berikut.
+                {' '}
+                <a href="https://docs.google.com/document/u/0/d/1Kg0YtSVHEvj9iocJjKFl0glBdcvVmf7Q1YmopgmxhMk/edit" target="_blank" rel="noopener noreferrer">
+                  PANDUAN PERMAINAN DECK
+                </a>
+              </p>
+            </div>
+          </article>
+
+          {/* POS IMPROVE - Left */}
+          <article className="game-desc-section left color-improve">
+            <div className="game-desc-badge">
+              <h2 className="game-desc-badge-text">POS IMPROVE</h2>
+            </div>
+            <div className="game-desc-content">
+              <p className="game-desc-text">
+                Pos ketiga merupakan arena debat freestyle yang bertujuan mendorong player untuk berlatih mengemukakan gagasan dan berimprovisasi dalam penyampaiannya.
+                {'\n\n'}
+                Pada pos ini akan diberi waktu satu menit untuk panitia melakukan case reveal dan melakukan pembagian role di setiap kelompok.
+                {'\n\n'}
+                Selanjutnya para player akan diberikan waktu 5 menit untuk berdiskusi dengan anggota kelompoknya.
+                {'\n\n'}
+                Berikutnya setiap kelompok mengajukan satu perwakilan untuk menyampaikan pendapat hasil diskusi dengan kelompoknya. Setiap kelompok diberikan waktu 1 menit untuk menyampaikan hasil diskusinya. Kemudian setiap player dapat melakukan debat freestyle yang mana setiap kelompok dapat melakukan serangan dan pembelaan kepada semua kelompok walaupun kelompok tersebut ada pada role yang sama. Debat freestyle ini diberikan waktu selama 19 menit.
+                {'\n\n'}
+                Sesi terakhir setiap player akan diberikan waktu 2 menit untuk melakukan vote kepada setiap pendapat kecuali pendapat kelompoknya sendiri.
+                {'\n'}
+                <span className="warning">WARNING!!!!</span>
+                Aturan tambahan untuk debat freestyle, dilarang keras menggunakan kata kata kasar saat proses debat.
+              </p>
+            </div>
+          </article>
+
+          {/* POS DEPLOY - Right */}
+          <article className="game-desc-section right color-deploy">
+            <div className="game-desc-badge">
+              <h2 className="game-desc-badge-text">POS DEPLOY</h2>
+            </div>
+            <div className="game-desc-content">
+              <p className="game-desc-text">
+                Pos keempat merupakan babak puncak sekaligus muara dari seluruh petualangan kelompok yang dilaksanakan secara terpusat di Main Arena dengan durasi 35 menit pelaksanaan penuh. Pada pos terakhir ini akan mengumpulkan semua kelompok dari semua rombongan untuk berkompetisi di Pos Deploy in. Akan disediakan 3 continent yang memuat berbagai soal.
+                {'\n\n'}
+                Misi utama mereka di sini adalah menyelesaikan tantangan soal yang disediakan panitia di map continent-continent tersebut, yang terdiri dari variasi tingkat kesulitan mulai dari logika dasar, soal UTBK, hingga soal OSN Informatika dan algoritma koding dasar. Pengerjaan dilakukan secara kolaboratif, di mana perwakilan kelompok mengambil satu soal ke depan, menyelesaikannya bersama-sama, lalu membawanya kembali ke panitia untuk dikoreksi; jika benar, mereka baru diperbolehkan mengambil soal berikutnya.
+                {'\n\n'}
+                Setiap kelompok dapat mengerjakan maksimal 7 soal benar dari banyaknya soal yang disediakan dengan skor setiap soal adalah 20 poin soal (SS) wilayah yang sangat besar, 15 poin soal (S) wilayah besar, 10 poin untuk soal (M) wilayah sedang, 5 poin untuk soal (E) wilayah kecil. Setiap soal yang diselesaikan dengan benar akan mendapatkan satu teritori di dalam peta sesuai nomor soal. Teritori yang telah didapatkan akan ditandai dengan stiker dari masing masing kelompok. Satu soal bisa dikerjakan oleh banyak kelompok sekaligus. Namun, point dari territory tersebut hanya akan didapatkan oleh kelompok tercepat yang berhasil memecahkan persoalan. Jika Soal pada suatu nomor telah diselesaikan oleh salah satu kelompok maka soal tersebut akan hangus di kelompok lainya yang belum dapat menyelesaikannya.
+              </p>
+            </div>
+          </article>
+        </div>
+      </main>
+    </>
   );
 }

@@ -70,11 +70,17 @@ const SPONSORS_BOTTOM = [
     logo: "/Logo Sponsor/VIRGIN CAKE AND BAKERY (S) 1.svg",
     accent: "#FFD900",
   },
-  {
-    id: "bottom-7",
+  // {
+  //   id: "bottom-7",
+  //   name: "Travel Link HT",
+  //   logo: "/Logo Sponsor/TravelLinkHT (L) 1.svg",
+  //   accent: "#2f00ff",
+  // },
+    {
+    id: "bottom-8",
     name: "Virgin Cake and Bakery",
-    logo: "/Logo Sponsor/VIRGIN CAKE AND BAKERY (S).png",
-    accent: "#2f00ff",
+    logo: "/Logo Sponsor/TraveLinkHT (L) 1.svg",
+    accent: "#FFD900",
   },
 ];
 
