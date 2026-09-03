@@ -1051,36 +1051,101 @@ img {
   }
 
 
+  /* PERBAIKAN: Hero section mobile lebih compact */
   .figma-start {
-    min-height: 720px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
 
   .figma-start__canvas {
-    min-height: 720px;
+    min-height: 100vh;
   }
 
 
+  /* PERBAIKAN: Logo lebih besar dan lebih centered */
   .figma-start__main-logo {
-    top: 185px;
-
-    width: min(86vw, 540px);
+    top: 45%;
+    transform: translate(-50%, -50%);
+    
+    width: min(90vw, 600px);
+    height: auto;
+    aspect-ratio: 636 / 267.773;
   }
 
 
+  /* PERBAIKAN: Decorative blobs lebih terlihat */
   .figma-start__neon--pink {
-    top: 70px;
-
-    width: 270px;
-    height: 50px;
+    top: 15vh;
+    left: -40px;
+    
+    width: 320px;
+    height: 60px;
+    
+    opacity: 0.85;
   }
 
 
   .figma-start__neon--purple {
-    top: 105px;
-
-    width: 235px;
-    height: 46px;
+    top: calc(15vh + 50px);
+    left: -50px;
+    
+    width: 280px;
+    height: 55px;
+    
+    opacity: 0.85;
+  }
+  
+  
+  /* PERBAIKAN: Building Terrain positioning */
+  .figma-start__terrain {
+    top: auto;
+    bottom: 15vh;
+    
+    height: 100px;
+  }
+  
+  .figma-start__terrain::before {
+    top: 15px;
+    height: 70px;
+  }
+  
+  .figma-start__terrain::after {
+    top: 18px;
+    height: 64px;
+  }
+  
+  .figma-start__terrain img {
+    width: 100vw !important;
+    min-width: 100vw;
+    height: 70px !important;
+    object-fit: contain;
+  }
+  
+  
+  /* PERBAIKAN: Right side decorative blobs */
+  .figma-start__right-neon--yellow {
+    bottom: 30vh;
+    top: auto;
+    right: -50px;
+    
+    width: 280px;
+    height: 60px;
+    
+    opacity: 0.85;
+  }
+  
+  .figma-start__right-neon--blue {
+    bottom: calc(30vh + 60px);
+    top: auto;
+    right: -60px;
+    
+    width: 320px;
+    height: 65px;
+    
+    opacity: 0.85;
   }
 
 }

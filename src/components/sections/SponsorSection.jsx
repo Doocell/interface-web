@@ -763,7 +763,7 @@ export default function SponsorSection() {
 
 
         /* =================================================
-           MOBILE
+           MOBILE - ENHANCED RESPONSIVE
         ================================================= */
 
         @media (
@@ -771,31 +771,174 @@ export default function SponsorSection() {
           600px
         ) {
 
-          .sp-card {
-            flex-basis: 145px;
-
-            width: 145px;
-
-            height: 88px;
-
-            padding: 3px;
-
-            border-radius: 5px;
+          /* PERBAIKAN: Frame mobile lebih compact */
+          .sp-frame {
+            aspect-ratio: auto;
+            min-height: 600px;
+            padding: 40px 0 60px;
           }
 
+          /* PERBAIKAN: Title responsive */
+          .sp-title {
+            position: relative;
+            top: 0;
+            margin-bottom: 50px;
+            transform: none;
+            left: 0;
+          }
+
+          .sp-title__word {
+            text-shadow:
+              3px
+              2.5px
+              0
+              rgba(172, 74, 253, 1);
+          }
+
+          .sp-title__first {
+            font-size: clamp(42px, 12vw, 56px);
+            line-height: 1;
+          }
+
+          .sp-title__rest {
+            font-size: clamp(32px, 9vw, 42px);
+            line-height: 1;
+          }
+
+          .sp-title__amp-wrap {
+            width: 50px;
+            height: 40px;
+            margin-left: 8px;
+            margin-right: 12px;
+          }
+
+          .sp-title__amp {
+            font-size: clamp(48px, 13vw, 64px);
+            line-height: 1;
+            text-shadow:
+              3.5px
+              3px
+              0
+              rgba(172, 74, 253, 1);
+          }
+
+          /* PERBAIKAN: Board positioning */
+          .sp-board {
+            position: relative;
+            top: 0;
+            transform: none;
+            left: 0;
+            width: 100%;
+            height: auto;
+            min-height: 320px;
+            padding: 30px 0;
+          }
+
+          /* PERBAIKAN: Rows stacked with spacing */
+          .sp-row {
+            position: relative;
+            top: 0 !important;
+            height: 100px;
+            margin-bottom: 20px;
+          }
+
+          .sp-row--top {
+            margin-bottom: 30px;
+          }
+
+          /* PERBAIKAN: Cards responsive size */
+          .sp-card {
+            flex-basis: 160px;
+            width: 160px;
+            height: 100px;
+            padding: 3px;
+            border-radius: 6px;
+            box-shadow:
+              0
+              0
+              5px
+              var(--sp-accent);
+          }
+
+          .sp-card__inside {
+            border-radius: 4px;
+          }
+
+          /* PERBAIKAN: Logo sizing */
+          .sp-card__logo {
+            max-width: 85%;
+            max-height: 78%;
+          }
+
+          /* PERBAIKAN: Track spacing */
+          .sp-track {
+            gap: 16px;
+            padding-right: 16px;
+          }
+
+          .sp-card__placeholder {
+            font-size: 9px;
+          }
+
+          /* PERBAIKAN: Animation speed untuk mobile */
+          .sp-track {
+            animation-duration: 20s;
+          }
+
+          .sp-track--reverse {
+            animation-duration: 20s;
+          }
+
+        }
+
+        /* =================================================
+           EXTRA SMALL MOBILE
+        ================================================= */
+
+        @media (
+          max-width:
+          400px
+        ) {
+
+          .sp-frame {
+            min-height: 550px;
+            padding: 30px 0 50px;
+          }
+
+          .sp-title {
+            margin-bottom: 40px;
+          }
+
+          .sp-title__first {
+            font-size: 38px;
+          }
+
+          .sp-title__rest {
+            font-size: 28px;
+          }
+
+          .sp-title__amp {
+            font-size: 44px;
+          }
+
+          .sp-board {
+            min-height: 280px;
+            padding: 25px 0;
+          }
+
+          .sp-card {
+            flex-basis: 140px;
+            width: 140px;
+            height: 88px;
+          }
 
           .sp-row {
             height: 88px;
           }
 
-
           .sp-track {
-            gap: 14px;
-          }
-
-
-          .sp-card__placeholder {
-            font-size: 8px;
+            gap: 12px;
+            padding-right: 12px;
           }
 
         }

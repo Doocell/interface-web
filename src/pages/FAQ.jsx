@@ -172,9 +172,15 @@ export default function FAQ() {
             </span>
           </h1>
 
-          <Link className="faq-send-button" to="/quest-collect">
-            SEND QUESTION HERE!
-          </Link>
+            <a 
+              href="https://www.instagram.com/himailkomunnes/" 
+              className="faq-send-btn" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ marginTop: "24px", display: "inline-block" }}
+            >
+              SEND QUESTION HERE!
+            </a>
         </div>
 
         <div className="faq-right-side">

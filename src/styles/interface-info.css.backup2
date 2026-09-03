@@ -229,7 +229,6 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 22px;
   align-items: start;
-  justify-items: center;
 }
 
 .ii-committee-column {
@@ -237,9 +236,6 @@
   flex-direction: column;
   gap: 32px;
   min-width: 0;
-  width: 100%;
-  max-width: 450px;
-  align-items: center;
 }
 
 .ii-role-card {
@@ -247,8 +243,6 @@
   --card-min-height: 210px;
   --name-columns: 1;
   position: relative;
-  width: 100%;
-  max-width: 420px;
   min-height: var(--card-min-height);
   margin: 40px 0 0 54px;
   padding: 69px 22px 30px;
@@ -351,19 +345,14 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
   margin-top: 56px;
-  justify-items: center;
 }
 
 .ii-role-card.is-wide {
   margin-left: 54px;
-  max-width: 100%;
 }
 
 .ii-committee-section > .ii-role-card.is-wide {
   margin-top: 64px;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 900px;
 }
 
 @media (max-width: 1100px) {
@@ -517,13 +506,6 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
-    align-items: center;
-  }
-  
-  .ii-committee-column {
-    width: 100%;
-    max-width: 100%;
-    align-items: center;
   }
 
   .ii-wide-card-grid {
@@ -533,11 +515,9 @@
   /* PERBAIKAN: Card sizing untuk mobile */
   .ii-role-card,
   .ii-role-card.is-wide {
-    width: calc(100% - 72px);
-    max-width: 420px;
-    margin-left: 60px;
-    margin-right: 12px;
-    padding: 75px 20px 32px;
+    margin-left: 50px;
+    margin-right: 8px;
+    padding: 69px 18px 30px;
     border-width: 5px;
     border-radius: 19px;
     box-shadow: 0 0 25px var(--accent);
@@ -545,45 +525,44 @@
 
   /* PERBAIKAN: Header icon positioning */
   .ii-role-header {
-    left: -56px;
-    width: calc(100% + 44px);
-    max-width: 360px;
+    left: -50px;
+    width: min(300px, calc(100vw - 70px));
   }
 
   .ii-role-icon {
-    width: 100px;
-    height: 84px;
+    width: 90px;
+    height: 76px;
   }
 
   /* PERBAIKAN: Title wrap responsive */
   .ii-role-title-wrap {
-    top: 13px;
-    left: 56px;
-    width: calc(100% - 56px);
-    max-width: none;
-    height: 42px;
-    padding: 0 20px 0 48px;
+    top: 12px;
+    left: 50px;
+    width: calc(100% - 50px);
+    max-width: 280px;
+    height: 40px;
+    padding: 0 18px 0 42px;
   }
 
   .ii-role-title-wrap h3 {
-    font-size: clamp(0.9rem, 3.8vw, 1.15rem);
+    font-size: clamp(0.85rem, 3.5vw, 1.1rem);
   }
 
   /* PERBAIKAN: Subtitle responsive */
   .ii-role-subtitle {
-    top: 56px;
-    left: 30px;
-    width: calc(100% - 30px);
-    max-width: none;
-    padding-left: 70px;
-    font-size: clamp(0.88rem, 3.5vw, 1.05rem);
+    top: 54px;
+    left: 28px;
+    width: calc(100% - 28px);
+    max-width: 300px;
+    padding-left: 64px;
+    font-size: clamp(0.85rem, 3.2vw, 1rem);
   }
 
   /* PERBAIKAN: Names grid - single column on mobile */
   .ii-role-names {
     grid-template-columns: 1fr;
-    gap: 18px;
-    font-size: clamp(1.08rem, 4.8vw, 1.3rem);
+    gap: 16px;
+    font-size: clamp(1.05rem, 4.5vw, 1.25rem);
   }
 
   .ii-committee-section > .ii-role-card.is-wide {

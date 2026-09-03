@@ -359,20 +359,12 @@
 
 /* ========================================
    RESPONSIVE - MOBILE (VERTICAL TIMELINE)
-   PERBAIKAN: Gambar centered secara vertikal
    ======================================== */
 
 @media (max-width: 640px) {
-  /* PERBAIKAN: Page jadi full height dengan flexbox centering */
   .timeline-page {
-    min-height: 100vh;
-    height: 100vh;
-    padding-top: 76px;
-    padding-bottom: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    padding-top: 80px;
+    padding-bottom: 60px;
   }
 
   .timeline-title-wrapper {
@@ -400,24 +392,17 @@
     display: none;
   }
 
-  /* PERBAIKAN: Container centered dengan margin auto vertikal */
   .timeline-svg-container--mobile {
     display: flex;
-    padding: 0;
-    margin: auto 0;
+    padding: 20px 15px 60px;
     z-index: 10;
     position: relative;
-    width: 100%;
-    max-width: none;
-    flex: 0 1 auto;
   }
 
-  /* PERBAIKAN: Width 95% untuk gambar lebih besar */
   .timeline-svg {
-    width: 95%;
-    max-width: none;
+    width: 100%;
+    max-width: 320px;
     height: auto;
-    margin: 0 auto;
   }
 }
 
@@ -426,20 +411,12 @@
    ======================================== */
 
 @media (max-width: 400px) {
-  .timeline-page {
-    min-height: 100vh;
-    height: 100vh;
-  }
-
-  /* PERBAIKAN: Sama seperti 640px */
   .timeline-svg-container--mobile {
-    padding: 0;
-    margin: auto 0;
+    padding: 15px 10px 50px;
   }
 
   .timeline-svg {
-    width: 95%;
-    max-width: none;
+    max-width: 280px;
   }
 
   .timeline-decoration--triangle,

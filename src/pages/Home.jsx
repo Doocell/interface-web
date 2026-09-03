@@ -12,7 +12,13 @@ import FooterSection from "../components/sections/FooterSection.jsx"
 
 export default function Home() {
   return (
-    <main className="home-page" style={{ paddingTop: "76px" }}>
+    <main className="home-page" 
+      style={{ 
+        paddingTop: "76px", 
+        // display: "flex", 
+        flexDirection: "column", 
+        gap: "5px" 
+      }}>
 
       {/* =========================================
           SECTION AWAL
