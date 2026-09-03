@@ -1,14 +1,9 @@
 /* =========================================================
-   INTERFACE 2026
+   INTERFACE 2026 - TIMELINE SECTION
    FIGMA NODE : 303:944
-   SECTION TIMELINE
-
-   SOURCE FRAME:
-   1440 × 1024
-
-   Semua posisi desktop mengikuti koordinat MCP Figma.
+   
+   RESPONSIVE & MOBILE OPTIMIZED
    ========================================================= */
-
 
 /* =========================================================
    ROOT SECTION
@@ -16,130 +11,92 @@
 
 .timeline-section {
   position: relative;
-
-  width: 100vw;
-  height: 1024px;
-
+  width: 100%;
+  min-height: 1024px; /* PERBAIKAN: Match stage height */
+  height: 1024px; /* PERBAIKAN: Fixed height for desktop */
   margin: 0;
   padding: 0;
-
-  overflow: hidden;
-
-  background: transparent;
-
+  overflow: visible; /* PERBAIKAN: Change from hidden to visible */
+  background: transparent; /* Background handled by BackgroundPattern */
   isolation: isolate;
+  /* PERBAIKAN: Ensure content is visible */
+  opacity: 1;
+  visibility: visible;
 }
 
+/* Desktop: fixed height */
+@media (min-width: 1024px) {
+  .timeline-section {
+    height: 1024px;
+  }
+}
 
 /* =========================================================
-   MAIN 1440 FIGMA COORDINATE STAGE
-
-   Semua komponen utama menggunakan koordinat Figma
-   terhadap canvas 1440px.
-
-   Pada monitor >1440:
-   ukuran komponen tidak membesar.
-   Canvas hanya di-center.
+   MAIN STAGE - FIXED DAN RESPONSIVE
    ========================================================= */
 
 .timeline-stage {
   position: absolute;
-
   left: 50%;
   top: 0;
-
   z-index: 3;
-
   width: 1440px;
   height: 1024px;
-
   transform: translateX(-50%);
-
-  pointer-events: none;
+  pointer-events: auto;
+  visibility: visible;
 }
-
 
 /* =========================================================
    TITLE
-   FIGMA NODE 303:1571
-
-   x = 409.5
-   y = 267
-   w = 618
    ========================================================= */
 
 .timeline-heading {
   position: absolute;
-
   left: 409.5px;
   top: 267px;
-
   width: 618px;
   height: 103px;
 }
 
-
 .timeline-heading h2 {
   position: absolute;
-
   left: 0;
   top: 0;
-
-  width: 618px;
-
+  width: 100%;
   margin: 0;
   padding: 0;
-
   color: #ffffff;
-
-  font-family:
-    "Tektur",
-    sans-serif;
-
+  font-family: "Tektur", sans-serif;
   font-size: 64px;
   font-weight: 700;
-
-  font-variation-settings:
-    "wdth" 100;
-
+  font-variation-settings: "wdth" 100;
   line-height: normal;
-
   text-align: left;
-
   white-space: nowrap;
+  /* PERBAIKAN: Ensure text is visible */
+  opacity: 1;
+  visibility: visible;
+  z-index: 10;
 }
-
-
-/* =========================================================
-   TITLE MULTICOLOR UNDERLINE
-   Figma node 303:1573
-   ========================================================= */
 
 .timeline-heading__underline {
   position: absolute;
-
   left: 0;
   top: 93px;
-
   width: 618px;
   height: 0;
 }
 
-
 .timeline-heading__underline img {
   position: absolute;
-
   left: -10px;
   top: -20px;
-
   width: 638px;
   height: 30px;
-
   max-width: none;
-
   user-select: none;
 }
-
 
 /* =========================================================
    ROAD / TRACK
@@ -147,50 +104,39 @@
 
 .timeline-track-piece {
   position: absolute;
-
   width: 257.767px;
   height: 98.892px;
-
   z-index: 2;
+  /* PERBAIKAN: Pastikan visible */
+  pointer-events: auto;
 }
-
 
 .timeline-track-piece img {
   display: block;
-
   width: 100%;
   height: 100%;
-
   max-width: none;
-
   user-select: none;
 }
-
 
 .timeline-track-piece--left {
   left: 234.89px;
   top: 611.85px;
 }
 
-
 .timeline-track-piece--center {
   left: 591.55px;
   top: 611.85px;
 }
 
-
 .timeline-track-piece--center img {
-  transform:
-    rotate(180deg)
-    scaleY(-1);
+  transform: rotate(180deg) scaleY(-1);
 }
-
 
 .timeline-track-piece--right {
   left: 935.24px;
   top: 611.85px;
 }
-
 
 /* =========================================================
    DASHED ROAD LINES
@@ -198,712 +144,573 @@
 
 .timeline-road-line {
   position: absolute;
-
   z-index: 4;
-
   display: flex;
-
   align-items: center;
   justify-content: center;
+  pointer-events: auto;
 }
-
 
 .timeline-road-line__content {
   position: relative;
-
   height: 0;
 }
 
-
 .timeline-road-line__content img {
   position: absolute;
-
   left: 0;
   top: -2px;
-
   display: block;
-
   width: 100%;
   height: 4px;
-
   max-width: none;
 }
-
-
-/* LEFT -> DOWN */
 
 .timeline-road-line--one {
   left: 280.5px;
   top: 634px;
-
   width: 172px;
   height: 52px;
 }
 
-
-.timeline-road-line--one
-.timeline-road-line__content {
+.timeline-road-line--one .timeline-road-line__content {
   width: 179.689px;
-
-  transform:
-    rotate(16.82deg);
+  transform: rotate(16.82deg);
 }
-
-
-/* CENTER -> UP */
 
 .timeline-road-line--two {
   left: 632.5px;
   top: 629px;
-
   width: 187px;
   height: 55px;
 }
 
-
-.timeline-road-line--two
-.timeline-road-line__content {
+.timeline-road-line--two .timeline-road-line__content {
   width: 194.921px;
-
-  transform:
-    rotate(-16.39deg);
+  transform: rotate(-16.39deg);
 }
-
-
-/* RIGHT -> DOWN */
 
 .timeline-road-line--three {
   left: 971.5px;
   top: 630px;
-
   width: 172px;
   height: 52px;
 }
 
-
-.timeline-road-line--three
-.timeline-road-line__content {
+.timeline-road-line--three .timeline-road-line__content {
   width: 179.689px;
-
-  transform:
-    rotate(16.82deg);
+  transform: rotate(16.82deg);
 }
 
-
 /* =========================================================
-   TIMELINE NODE BASE
+   TIMELINE NODES
    ========================================================= */
 
 .timeline-node {
   position: absolute;
-
   z-index: 5;
-
   width: 220.48px;
   height: 110.24px;
+  pointer-events: auto;
 }
-
 
 .timeline-node__outer {
   position: absolute;
-
   inset: 0;
-
   width: 220.48px;
   height: 110.24px;
-
   max-width: none;
 }
-
 
 .timeline-node__middle {
   position: absolute;
-
   width: 161px;
   height: 80.5px;
-
   max-width: none;
 }
 
-
 .timeline-node__inner {
   position: absolute;
-
   width: 100px;
   height: 50px;
 }
 
-
 .timeline-node__inner img {
   position: absolute;
-
   left: 0;
   top: 0;
-
   width: 100px;
   height: 54px;
-
   max-width: none;
 }
 
-
-/* =========================================================
-   NODE 1
-   PINK
-   ========================================================= */
-
+/* NODE POSITIONS */
 .timeline-node--one {
   left: 82.5px;
   top: 553.48px;
 }
 
-
-.timeline-node--one
-.timeline-node__middle {
+.timeline-node--one .timeline-node__middle {
   left: 30px;
   top: 13.52px;
 }
 
-
-.timeline-node--one
-.timeline-node__inner {
+.timeline-node--one .timeline-node__inner {
   left: 59px;
   top: 26.52px;
 }
-
-
-/* =========================================================
-   NODE 2
-   PURPLE
-   ========================================================= */
 
 .timeline-node--two {
   left: 432.67px;
   top: 647.51px;
 }
 
-
-.timeline-node--two
-.timeline-node__middle {
+.timeline-node--two .timeline-node__middle {
   left: 27.83px;
   top: 13.49px;
 }
 
-
-.timeline-node--two
-.timeline-node__inner {
+.timeline-node--two .timeline-node__inner {
   left: 57.83px;
   top: 23.49px;
 }
-
-
-/* =========================================================
-   NODE 3
-   BLUE
-   ========================================================= */
 
 .timeline-node--three {
   left: 782.85px;
   top: 554px;
 }
 
-
-.timeline-node--three
-.timeline-node__middle {
+.timeline-node--three .timeline-node__middle {
   left: 28.65px;
   top: 13px;
 }
 
-
-.timeline-node--three
-.timeline-node__inner {
+.timeline-node--three .timeline-node__inner {
   left: 58.65px;
   top: 23px;
 }
-
-
-/* =========================================================
-   NODE 4
-   YELLOW
-   ========================================================= */
 
 .timeline-node--four {
   left: 1133.02px;
   top: 647.51px;
 }
 
-
-.timeline-node--four
-.timeline-node__middle {
+.timeline-node--four .timeline-node__middle {
   left: 29.48px;
   top: 13.49px;
 }
 
-
-.timeline-node--four
-.timeline-node__inner {
+.timeline-node--four .timeline-node__inner {
   left: 59.48px;
   top: 24.49px;
 }
 
-
 /* =========================================================
-   CARD BASE
-   Figma panels are 221 × 127
+   TIMELINE CARDS
    ========================================================= */
 
 .timeline-card {
   position: absolute;
-
   z-index: 8;
-
   width: 221px;
   height: 127px;
+  pointer-events: auto;
 }
-
 
 .timeline-card__panel {
   position: absolute;
-
   left: 0;
   top: 0;
-
   z-index: 2;
-
   width: 221px;
   height: 127px;
 }
 
-
 .timeline-card__panel img {
   position: absolute;
-
-  /*
-     Figma SVG glow extends outside
-     panel's nominal frame.
-  */
-
   left: -13.55px;
   top: -14.96px;
-
   width: 247.8px;
   height: 156.92px;
-
   max-width: none;
-
   user-select: none;
   pointer-events: none;
 }
 
-
 .timeline-card__pin {
   position: absolute;
-
   z-index: 1;
-
   width: 37px;
   height: 53.182px;
-
   max-width: none;
-
   user-select: none;
 }
 
-
 .timeline-card__title {
   position: absolute;
-
   z-index: 4;
-
   margin: 0;
-
-  font-family:
-    "Tektur",
-    sans-serif;
-
-  font-variation-settings:
-    "wdth" 100;
-
+  font-family: "Tektur", sans-serif;
+  font-variation-settings: "wdth" 100;
   font-weight: 800;
-
   line-height: normal;
-
   white-space: nowrap;
 }
-
 
 .timeline-card__details {
   position: absolute;
-
   z-index: 4;
-
   margin: 0;
-
-  font-family:
-    "Londrina Solid",
-    sans-serif;
-
+  font-family: "Londrina Solid", sans-serif;
   font-weight: 400;
-
   font-style: normal;
-
   line-height: normal;
-
   white-space: nowrap;
 }
-
 
 .timeline-card__details p {
   margin: 0;
   padding: 0;
-
   line-height: normal;
 }
 
-
-/* =========================================================
-   PINK CARD
-
-   FIGMA group:
-   x = 80
-   y = 426
-   ========================================================= */
-
+/* CARD POSITIONS & COLORS */
 .timeline-card--pink {
   left: 80px;
   top: 426px;
 }
 
-
-.timeline-card--pink
-.timeline-card__pin {
+.timeline-card--pink .timeline-card__pin {
   left: 113px;
   top: 126px;
 }
 
-
-.timeline-card--pink
-.timeline-card__title {
+.timeline-card--pink .timeline-card__title {
   left: 24.5px;
   top: 20px;
-
   color: #ff59fb;
-
   font-size: 14px;
-  font-weight: 800;
 }
 
-
-.timeline-card--pink
-.timeline-card__details {
+.timeline-card--pink .timeline-card__details {
   left: 24.5px;
   top: 48px;
-
   color: #ff59fb;
-
   font-size: 11px;
 }
-
-
-/* =========================================================
-   PURPLE CARD
-
-   FIGMA:
-   x = 432.5
-   y = 513
-   ========================================================= */
 
 .timeline-card--purple {
   left: 432.5px;
   top: 513px;
 }
 
-
-.timeline-card--purple
-.timeline-card__pin {
+.timeline-card--purple .timeline-card__pin {
   left: 109.5px;
   top: 127px;
 }
 
-
-.timeline-card--purple
-.timeline-card__title {
+.timeline-card--purple .timeline-card__title {
   left: 22px;
   top: 21px;
-
   color: #9513ff;
-
   font-size: 14px;
-  font-weight: 800;
 }
 
-
-.timeline-card--purple
-.timeline-card__details {
+.timeline-card--purple .timeline-card__details {
   left: 22px;
   top: 49px;
-
   color: #9513ff;
-
   font-size: 11px;
 }
-
-
-/* =========================================================
-   BLUE CARD
-
-   FIGMA:
-   x = 777.5
-   y = 426
-   ========================================================= */
 
 .timeline-card--blue {
   left: 777.5px;
   top: 426px;
 }
 
-
-.timeline-card--blue
-.timeline-card__pin {
+.timeline-card--blue .timeline-card__pin {
   left: 113.5px;
   top: 125px;
 }
 
-
-.timeline-card--blue
-.timeline-card__title {
+.timeline-card--blue .timeline-card__title {
   left: 19px;
   top: 19px;
-
   color: #189cf4;
-
   font-size: 12px;
-  font-weight: 800;
 }
 
-
-.timeline-card--blue
-.timeline-card__details {
+.timeline-card--blue .timeline-card__details {
   left: 19px;
   top: 45px;
-
   color: #189cf4;
-
   font-size: 11px;
 }
-
-
-/* =========================================================
-   YELLOW CARD
-
-   FIGMA:
-   x = 1139.5
-   y = 511
-   ========================================================= */
 
 .timeline-card--yellow {
   left: 1139.5px;
   top: 511px;
 }
 
-
-.timeline-card--yellow
-.timeline-card__pin {
+.timeline-card--yellow .timeline-card__pin {
   left: 103.5px;
   top: 126px;
 }
 
-
-.timeline-card--yellow
-.timeline-card__title {
+.timeline-card--yellow .timeline-card__title {
   left: 25px;
   top: 20px;
-
   color: #f4bf32;
-
   font-size: 10px;
-  font-weight: 900;
 }
 
-
-.timeline-card--yellow
-.timeline-card__details {
+.timeline-card--yellow .timeline-card__details {
   left: 25px;
   top: 56px;
-
   color: #f4bf32;
-
   font-size: 8px;
 }
 
-
 /* =========================================================
-   LEFT TRIANGLE DECORATION
-   FIGMA NODE 303:1587
-
-   frame:
-   x = -123
-   y = -27
-   size = 319.248
+   DECORATIONS
    ========================================================= */
 
 .timeline-decoration-triangle {
   position: absolute;
-
   left: -123px;
   top: -27px;
-
   z-index: 2;
-
   width: 319.248px;
   height: 319.248px;
-
   display: flex;
-
   align-items: center;
   justify-content: center;
-
   pointer-events: none;
 }
-
 
 .timeline-decoration-triangle img {
   width: 292.375px;
   height: 292.375px;
-
   max-width: none;
-
-  transform:
-    rotate(-174.46deg)
-    scaleY(-1);
-
+  transform: rotate(-174.46deg) scaleY(-1);
   user-select: none;
 }
 
-
-/* =========================================================
-   RIGHT X DECORATION
-   FIGMA NODE 303:1584
-
-   Figma:
-   x = 1218
-   width = 357.865
-
-   Overflow:
-   1218 + 357.865 - 1440
-   = 135.865px
-
-   Anchor ke viewport kanan agar pada desktop
-   lebar tetap berada di ujung kanan browser.
-   ========================================================= */
-
 .timeline-decoration-x {
   position: absolute;
-
   right: -135.865px;
   top: 57px;
-
   z-index: 2;
-
   width: 357.865px;
   height: 357.865px;
-
   display: flex;
-
   align-items: center;
   justify-content: center;
-
   pointer-events: none;
 }
-
 
 .timeline-decoration-x img {
   width: 313.131px;
   height: 313.131px;
-
   max-width: none;
-
-  transform:
-    rotate(-8.91deg);
-
+  transform: rotate(-8.91deg);
   user-select: none;
 }
 
-
 /* =========================================================
-   DESKTOP PRIMARY TARGET
+   RESPONSIVE - DESKTOP LARGE
    ========================================================= */
 
 @media (min-width: 1440px) {
-
   .timeline-section {
-    width: 100vw;
     height: 1024px;
   }
-
 
   .timeline-stage {
     width: 1440px;
     height: 1024px;
   }
-
 }
 
-
 /* =========================================================
-   BELOW FIGMA DESKTOP WIDTH
-
-   Tidak mengubah desktop 1440+.
-   Hanya fallback jika browser diperkecil.
+   RESPONSIVE - BELOW 1440px
    ========================================================= */
 
 @media (max-width: 1439px) {
-
   .timeline-section {
-    height:
-      calc(
-        100vw *
-        0.7111111111
-      );
+    height: calc(100vw * 0.7111111111);
+    min-height: 600px;
   }
-
 
   .timeline-stage {
-    left: 50%;
-
-    width: 1440px;
-    height: 1024px;
-
-    transform-origin:
-      top center;
-
-    transform:
-      translateX(-50%)
-      scale(
-        calc(
-          100vw /
-          1440
-        )
-      );
-  }
-
-
-  .timeline-decoration-triangle,
-  .timeline-decoration-x {
+    transform: translateX(-50%) scale(calc(100vw / 1440));
     transform-origin: top center;
   }
-
 }
 
-
 /* =========================================================
-   SMALL SCREEN FALLBACK
+   RESPONSIVE - TABLET (max-width: 1024px)
+   PERBAIKAN: Layout vertikal untuk tablet
    ========================================================= */
 
-@media (max-width: 768px) {
-
+@media (max-width: 1024px) {
   .timeline-section {
-    min-height: 570px;
+    height: auto;
+    min-height: auto;
+    padding: 60px 20px 80px;
   }
 
+  .timeline-stage {
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  /* Hide decorative elements on mobile */
+  .timeline-decoration-triangle,
+  .timeline-decoration-x,
+  .timeline-track-piece,
+  .timeline-road-line,
+  .timeline-node {
+    display: none;
+  }
+
+  /* Title responsive */
+  .timeline-heading {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    text-align: center;
+  }
+
+  .timeline-heading h2 {
+    font-size: clamp(32px, 8vw, 48px);
+    white-space: normal;
+    text-align: center;
+  }
+
+  .timeline-heading__underline {
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .timeline-heading__underline img {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    height: auto;
+  }
+
+  /* Cards stacked vertically */
+  .timeline-card {
+    position: relative;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    min-height: 180px;
+    padding: 20px;
+  }
+
+  .timeline-card__panel {
+    width: 100%;
+    height: 100%;
+  }
+
+  .timeline-card__panel img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% + 40px);
+    height: calc(100% + 40px);
+  }
+
+  .timeline-card__pin {
+    left: 50% !important;
+    top: auto !important;
+    bottom: -25px;
+    transform: translateX(-50%);
+    width: 45px;
+    height: auto;
+  }
+
+  .timeline-card__title {
+    position: relative;
+    left: 0 !important;
+    top: 0 !important;
+    font-size: 18px !important;
+    white-space: normal;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .timeline-card__details {
+    position: relative;
+    left: 0 !important;
+    top: 0 !important;
+    font-size: 14px !important;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .timeline-card__details p {
+    margin-bottom: 8px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE - MOBILE SMALL (max-width: 640px)
+   ========================================================= */
+
+@media (max-width: 640px) {
+  .timeline-section {
+    padding: 40px 16px 60px;
+  }
+
+  .timeline-heading h2 {
+    font-size: clamp(28px, 9vw, 36px);
+  }
+
+  .timeline-card {
+    max-width: 100%;
+    min-height: 200px;
+    padding: 16px;
+  }
+
+  .timeline-card__title {
+    font-size: 16px !important;
+    margin-bottom: 12px;
+  }
+
+  .timeline-card__details {
+    font-size: 13px !important;
+  }
+}
+
+/* =========================================================
+   LANDSCAPE MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) and (orientation: landscape) {
+  .timeline-section {
+    padding: 30px 20px 50px;
+  }
+
+  .timeline-card {
+    min-height: 150px;
+  }
 }

@@ -1,77 +1,79 @@
+// Sponsor Besar (Large)
 const SPONSORS_TOP = [
   {
     id: "top-1",
-    name: "SPONSOR 01",
-    logo: "",
+    name: "Bank Jateng",
+    logo: "/Logo Sponsor/Bank Jateng (L) 1.svg",
     accent: "#FFD900",
   },
   {
     id: "top-2",
-    name: "SPONSOR 02",
-    logo: "",
+    name: "BCA",
+    logo: "/Logo Sponsor/BCA (L) 1.svg",
     accent: "#FF59FB",
   },
   {
     id: "top-3",
-    name: "SPONSOR 03",
-    logo: "",
+    name: "BTN",
+    logo: "/Logo Sponsor/BTN (L).png",
     accent: "#189CF4",
   },
   {
     id: "top-4",
-    name: "SPONSOR 04",
-    logo: "",
+    name: "E-Ujian",
+    logo: "/Logo Sponsor/E-Ujian (L).png",
     accent: "#9513FF",
   },
   {
     id: "top-5",
-    name: "SPONSOR 05",
-    logo: "",
+    name: "TraveLinkHT",
+    logo: "/Logo Sponsor/TraveLinkHT (L).png",
     accent: "#FFD900",
   },
   {
     id: "top-6",
-    name: "SPONSOR 06",
-    logo: "",
+    name: "69",
+    logo: "/Logo Sponsor/69 (M).png",
     accent: "#FF59FB",
   },
 ];
 
+// Sponsor Kecil (Small)
 const SPONSORS_BOTTOM = [
   {
     id: "bottom-1",
-    name: "SPONSOR 01",
-    logo: "",
+    name: "Kembar Printing",
+    logo: "/Logo Sponsor/Kembar Printing (S).png",
     accent: "#FFD900",
   },
   {
     id: "bottom-2",
-    name: "SPONSOR 02",
-    logo: "",
+    name: "Mahaleza",
+    logo: "/Logo Sponsor/Mahaleza (S).png",
     accent: "#FF59FB",
   },
   {
     id: "bottom-3",
-    name: "SPONSOR 03",
-    logo: "",
+    name: "Nakama",
+    logo: "/Logo Sponsor/Nakama (S).png",
     accent: "#189CF4",
   },
   {
     id: "bottom-4",
-    name: "SPONSOR 04",
-    logo: "",
+    name: "Qtea",
+    logo: "/Logo Sponsor/qtea (S).png",
     accent: "#9513FF",
   },
   {
     id: "bottom-5",
-    name: "SPONSOR 05",
-    logo: "",
+    name: "Ushapp",
+    logo: "/Logo Sponsor/Ushapp (S).png",
     accent: "#FF59FB",
   },
   {
     id: "bottom-6",
-    name: "SPONSOR 06",
-    logo: "",
+    name: "Virgin Cake and Bakery",
+    logo: "/Logo Sponsor/VIRGIN CAKE AND BAKERY (S).png",
     accent: "#FFD900",
   },
 ];

@@ -627,17 +627,6 @@ export default function Leaderboard() {
             </div>
           </div>
         </section>
-
-        {/* ========================================== */}
-        {/* 5. FOOTER */}
-        {/* ========================================== */}
-        <footer className="mt-28 md:mt-36 pb-8 text-center flex flex-col items-center justify-center gap-3">
-          <p
-            className="font-['Tektur',sans-serif] font-semibold text-white/80 uppercase tracking-widest text-xs sm:text-sm md:text-base"
-          >
-            COPYRIGHT @2026. INTERFACE PROJECT
-          </p>
-        </footer>
       </div>
 
       {/* ========================================================================= */}

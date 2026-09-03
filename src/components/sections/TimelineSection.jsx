@@ -189,7 +189,7 @@ export default function TimelineSection() {
             TITLE
         ======================================== */}
 
-        <div className="timeline-heading">
+        {/* <div className="timeline-heading">
           <h2>TIMELINE KEGIATAN</h2>
 
           <div className="timeline-heading__underline">
@@ -199,7 +199,7 @@ export default function TimelineSection() {
               draggable="false"
             />
           </div>
-        </div>
+        </div> */}
 
 
         {/* ========================================

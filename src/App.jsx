@@ -115,8 +115,7 @@ function AppRoutes() {
 
       <Navbar />
 
-      <div className="app-content">
-        <Routes>
+      <Routes>
           <Route
             path="/"
             element={<Home />}
@@ -177,7 +176,6 @@ function AppRoutes() {
             }
           />
         </Routes>
-      </div>
     </>
   );
 }

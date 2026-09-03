@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { supabase } from "../lib/supabase";
 
 // Floating geometric shapes from leaderboard
 import elemenX from "../assets/leaderboard/elemen-x.svg";
@@ -22,114 +21,115 @@ import robotHat from "../assets/vote/robot-hat.svg";
 import robotEarL from "../assets/vote/robot-ear-l.svg";
 import robotEarR from "../assets/vote/robot-ear-r.svg";
 
+const API_BASE_URL = "http://localhost:3000/api";
+
 export default function Vote() {
-  const [session, setSession] = useState(null);
-  const [options, setOptions] = useState([]);
-  const [selectedOptionId, setSelectedOptionId] = useState(null);
-  const [hasVoted, setHasVoted] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [step, setStep] = useState("input-code"); // "input-code" | "vote-selection" | "voted"
+  const [uniqueCode, setUniqueCode] = useState("");
+  const [token, setToken] = useState(null);
+  const [kelompokInfo, setKelompokInfo] = useState(null);
+  const [candidates, setCandidates] = useState([]);
+  const [selectedCandidateId, setSelectedCandidateId] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [kodeKelompok, setKodeKelompok] = useState(
-    localStorage.getItem("kode_kelompok") || ""
-  );
+  const [errorMessage, setErrorMessage] = useState("");
 
-  useEffect(() => {
-    // Check local storage for vote status
-    const votedLocally = localStorage.getItem("interface_has_voted") === "true";
-    if (votedLocally) {
-      setHasVoted(true);
-    }
-
-    async function fetchActiveSession() {
-      try {
-        const { data: sessionData, error: sessionError } = await supabase
-          .from("vote_sessions")
-          .select("*")
-          .eq("is_active", true)
-          .limit(1)
-          .maybeSingle();
-
-        if (!sessionError && sessionData) {
-          setSession(sessionData);
-
-          const { data: optionsData } = await supabase
-            .from("vote_options")
-            .select("*, vote_records(count)")
-            .eq("session_id", sessionData.id);
-
-          if (optionsData && optionsData.length > 0) {
-            setOptions(optionsData);
-          }
-
-          if (kodeKelompok) {
-            const { data: existingVote } = await supabase
-              .from("vote_records")
-              .select("id")
-              .eq("session_id", sessionData.id)
-              .eq("kode_kelompok", kodeKelompok)
-              .maybeSingle();
-
-            if (existingVote) {
-              setHasVoted(true);
-              localStorage.setItem("interface_has_voted", "true");
-            }
-          }
-        }
-      } catch (err) {
-        console.error("Error fetching vote session:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchActiveSession();
-  }, [kodeKelompok]);
-
-  // Demo fallback candidate groups matching Figma 1:1
+  // Demo fallback candidates jika belum verify code
   const defaultOptions = [
-    { id: 1, nama_kandidat: "Kelompok 01", deskripsi: "Tim Alpha" },
-    { id: 2, nama_kandidat: "Kelompok 02", deskripsi: "Tim Beta" },
-    { id: 3, nama_kandidat: "Kelompok 03", deskripsi: "Tim Gamma" },
+    { id: 1, name: "Kelompok 01" },
+    { id: 2, name: "Kelompok 02" },
+    { id: 3, name: "Kelompok 03" },
   ];
 
-  const displayOptions = options.length > 0 ? options : defaultOptions;
+  const displayOptions = candidates.length > 0 ? candidates : defaultOptions;
+
+  async function handleVerifyCode() {
+    if (!uniqueCode.trim()) {
+      setErrorMessage("Kode kelompok wajib diisi!");
+      return;
+    }
+
+    setLoading(true);
+    setErrorMessage("");
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/voting/verify-code`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ unique_code: uniqueCode }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setErrorMessage(data.message || "Kode tidak valid");
+        setLoading(false);
+        return;
+      }
+
+      // Success: store token & kelompok info
+      setToken(data.token);
+      setKelompokInfo(data.kelompok);
+      setCandidates(data.candidates);
+      setStep("vote-selection");
+    } catch (err) {
+      console.error("Verify code error:", err);
+      setErrorMessage("Terjadi kesalahan koneksi ke server");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   async function handleVoteSubmit() {
-    if (!selectedOptionId) {
+    if (!selectedCandidateId) {
       alert("Silakan pilih kelompok yang ingin kamu vote terlebih dahulu!");
       return;
     }
 
-    setSubmitting(true);
-
-    if (session?.id) {
-      try {
-        const activeKode = kodeKelompok || "GUEST-" + Math.floor(1000 + Math.random() * 9000);
-        const { error } = await supabase.from("vote_records").insert({
-          session_id: session.id,
-          option_id: selectedOptionId,
-          kode_kelompok: activeKode,
-        });
-
-        if (error) {
-          console.warn("Supabase record error:", error.message);
-        }
-      } catch (err) {
-        console.error("Vote submission error:", err);
-      }
+    if (!token) {
+      alert("Token tidak valid. Silakan refresh halaman.");
+      return;
     }
 
-    // Mark as voted in UI & local storage
-    localStorage.setItem("interface_has_voted", "true");
-    setHasVoted(true);
-    setSubmitting(false);
+    setSubmitting(true);
+    setErrorMessage("");
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/voting/submit`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: token,
+          voted_kelompok_id: selectedCandidateId,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setErrorMessage(data.message || "Gagal submit vote");
+        setSubmitting(false);
+        return;
+      }
+
+      // Success
+      setStep("voted");
+    } catch (err) {
+      console.error("Vote submission error:", err);
+      setErrorMessage("Terjadi kesalahan koneksi ke server");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
-  // Toggle for testing purpose
   function handleResetVote() {
-    localStorage.removeItem("interface_has_voted");
-    setHasVoted(false);
-    setSelectedOptionId(null);
+    setStep("input-code");
+    setUniqueCode("");
+    setToken(null);
+    setKelompokInfo(null);
+    setCandidates([]);
+    setSelectedCandidateId(null);
+    setErrorMessage("");
   }
 
   return (
@@ -285,18 +285,86 @@ export default function Vote() {
           }}
           aria-label="Panel Pemilihan Suara"
         >
-          {loading ? (
-            <div className="py-20 text-center flex flex-col items-center justify-center">
-              <div className="w-10 h-10 border-4 border-[#FF59FB] border-t-transparent rounded-full animate-spin mb-4" />
-              <p className="font-['Tektur',sans-serif] text-white/80 text-lg">
-                Memuat data sesi vote...
+          {/* ------------------------------------------------------------- */}
+          {/* STEP 1: INPUT UNIQUE CODE */}
+          {/* ------------------------------------------------------------- */}
+          {step === "input-code" && (
+            <div className="w-full max-w-[500px] flex flex-col items-center justify-center gap-6">
+              <h2
+                className="font-['Tektur',sans-serif] font-bold text-white uppercase text-center tracking-wide"
+                style={{
+                  fontSize: "clamp(20px, 2.8vw, 32px)",
+                  textShadow: "0px 0px 15px rgba(255,255,255,0.4)",
+                }}
+              >
+                Masukkan Kode Kelompok
+              </h2>
+
+              <input
+                type="text"
+                value={uniqueCode}
+                onChange={(e) => setUniqueCode(e.target.value.toUpperCase())}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleVerifyCode();
+                }}
+                placeholder="Contoh: TEAM001"
+                className="w-full px-6 py-4 rounded-lg bg-white/10 border-2 border-white/30 text-white text-center font-['Tektur',sans-serif] text-lg placeholder:text-white/40 focus:outline-none focus:border-[#FFD900] focus:ring-2 focus:ring-[#FFD900]/50 transition-all"
+                disabled={loading}
+              />
+
+              {errorMessage && (
+                <p className="text-red-400 font-['Tektur',sans-serif] text-sm text-center">
+                  ⚠️ {errorMessage}
+                </p>
+              )}
+
+              <button
+                onClick={handleVerifyCode}
+                disabled={loading || !uniqueCode.trim()}
+                className="relative w-full h-[52px] sm:h-[56px] md:h-[60px] rounded-[10px] bg-[#ffd900] flex items-center justify-center transition-all duration-200 transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer select-none"
+                style={{
+                  boxShadow:
+                    "inset -4px -4px 4px 0px rgba(0,0,0,0.25), inset 5px 4px 3px 0px #fceb8a, 0px 8px 25px rgba(255,217,0,0.45)",
+                }}
+              >
+                <span
+                  className="font-['Tektur',sans-serif] font-black uppercase text-white tracking-wider"
+                  style={{
+                    fontSize: "clamp(20px, 2.4vw, 28px)",
+                    textShadow:
+                      "0px 5px 3px rgba(0,0,0,0.31), 0px 4px 0px #ac4afd",
+                  }}
+                >
+                  {loading ? "MEMVERIFIKASI..." : "VERIFIKASI"}
+                </span>
+              </button>
+
+              <p className="mt-2 text-xs sm:text-sm font-['Tektur',sans-serif] text-white/60 text-center">
+                *Masukkan kode unik kelompok kamu untuk mulai voting
               </p>
             </div>
-          ) : !hasVoted ? (
-            /* ------------------------------------------------------------- */
-            /* BEFORE STATE: VOTE CARD SELECTION & VOTE BUTTON (NODE 405:5627) */
-            /* ------------------------------------------------------------- */
+          )}
+
+          {/* ------------------------------------------------------------- */}
+          {/* STEP 2: VOTE CARD SELECTION & VOTE BUTTON */}
+          {/* ------------------------------------------------------------- */}
+          {step === "vote-selection" && (
             <div className="w-full flex flex-col items-center justify-between gap-8 md:gap-10">
+              {/* Info Kelompok yang Login */}
+              {kelompokInfo && (
+                <div className="w-full text-center mb-4">
+                  <p className="font-['Tektur',sans-serif] text-white/80 text-sm sm:text-base">
+                    Voting sebagai:{" "}
+                    <span className="text-[#FFD900] font-bold">
+                      {kelompokInfo.name}
+                    </span>
+                  </p>
+                  <p className="font-['Tektur',sans-serif] text-white/60 text-xs mt-1">
+                    Grup: {kelompokInfo.grup_name}
+                  </p>
+                </div>
+              )}
+
               {/* Cards Grid / Container */}
               <div
                 className="w-full flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:gap-12"
@@ -304,15 +372,15 @@ export default function Vote() {
                 aria-label="Pilih Kelompok"
               >
                 {displayOptions.map((opt) => {
-                  const isSelected = selectedOptionId === opt.id;
+                  const isSelected = selectedCandidateId === opt.id;
 
                   return (
                     <div
                       key={opt.id}
-                      onClick={() => setSelectedOptionId(opt.id)}
+                      onClick={() => setSelectedCandidateId(opt.id)}
                       onKeyDown={(e) => {
                         if (e.key === "Enter" || e.key === " ") {
-                          setSelectedOptionId(opt.id);
+                          setSelectedCandidateId(opt.id);
                         }
                       }}
                       tabIndex={0}
@@ -397,7 +465,7 @@ export default function Vote() {
                             textShadow: "1px 1px 3px rgba(0,0,0,0.8)",
                           }}
                         >
-                          {opt.nama_kandidat}
+                          {opt.name}
                         </span>
                       </div>
 
@@ -412,11 +480,18 @@ export default function Vote() {
                 })}
               </div>
 
+              {/* Error Message */}
+              {errorMessage && (
+                <p className="text-red-400 font-['Tektur',sans-serif] text-sm text-center">
+                  ⚠️ {errorMessage}
+                </p>
+              )}
+
               {/* Vote Button (Figma Node 522:13850) */}
               <div className="w-full flex flex-col items-center justify-center pt-2">
                 <button
                   onClick={handleVoteSubmit}
-                  disabled={submitting}
+                  disabled={submitting || !selectedCandidateId}
                   className="relative w-full max-w-[336px] h-[52px] sm:h-[56px] md:h-[60.9px] rounded-[10.1px] bg-[#ffd900] flex items-center justify-center transition-all duration-200 transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer select-none"
                   style={{
                     boxShadow:
@@ -441,10 +516,12 @@ export default function Vote() {
                 </p>
               </div>
             </div>
-          ) : (
-            /* ------------------------------------------------------------- */
-            /* AFTER STATE: WARN MESSAGE ROBOT (FIGMA NODE 522:14258) */
-            /* ------------------------------------------------------------- */
+          )}
+
+          {/* ------------------------------------------------------------- */}
+          {/* STEP 3: AFTER STATE - WARN MESSAGE ROBOT (FIGMA NODE 522:14258) */}
+          {/* ------------------------------------------------------------- */}
+          {step === "voted" && (
             <div className="w-full flex flex-col items-center justify-center py-12 md:py-16 text-center animate-fade-in">
               {/* Cute Robot Head Illustration from Figma */}
               <div

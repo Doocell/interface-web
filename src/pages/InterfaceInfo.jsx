@@ -440,8 +440,8 @@ function RoleCard({ card, wide = false }) {
             <img src={card.icon} alt={card.title} />
           </div>
         )}
-        <div className="ii-role-badge" aria-hidden="true">
-          <span>{card.badge}</span>
+        <div className="ii-role-badge" aria-hidden="false">
+          {/* <span>{card.badge}</span> */}
         </div>
 
         <div className="ii-role-title-wrap">

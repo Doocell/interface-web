@@ -1,0 +1,453 @@
+/* ========================================
+   TIMELINE PAGE - FIGMA NODE 303:944
+   ======================================== */
+
+.timeline-page {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  padding-top: 76px;
+  padding-bottom: 80px;
+  overflow: hidden;
+}
+
+/* ========================================
+   DECORATIONS
+   ======================================== */
+
+.timeline-decoration {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  z-index: 2;
+}
+
+.timeline-decoration--triangle {
+  left: -50px;
+  top: 100px;
+  width: 250px;
+  height: 250px;
+  opacity: 0.6;
+  transform: rotate(-174.46deg) scaleY(-1);
+}
+
+.timeline-decoration--x {
+  right: -50px;
+  top: 150px;
+  width: 280px;
+  height: 280px;
+  opacity: 0.6;
+  transform: rotate(-8.91deg);
+}
+
+/* ========================================
+   TITLE
+   ======================================== */
+
+.timeline-title-wrapper {
+  text-align: center;
+  margin: 60px auto 80px;
+  max-width: 800px;
+}
+
+.timeline-title {
+  font-family: "Tektur", sans-serif;
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.02em;
+}
+
+.timeline-title-underline {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.underline-segment {
+  height: 6px;
+  flex: 1;
+  border-radius: 3px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.underline-pink {
+  background: #ff59fb;
+}
+
+.underline-purple {
+  background: #9513ff;
+}
+
+.underline-blue {
+  background: #189cf4;
+}
+
+.underline-yellow {
+  background: #f4bf32;
+}
+
+/* ========================================
+   TIMELINE SVG CONTAINERS
+   ======================================== */
+
+.timeline-svg-container {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.timeline-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-width: 100%;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Desktop SVG - visible by default */
+.timeline-svg-container--desktop {
+  display: flex;
+}
+
+/* Mobile SVG - hidden by default */
+.timeline-svg-container--mobile {
+  display: none;
+}
+
+/* ========================================
+   TIMELINE CONTENT (OLD - NOT USED)
+   ======================================== */
+
+.timeline-content {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 40px;
+  z-index: 3;
+}
+
+/* ========================================
+   ROAD/PATH SVG
+   ======================================== */
+
+.timeline-road {
+  width: 100%;
+  height: 150px;
+  display: block;
+  margin-bottom: -50px;
+}
+
+/* ========================================
+   TIMELINE CARDS CONTAINER - RESPONSIVE
+   ======================================== */
+
+.timeline-cards-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  min-height: 300px;
+}
+
+.timeline-item {
+  flex: 1;
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeInUp 0.6s ease-out calc(var(--item-index) * 0.15s) both;
+}
+
+.timeline-item--up {
+  justify-content: flex-end;
+}
+
+.timeline-item--down {
+  justify-content: flex-start;
+  padding-top: 80px;
+}
+
+.timeline-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: -10px;
+}
+
+.timeline-item--down .timeline-card-wrapper {
+  margin-top: -10px;
+  margin-bottom: 0;
+}
+
+.timeline-card {
+  position: relative;
+  width: 180px;
+  height: 110px;
+  will-change: transform;
+  transform: translateZ(0);
+  transition: transform 0.3s ease;
+}
+
+.timeline-card:hover {
+  transform: scale(1.05) translateZ(0);
+}
+
+.timeline-card-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  text-align: center;
+}
+
+.timeline-card-title {
+  font-family: "Tektur", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+  white-space: pre-line;
+  line-height: 1.3;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.timeline-card-details {
+  font-family: "Londrina Solid", sans-serif;
+  font-size: 8px;
+  line-height: 1.5;
+}
+
+.timeline-card-details p {
+  margin: 2px 0;
+}
+
+.timeline-node {
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* ========================================
+   NODE/CIRCLE
+   ======================================== */
+
+.timeline-node {
+  margin-bottom: 30px;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
+}
+
+.timeline-node-outer {
+  width: 110px;
+  height: 110px;
+  border: 8px solid;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 4px 8px rgba(255, 255, 255, 0.1), 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.timeline-node-middle {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-node-inner {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), inset 0 2px 6px rgba(255, 255, 255, 0.4);
+}
+
+/* ========================================
+   CARD
+   ======================================== */
+
+.timeline-card {
+  position: relative;
+  width: 100%;
+  max-width: 240px;
+  padding: 20px 16px;
+  border: 3px solid;
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.15);
+}
+
+.timeline-card-pin {
+  display: none; /* Hide pin for cleaner look */
+}
+
+.timeline-card-title {
+  font-family: "Tektur", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin: 0 0 14px 0;
+  line-height: 1.3;
+  white-space: pre-line;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.02em;
+}
+
+.timeline-card-details {
+  font-family: "Londrina Solid", sans-serif;
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.timeline-card-details p {
+  margin: 5px 0;
+  font-weight: 400;
+}
+
+/* ========================================
+   RESPONSIVE - TABLET
+   ======================================== */
+
+@media (max-width: 1024px) {
+  .timeline-svg-container {
+    padding: 30px 15px 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .timeline-svg-container--desktop {
+    padding: 25px 15px 50px;
+  }
+
+  .timeline-svg {
+    max-width: 600px;
+  }
+
+  .timeline-decoration--triangle,
+  .timeline-decoration--x {
+    opacity: 0.25;
+    width: 180px;
+    height: 180px;
+  }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE (VERTICAL TIMELINE)
+   ======================================== */
+
+@media (max-width: 640px) {
+  .timeline-page {
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+
+  .timeline-title-wrapper {
+    margin: 30px auto 50px;
+    padding: 0 20px;
+    z-index: 15;
+    position: relative;
+  }
+
+  .timeline-title {
+    font-size: clamp(32px, 8vw, 48px);
+  }
+
+  /* Dekorasi lebih ke belakang */
+  .timeline-decoration--triangle,
+  .timeline-decoration--x {
+    opacity: 0.15;
+    width: 120px;
+    height: 120px;
+    z-index: 1;
+  }
+
+  /* Switch to mobile SVG */
+  .timeline-svg-container--desktop {
+    display: none;
+  }
+
+  .timeline-svg-container--mobile {
+    display: flex;
+    padding: 20px 15px 60px;
+    z-index: 10;
+    position: relative;
+  }
+
+  .timeline-svg {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+  }
+}
+
+/* ========================================
+   RESPONSIVE - VERY SMALL MOBILE
+   ======================================== */
+
+@media (max-width: 400px) {
+  .timeline-svg-container--mobile {
+    padding: 15px 10px 50px;
+  }
+
+  .timeline-svg {
+    max-width: 280px;
+  }
+
+  .timeline-decoration--triangle,
+  .timeline-decoration--x {
+    opacity: 0.1;
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline-item {
+    animation: none;
+  }
+
+  .timeline-card {
+    transition: none;
+  }
+}
