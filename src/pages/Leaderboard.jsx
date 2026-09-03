@@ -93,7 +93,7 @@ export default function Leaderboard() {
 
       {/* Elemen Segitiga (Top Left Floating Neon Triangle) */}
       <div
-        className="pointer-events-none absolute -left-12 sm:left-4 md:left-12 lg:left-24 top-44 sm:top-56 md:top-64 z-0 opacity-80 md:opacity-100 float-anim-1"
+        className="pointer-events-none absolute -left-12 sm:left-4 md:left-12 lg:left-24 top-44 sm:top-56 md:top-64 z-0 opacity-80 md:opacity-100 float-anim-1 hidden sm:block"
         style={{
           width: "clamp(160px, 22vw, 335px)",
           height: "clamp(160px, 22vw, 335px)",
@@ -110,7 +110,7 @@ export default function Leaderboard() {
 
       {/* Elemen X (Top Right Floating Neon X) */}
       <div
-        className="pointer-events-none absolute -right-16 sm:-right-8 md:right-4 lg:right-16 top-96 sm:top-[480px] md:top-[560px] z-0 opacity-80 md:opacity-100 float-anim-2"
+        className="pointer-events-none absolute -right-16 sm:-right-8 md:right-4 lg:right-16 top-96 sm:top-[480px] md:top-[560px] z-0 opacity-80 md:opacity-100 float-anim-2 hidden sm:block"
         style={{
           width: "clamp(180px, 26vw, 404px)",
           height: "clamp(180px, 26vw, 404px)",
@@ -123,7 +123,7 @@ export default function Leaderboard() {
 
       {/* Elemen Lingkaran (Middle Left Floating Neon Yellow Circle) */}
       <div
-        className="pointer-events-none absolute -left-14 sm:-left-8 md:left-0 top-[1180px] sm:top-[1280px] md:top-[1337px] z-0 opacity-80 md:opacity-100 float-anim-3"
+        className="pointer-events-none absolute -left-14 sm:-left-8 md:left-0 top-[1180px] sm:top-[1280px] md:top-[1337px] z-0 opacity-80 md:opacity-100 float-anim-3 hidden md:block"
         style={{
           width: "clamp(120px, 15vw, 217px)",
           height: "clamp(120px, 15vw, 220px)",
@@ -140,7 +140,7 @@ export default function Leaderboard() {
 
       {/* Elemen Kotak (Bottom Right Floating Neon Pink Square) */}
       <div
-        className="pointer-events-none absolute -right-12 sm:-right-4 md:right-8 lg:right-20 top-[1680px] sm:top-[1780px] md:top-[1847px] z-0 opacity-80 md:opacity-100 float-anim-4"
+        className="pointer-events-none absolute -right-12 sm:-right-4 md:right-8 lg:right-20 top-[1680px] sm:top-[1780px] md:top-[1847px] z-0 opacity-80 md:opacity-100 float-anim-4 hidden md:block"
         style={{
           width: "clamp(140px, 18vw, 270px)",
           height: "clamp(140px, 18vw, 270px)",
@@ -229,7 +229,7 @@ export default function Leaderboard() {
         {/* 2. TOP 3 PODIUM (RANKING) */}
         {/* ========================================== */}
         <section
-          className="relative mx-auto flex items-end justify-center gap-3 sm:gap-6 md:gap-8 z-10"
+          className="relative mx-auto flex items-end justify-center gap-2 sm:gap-6 md:gap-8 z-10 px-2"
           style={{
             maxWidth: "680px",
             marginBottom: "-25px",
@@ -237,9 +237,9 @@ export default function Leaderboard() {
           aria-label="Podium Juara 1, 2, dan 3"
         >
           {/* ----------------- RANK 2 (PINK / SILVER) ----------------- */}
-          <div className="flex flex-col items-center flex-1 max-w-[198px] z-10">
+          <div className="flex flex-col items-center flex-1 max-w-[130px] sm:max-w-[198px] z-10">
             {/* Crown 2 */}
-            <div className="w-[52px] sm:w-[62px] md:w-[68px] h-[42px] sm:h-[48px] md:h-[54px] mb-2 filter drop-shadow-[0_0_12px_rgba(213,87,210,0.6)]">
+            <div className="w-[40px] sm:w-[62px] md:w-[68px] h-[32px] sm:h-[48px] md:h-[54px] mb-1 sm:mb-2 filter drop-shadow-[0_0_12px_rgba(213,87,210,0.6)]">
               <img
                 src={crown2}
                 alt="Crown Rank 2"
@@ -249,7 +249,7 @@ export default function Leaderboard() {
 
             {/* Team Name Ribbon */}
             <div
-              className="relative w-full max-w-[191px] h-[44px] sm:h-[48px] md:h-[53px] flex items-center justify-center mb-2.5"
+              className="relative w-full max-w-[120px] sm:max-w-[191px] h-[36px] sm:h-[48px] md:h-[53px] flex items-center justify-center mb-1.5 sm:mb-2.5"
               style={{ transform: "rotate(2.22deg)" }}
             >
               <img
@@ -258,9 +258,9 @@ export default function Leaderboard() {
                 className="absolute inset-0 w-full h-full object-fill pointer-events-none drop-shadow-[0_0_12px_rgba(255,89,251,0.7)]"
               />
               <span
-                className="relative z-10 font-['Tektur',sans-serif] font-bold text-white uppercase truncate px-3"
+                className="relative z-10 font-['Tektur',sans-serif] font-bold text-white uppercase truncate px-2 sm:px-3"
                 style={{
-                  fontSize: "clamp(12px, 1.4vw, 18.9px)",
+                  fontSize: "clamp(10px, 1.4vw, 18.9px)",
                   textShadow: "0px 0px 8px #ff59fb, 1px 1px 2px rgba(0,0,0,0.5)",
                 }}
                 title={top2.nama_kelompok}
@@ -271,13 +271,13 @@ export default function Leaderboard() {
 
             {/* Podium Block 2 */}
             <div
-              className="relative w-full h-[190px] sm:h-[215px] md:h-[238px] bg-[#FF59FB] rounded-t-[22px] sm:rounded-t-[26px] md:rounded-t-[30.866px] overflow-hidden flex flex-col justify-between items-center shadow-[0_0_25px_rgba(255,89,251,0.45)]"
+              className="relative w-full h-[150px] sm:h-[215px] md:h-[238px] bg-[#FF59FB] rounded-t-[18px] sm:rounded-t-[26px] md:rounded-t-[30.866px] overflow-hidden flex flex-col justify-between items-center shadow-[0_0_25px_rgba(255,89,251,0.45)]"
             >
               {/* Rank Number 2 */}
               <div
-                className="font-['Tektur',sans-serif] font-bold text-white text-center leading-none mt-4 sm:mt-5 md:mt-7 select-none"
+                className="font-['Tektur',sans-serif] font-bold text-white text-center leading-none mt-3 sm:mt-5 md:mt-7 select-none"
                 style={{
-                  fontSize: "clamp(85px, 10vw, 145px)",
+                  fontSize: "clamp(60px, 10vw, 145px)",
                   textShadow: "0px 0px 15.433px #d557d2",
                 }}
               >
@@ -285,7 +285,7 @@ export default function Leaderboard() {
               </div>
 
               {/* Bottom Gradient Vector */}
-              <div className="w-full h-[75px] sm:h-[90px] md:h-[105px] -mt-auto">
+              <div className="w-full h-[60px] sm:h-[90px] md:h-[105px] -mt-auto">
                 <img
                   src={podium2Base}
                   alt=""
@@ -296,9 +296,9 @@ export default function Leaderboard() {
           </div>
 
           {/* ----------------- RANK 1 (YELLOW / GOLD - TALLEST) ----------------- */}
-          <div className="flex flex-col items-center flex-1 max-w-[198px] z-20">
+          <div className="flex flex-col items-center flex-1 max-w-[140px] sm:max-w-[198px] z-20">
             {/* Crown 1 */}
-            <div className="w-[52px] sm:w-[62px] md:w-[68px] h-[42px] sm:h-[48px] md:h-[54px] mb-2 filter drop-shadow-[0_0_16px_rgba(255,217,0,0.8)]">
+            <div className="w-[42px] sm:w-[62px] md:w-[68px] h-[34px] sm:h-[48px] md:h-[54px] mb-1 sm:mb-2 filter drop-shadow-[0_0_16px_rgba(255,217,0,0.8)]">
               <img
                 src={crown1}
                 alt="Crown Rank 1"
@@ -308,7 +308,7 @@ export default function Leaderboard() {
 
             {/* Team Name Ribbon */}
             <div
-              className="relative w-full max-w-[191px] h-[44px] sm:h-[48px] md:h-[53px] flex items-center justify-center mb-2.5"
+              className="relative w-full max-w-[130px] sm:max-w-[191px] h-[36px] sm:h-[48px] md:h-[53px] flex items-center justify-center mb-1.5 sm:mb-2.5"
               style={{ transform: "rotate(2.22deg)" }}
             >
               <img
@@ -317,9 +317,9 @@ export default function Leaderboard() {
                 className="absolute inset-0 w-full h-full object-fill pointer-events-none drop-shadow-[0_0_14px_rgba(255,217,0,0.9)]"
               />
               <span
-                className="relative z-10 font-['Tektur',sans-serif] font-bold text-[#FFF3AD] uppercase truncate px-3"
+                className="relative z-10 font-['Tektur',sans-serif] font-bold text-[#FFF3AD] uppercase truncate px-2 sm:px-3"
                 style={{
-                  fontSize: "clamp(12px, 1.4vw, 18.9px)",
+                  fontSize: "clamp(10px, 1.4vw, 18.9px)",
                   textShadow: "0px 0px 8px #ffd900, 1px 1px 2px rgba(0,0,0,0.4)",
                 }}
                 title={top1.nama_kelompok}
@@ -330,13 +330,13 @@ export default function Leaderboard() {
 
             {/* Podium Block 1 */}
             <div
-              className="relative w-full h-[240px] sm:h-[275px] md:h-[308.7px] bg-[#FFD900] rounded-t-[22px] sm:rounded-t-[26px] md:rounded-t-[30.866px] overflow-hidden flex flex-col justify-between items-center shadow-[0_0_35px_rgba(255,217,0,0.55)]"
+              className="relative w-full h-[190px] sm:h-[275px] md:h-[308.7px] bg-[#FFD900] rounded-t-[18px] sm:rounded-t-[26px] md:rounded-t-[30.866px] overflow-hidden flex flex-col justify-between items-center shadow-[0_0_35px_rgba(255,217,0,0.55)]"
             >
               {/* Rank Number 1 */}
               <div
-                className="font-['Tektur',sans-serif] font-bold text-white text-center leading-none mt-6 sm:mt-8 md:mt-11 select-none"
+                className="font-['Tektur',sans-serif] font-bold text-white text-center leading-none mt-4 sm:mt-8 md:mt-11 select-none"
                 style={{
-                  fontSize: "clamp(85px, 10vw, 145px)",
+                  fontSize: "clamp(60px, 10vw, 145px)",
                   textShadow: "0px 0px 15.433px #f4bf32",
                 }}
               >
@@ -344,7 +344,7 @@ export default function Leaderboard() {
               </div>
 
               {/* Bottom Gradient Vector */}
-              <div className="w-full h-[100px] sm:h-[125px] md:h-[145px] -mt-auto">
+              <div className="w-full h-[75px] sm:h-[125px] md:h-[145px] -mt-auto">
                 <img
                   src={podium1Base}
                   alt=""
@@ -355,9 +355,9 @@ export default function Leaderboard() {
           </div>
 
           {/* ----------------- RANK 3 (CYAN / BRONZE) ----------------- */}
-          <div className="flex flex-col items-center flex-1 max-w-[198px] z-10">
+          <div className="flex flex-col items-center flex-1 max-w-[130px] sm:max-w-[198px] z-10">
             {/* Crown 3 */}
-            <div className="w-[52px] sm:w-[62px] md:w-[68px] h-[42px] sm:h-[48px] md:h-[54px] mb-2 filter drop-shadow-[0_0_12px_rgba(24,156,244,0.6)]">
+            <div className="w-[40px] sm:w-[62px] md:w-[68px] h-[32px] sm:h-[48px] md:h-[54px] mb-1 sm:mb-2 filter drop-shadow-[0_0_12px_rgba(24,156,244,0.6)]">
               <img
                 src={crown3}
                 alt="Crown Rank 3"
@@ -367,7 +367,7 @@ export default function Leaderboard() {
 
             {/* Team Name Ribbon */}
             <div
-              className="relative w-full max-w-[191px] h-[44px] sm:h-[48px] md:h-[53px] flex items-center justify-center mb-2.5"
+              className="relative w-full max-w-[120px] sm:max-w-[191px] h-[36px] sm:h-[48px] md:h-[53px] flex items-center justify-center mb-1.5 sm:mb-2.5"
               style={{ transform: "rotate(2.22deg)" }}
             >
               <img
@@ -376,9 +376,9 @@ export default function Leaderboard() {
                 className="absolute inset-0 w-full h-full object-fill pointer-events-none drop-shadow-[0_0_12px_rgba(24,156,244,0.7)]"
               />
               <span
-                className="relative z-10 font-['Tektur',sans-serif] font-bold text-white uppercase truncate px-3"
+                className="relative z-10 font-['Tektur',sans-serif] font-bold text-white uppercase truncate px-2 sm:px-3"
                 style={{
-                  fontSize: "clamp(12px, 1.4vw, 18.9px)",
+                  fontSize: "clamp(10px, 1.4vw, 18.9px)",
                   textShadow: "0px 0px 8px #199bf3, 1px 1px 2px rgba(0,0,0,0.5)",
                 }}
                 title={top3.nama_kelompok}
@@ -389,13 +389,13 @@ export default function Leaderboard() {
 
             {/* Podium Block 3 */}
             <div
-              className="relative w-full h-[170px] sm:h-[190px] md:h-[210px] bg-[#189CF4] rounded-t-[22px] sm:rounded-t-[26px] md:rounded-t-[30.866px] overflow-hidden flex flex-col justify-between items-center shadow-[0_0_25px_rgba(24,156,244,0.45)]"
+              className="relative w-full h-[135px] sm:h-[190px] md:h-[210px] bg-[#189CF4] rounded-t-[18px] sm:rounded-t-[26px] md:rounded-t-[30.866px] overflow-hidden flex flex-col justify-between items-center shadow-[0_0_25px_rgba(24,156,244,0.45)]"
             >
               {/* Rank Number 3 */}
               <div
-                className="font-['Tektur',sans-serif] font-bold text-white text-center leading-none mt-4 sm:mt-5 md:mt-7 select-none"
+                className="font-['Tektur',sans-serif] font-bold text-white text-center leading-none mt-3 sm:mt-5 md:mt-7 select-none"
                 style={{
-                  fontSize: "clamp(85px, 10vw, 145px)",
+                  fontSize: "clamp(60px, 10vw, 145px)",
                   textShadow: "0px 0px 15.433px #147fc7",
                 }}
               >
@@ -403,7 +403,7 @@ export default function Leaderboard() {
               </div>
 
               {/* Bottom Gradient Vector */}
-              <div className="w-full h-[100px] sm:h-[125px] md:h-[145px] -mt-auto">
+              <div className="w-full h-[75px] sm:h-[125px] md:h-[145px] -mt-auto">
                 <img
                   src={podium3Base}
                   alt=""
@@ -418,29 +418,34 @@ export default function Leaderboard() {
         {/* 3. LEADERBOARD TABLE (TOP RANK TEAM) */}
         {/* ========================================== */}
         <section
-          className="relative z-20 w-full max-w-[1303px] mx-auto rounded-[16.6px] overflow-hidden shadow-[0px_0px_29.578px_0px_#9513ff]"
+          className="relative z-20 w-full max-w-[1303px] mx-auto rounded-[12px] sm:rounded-[16.6px] overflow-hidden shadow-[0px_0px_20px_0px_#9513ff] sm:shadow-[0px_0px_29.578px_0px_#9513ff]"
           style={{
             background: "rgba(41, 54, 62, 0.72)",
             backdropFilter: "blur(14px)",
             WebkitBackdropFilter: "blur(14px)",
-            border: "5.324px solid #9513FF",
+            border: "3px solid #9513FF",
           }}
         >
           {/* Table Header */}
           <div
-            className="flex items-center justify-between px-4 sm:px-8 md:px-14 py-4 md:py-5 border-b border-white/10 font-['Tektur',sans-serif] font-semibold text-white tracking-wide"
-            style={{ fontSize: "clamp(16px, 1.8vw, 24.7px)" }}
+            className="relative flex items-center justify-between pl-[44px] pr-2 sm:pl-[60px] sm:pr-4 md:pl-[90px] md:pr-6 py-2.5 sm:py-4 md:py-5 border-b border-white/10 font-['Tektur',sans-serif] font-semibold text-white tracking-wide"
+            style={{ fontSize: "clamp(11px, 1.6vw, 24.7px)" }}
           >
-            <div className="flex items-center gap-6 sm:gap-10 md:gap-14 flex-1">
-              <span className="w-14 sm:w-20 md:w-24 text-center">Rank</span>
+            {/* Rank Label - Positioned absolute */}
+            <span className="absolute left-2 sm:left-3 md:left-4 text-center" style={{ width: "clamp(32px, 4.5vw, 70px)", fontSize: "clamp(10px, 1.5vw, 20px)" }}>
+              Rank
+            </span>
+
+            {/* Team Name & Score Container */}
+            <div className="flex items-center justify-between w-full gap-2">
               <span>Nama Kelompok</span>
+              <span className="text-right">Total Skor</span>
             </div>
-            <span className="text-right pr-2 sm:pr-4">Total Skor</span>
           </div>
 
           {/* Table Scrollable Body */}
           <div
-            className="overflow-y-auto px-3 sm:px-6 md:px-10 py-4 custom-scrollbar"
+            className="overflow-y-auto px-2 sm:px-6 md:px-10 py-3 sm:py-4 custom-scrollbar"
             style={{
               maxHeight: "440px",
             }}
@@ -459,7 +464,7 @@ export default function Leaderboard() {
                 </p>
               </div>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 {displayGroups.map((group, index) => {
                   const rank = index + 1;
 
@@ -497,7 +502,7 @@ export default function Leaderboard() {
                   return (
                     <div
                       key={group.id || index}
-                      className="relative w-full h-[62px] sm:h-[66.7px] flex items-center justify-between px-4 sm:px-6 md:px-10 rounded-xl transition-transform duration-200 hover:scale-[1.008]"
+                      className="relative w-full h-[52px] sm:h-[62px] md:h-[66.7px] flex items-center justify-between pl-[44px] pr-2 sm:pl-[60px] sm:pr-4 md:pl-[90px] md:pr-6 rounded-lg sm:rounded-xl transition-transform duration-200 hover:scale-[1.008]"
                     >
                       {/* Exact SVG Neon Frame from Figma */}
                       <img
@@ -506,25 +511,26 @@ export default function Leaderboard() {
                         className="absolute inset-0 w-full h-full pointer-events-none object-fill"
                       />
 
-                      {/* Rank & Team Name */}
-                      <div className="relative z-10 flex items-center gap-6 sm:gap-10 md:gap-14 flex-1 min-w-0">
-                        {/* Rank Number */}
-                        <span
-                          className="w-14 sm:w-20 md:w-24 text-center font-['Tektur',sans-serif] font-bold leading-none select-none shrink-0"
-                          style={{
-                            fontSize: "clamp(26px, 3.2vw, 44.5px)",
-                            color: rankColor,
-                            textShadow: rankShadow,
-                          }}
-                        >
-                          {rank}
-                        </span>
+                      {/* Rank Number - Positioned absolute inside the left corner */}
+                      <span
+                        className="absolute left-2 sm:left-3 md:left-4 top-1/2 -translate-y-1/2 font-['Tektur',sans-serif] font-bold leading-none select-none text-center"
+                        style={{
+                          fontSize: "clamp(16px, 2.8vw, 44.5px)",
+                          color: rankColor,
+                          textShadow: rankShadow,
+                          width: "clamp(32px, 4.5vw, 70px)",
+                        }}
+                      >
+                        {rank}
+                      </span>
 
+                      {/* Team Name & Score Container */}
+                      <div className="relative z-10 flex items-center justify-between w-full gap-2">
                         {/* Team Name */}
                         <span
-                          className="font-['Tektur',sans-serif] font-semibold truncate tracking-wide pr-2"
+                          className="font-['Tektur',sans-serif] font-semibold truncate tracking-wide flex-1"
                           style={{
-                            fontSize: "clamp(15px, 1.8vw, 24.7px)",
+                            fontSize: "clamp(11px, 1.6vw, 24.7px)",
                             color: nameColor,
                             textShadow: nameShadow,
                           }}
@@ -532,18 +538,18 @@ export default function Leaderboard() {
                         >
                           {group.nama_kelompok}
                         </span>
-                      </div>
 
-                      {/* Score */}
-                      <span
-                        className="relative z-10 font-['Tektur',sans-serif] font-semibold text-right shrink-0 pl-2 pr-1 sm:pr-3"
-                        style={{
-                          fontSize: "clamp(16px, 1.8vw, 24.7px)",
-                          color: scoreColor,
-                        }}
-                      >
-                        {group.poin}
-                      </span>
+                        {/* Score */}
+                        <span
+                          className="font-['Tektur',sans-serif] font-semibold text-right shrink-0"
+                          style={{
+                            fontSize: "clamp(12px, 1.6vw, 24.7px)",
+                            color: scoreColor,
+                          }}
+                        >
+                          {group.poin}
+                        </span>
+                      </div>
                     </div>
                   );
                 })}

@@ -1,516 +1,385 @@
-import { useState } from "react";
+import { useRef } from "react";
 
-const QUESTS = [
+/* ─── DATA ────────────────────────────────────────────────────────────────── */
+const PLAYER_TASKS = [
   {
     id: 1,
-    chapter: "PROLOGUE",
-    color: "#FF59FB",
-    glow: "rgba(255,89,251,0.35)",
-    border: "rgba(255,89,251,0.4)",
+    penugasan: "Penugasan 1",
+    logo: "/logo_tugas/Skill-Ketua 2.svg",
     title: "Patch Notes!",
-    badge: "ONLINE",
-    badgeColor: "#FF59FB",
     date: "Sabtu, 29 Agustus 2026",
-    time: "19.00 – 21.00 WIB",
-    place: "Zoom",
     description:
-      "Sesi pembukaan online Interface 2026. Dapatkan informasi awal, perkenalan tim, dan pengumuman penting sebelum kegiatan inti dimulai.",
-    quests: [
-      { label: "Hadir di sesi Zoom", points: 100 },
-      { label: "Perkenalkan diri di chat", points: 50 },
-      { label: "Screenshot sesi & upload ke story", points: 75 },
-    ],
-    totalXP: 225,
+      "Sesi pembukaan online Interface 2026. Dapatkan informasi awal, perkenalan tim, dan pengumuman penting sebelum kegiatan inti dimulai. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
   },
   {
     id: 2,
-    chapter: "CHAPTER 1",
-    color: "#9513FF",
-    glow: "rgba(149,19,255,0.35)",
-    border: "rgba(149,19,255,0.4)",
+    penugasan: "Penugasan 2",
+    logo: "/logo_tugas/Skill-Ketua 2-1.svg",
     title: "Spawn Point",
-    badge: "DAY 1",
-    badgeColor: "#9513FF",
     date: "Minggu, 6 September 2026",
-    time: "06.00 WIB – Selesai",
-    place: "Gedung D4 FMIPA, Lantai 3",
     description:
-      "Hari pertama kegiatan offline Interface 2026. Ice Breaking, pengenalan lingkungan kampus, dan pembentukan kelompok. Mulailah perjalananmu!",
-    quests: [
-      { label: "Check-in di pos registrasi", points: 100 },
-      { label: "Selesaikan sesi ice breaking", points: 150 },
-      { label: "Foto bersama kelompok di Gedung D4", points: 75 },
-      { label: "Upload kegiatan ke media sosial", points: 100 },
-    ],
-    totalXP: 425,
+      "Hari pertama kegiatan offline Interface 2026. Ice Breaking, pengenalan lingkungan kampus, dan pembentukan kelompok. Mulailah perjalananmu! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   },
   {
     id: 3,
-    chapter: "CHAPTER 2",
-    color: "#189CF4",
-    glow: "rgba(24,156,244,0.35)",
-    border: "rgba(24,156,244,0.4)",
+    penugasan: "Penugasan 3",
+    logo: "/logo_tugas/Skill-Ketua 2-2.svg",
     title: "Questline PKMMPD",
-    badge: "DAY 2",
-    badgeColor: "#189CF4",
-    date: "Minggu, 6 September 2026",
-    time: "06.00 WIB – Selesai",
-    place: "Gedung D4 FMIPA, Lantai 3",
+    date: "Sabtu, 5 September 2026",
     description:
-      "Rangkaian kegiatan PKMMPD (Pengenalan Kehidupan Mahasiswa Matematika dan Data). Selesaikan misi-misi kelompok dan kumpulkan XP sebanyak-banyaknya!",
-    quests: [
-      { label: "Ikuti semua sesi PKMMPD", points: 200 },
-      { label: "Selesaikan misi kelompok", points: 150 },
-      { label: "Aktif bertanya / berpendapat", points: 100 },
-      { label: "Bantu sesama peserta", points: 75 },
-    ],
-    totalXP: 525,
+      "Rangkaian kegiatan PKMMPD. Selesaikan misi-misi kelompok dan kumpulkan XP sebanyak-banyaknya! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.",
   },
   {
     id: 4,
-    chapter: "NEXT CHAPTER",
-    color: "#FFD900",
-    glow: "rgba(255,217,0,0.35)",
-    border: "rgba(255,217,0,0.4)",
+    penugasan: "Penugasan 4",
+    logo: "/logo_tugas/Skill-Ketua 2-3.svg",
     title: "Into the Komputek Verse!",
-    badge: "DAY 3–5",
-    badgeColor: "#FFD900",
-    date: "Jumat – Minggu, 11–13 September 2026",
-    time: "Jumat 13.00 WIB – Selesai",
-    place: "Yon Zipur 4",
+    date: "Jumat, 11 September 2026",
     description:
-      "Puncak kegiatan Interface 2026! Malam keakraban, berbagai lomba seru, dan banyak kejutan menanti. Jadilah bagian dari momen epik ini!",
-    quests: [
-      { label: "Ikuti City Tour & misi lapangan", points: 250 },
-      { label: "Selesaikan tantangan kelompok", points: 200 },
-      { label: "Ikuti Malam Keakraban", points: 150 },
-      { label: "Menangkan lomba / kompetisi", points: 300 },
-      { label: "Upload highlight ke sosmed", points: 100 },
-    ],
-    totalXP: 1000,
+      "Puncak kegiatan Interface 2026! Malam keakraban, berbagai lomba seru, dan banyak kejutan menanti. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.",
   },
 ];
 
-function QuestCard({ quest, index }) {
-  const [expanded, setExpanded] = useState(false);
+const PARTY_TASKS = [
+  {
+    id: 5,
+    penugasan: "Penugasan 1",
+    logo: "/logo_tugas/Skill-Ketua 2.svg",
+    title: "Party Formation",
+    date: "Sabtu, 29 Agustus 2026",
+    description:
+      "Bentuk party kamu dan mulai perjalanan bersama. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+  },
+  {
+    id: 6,
+    penugasan: "Penugasan 2",
+    logo: "/logo_tugas/Skill-Ketua 2-1.svg",
+    title: "Guild Challenge",
+    date: "Minggu, 6 September 2026",
+    description:
+      "Selesaikan tantangan bersama guild kamu. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+  },
+  {
+    id: 7,
+    penugasan: "Penugasan 3",
+    logo: "/logo_tugas/Skill-Ketua 2-2.svg",
+    title: "Co-op Mission",
+    date: "Sabtu, 5 September 2026",
+    description:
+      "Misi kolaborasi antar kelompok. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+  },
+  {
+    id: 8,
+    penugasan: "Penugasan 4",
+    logo: "/logo_tugas/Skill-Ketua 2-3.svg",
+    title: "Final Raid",
+    date: "Jumat, 11 September 2026",
+    description:
+      "Raid terakhir sebelum puncak acara. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
+  },
+];
 
+/* ─── QUEST CARD ──────────────────────────────────────────────────────────── */
+function QuestCard({ task }) {
   return (
-    <article
-      className="quest-card"
-      style={{
-        "--card-color": quest.color,
-        "--card-glow": quest.glow,
-        "--card-border": quest.border,
-        animationDelay: `${index * 0.12}s`,
-      }}
-    >
-      {/* Header */}
-      <div className="quest-card__header">
-        <div className="quest-card__chapter-row">
-          <span
-            className="quest-card__badge"
-            style={{ background: quest.badgeColor, color: quest.badgeColor === "#FFD900" ? "#1a0a2e" : "#fff" }}
-          >
-            {quest.badge}
-          </span>
-          <span className="quest-card__chapter">{quest.chapter}</span>
+    <div className="qc-card">
+      <div className="qc-card__top">
+        <img
+          className="qc-card__thumb"
+          src={task.logo}
+          alt={task.penugasan}
+        />
+        <div className="qc-card__header-info">
+          <p className="qc-card__penugasan">{task.penugasan}</p>
+          <h3 className="qc-card__title">{task.title}</h3>
+          <div className="qc-card__date-badge">
+            <svg className="qc-card__clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" />
+              <polyline points="12 7 12 12 15.5 14" />
+            </svg>
+            <span>{task.date}</span>
+          </div>
         </div>
-
-        <h3 className="quest-card__title">{quest.title}</h3>
-
-        <p className="quest-card__meta">
-          <span>📅 {quest.date}</span>
-          <span>⏰ {quest.time}</span>
-          <span>📍 {quest.place}</span>
-        </p>
       </div>
-
-      {/* Description */}
-      <p className="quest-card__desc">{quest.description}</p>
-
-      {/* Toggle */}
-      <button
-        className="quest-card__toggle"
-        onClick={() => setExpanded((v) => !v)}
-        aria-expanded={expanded}
-        style={{ color: quest.color }}
-      >
-        {expanded ? "▲ Sembunyikan Quest" : "▼ Lihat Daftar Quest"}
-      </button>
-
-      {/* Quest List */}
-      {expanded && (
-        <ul className="quest-card__list">
-          {quest.quests.map((q, i) => (
-            <li key={i} className="quest-card__list-item">
-              <span className="quest-card__list-icon" style={{ color: quest.color }}>✦</span>
-              <span className="quest-card__list-label">{q.label}</span>
-              <span className="quest-card__list-xp" style={{ color: quest.color }}>+{q.points} XP</span>
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {/* Footer */}
-      <div className="quest-card__footer">
-        <div className="quest-card__xp-bar">
-          <div
-            className="quest-card__xp-fill"
-            style={{ background: `linear-gradient(90deg, ${quest.color}, ${quest.color}88)` }}
-          />
-        </div>
-        <span className="quest-card__total-xp" style={{ color: quest.color }}>
-          Total: {quest.totalXP.toLocaleString()} XP
-        </span>
-      </div>
-    </article>
+      <div className="qc-card__divider" />
+      <p className="qc-card__desc">{task.description}</p>
+    </div>
   );
 }
 
+/* ─── TASK SECTION ────────────────────────────────────────────────────────── */
+function TaskSection({ title, tasks }) {
+  const scrollRef = useRef(null);
+  return (
+    <section className="qc-section">
+      <div className="qc-section__bg" />
+      <h2 className="qc-section__title" style={{
+          background: "linear-gradient(180deg, #EA56FB 0%, #AC4AFC 100%)",
+          WebkitBackgroundClip: "text",
+          backgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+        }}>{title}</h2>
+      <div className="qc-section__row" ref={scrollRef}>
+        {tasks.map((task) => (
+          <QuestCard key={task.id} task={task} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ─── PAGE ────────────────────────────────────────────────────────────────── */
 export default function QuestCollect() {
   return (
-    <>
-      <main
-        className="quest-page"
-        style={{ paddingTop: "76px" }}
-      >
+    <main className="qc-page" style={{ paddingTop: "76px" }}>
       <style>{`
-        /* ========== QUEST COLLECT PAGE ========== */
-        .quest-page {
+        .qc-page {
           width: 100%;
           min-height: 100vh;
+          background-color: #685ABB;
           position: relative;
-          padding-bottom: 80px;
+          overflow-x: hidden;
         }
 
         /* HERO */
-        .quest-hero {
-          width: 100%;
-          padding: 60px 24px 40px;
+        .qc-hero {
           text-align: center;
+          padding: 60px 24px 32px;
+        }
+        .qc-hero__title {
+          font-family: 'Tektur', sans-serif;
+          font-weight: 800;
+          font-size: clamp(60px, 8vw, 100px);
+          line-height: 0.85;
+          text-transform: uppercase;
+          text-align: center;
+          margin: 0;
+          text-shadow: 8px 7px 0px #ac4afd, 0px 0px 10px white;
+        }
+        .qc-hero__title .yellow { color: #FFD900; }
+        .qc-hero__title .white  { color: #FFFFFF; }
+
+        /* CONTENT WRAPPER */
+        .qc-content {
+          padding: 0 36px;
+        }
+
+        /* SECTION */
+        .qc-section {
           position: relative;
+          margin: 32px -36px 48px;
         }
-
-        .quest-hero__eyebrow {
-          display: inline-block;
-          font-family: 'Tektur', sans-serif;
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 3px;
-          text-transform: uppercase;
-          color: #FFD900;
-          background: rgba(255,217,0,0.12);
-          border: 1px solid rgba(255,217,0,0.3);
-          border-radius: 100px;
-          padding: 6px 16px;
-          margin-bottom: 20px;
+        .qc-section__bg {
+          position: absolute;
+          inset: 0;
+          background: rgba(32, 45, 51, 0.61);
+          border: 3px solid #DFDFDF;
+          border-radius: 15px;
+          pointer-events: none;
         }
-
-        .quest-hero__title {
-          font-family: 'Tektur', sans-serif;
-          font-size: clamp(32px, 6vw, 64px);
+        .qc-section__title {
+          font-family: 'Londrina Solid';
           font-weight: 900;
-          color: #fff;
-          line-height: 1.1;
-          margin: 0 0 16px;
-          text-shadow: 0 0 40px rgba(255,89,251,0.4);
-        }
-
-        .quest-hero__title span {
-          color: #FF59FB;
-        }
-
-        .quest-hero__subtitle {
-          font-family: 'Sora', sans-serif;
-          font-size: clamp(13px, 2vw, 16px);
-          color: rgba(255,255,255,0.65);
-          max-width: 520px;
-          margin: 0 auto 32px;
-          line-height: 1.6;
-        }
-
-        .quest-hero__stats {
-          display: flex;
-          justify-content: center;
-          gap: 32px;
-          flex-wrap: wrap;
-        }
-
-        .quest-stat {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 4px;
-        }
-
-        .quest-stat__value {
-          font-family: 'Tektur', sans-serif;
-          font-size: 28px;
-          font-weight: 900;
-          color: #FFD900;
-          line-height: 1;
-        }
-
-        .quest-stat__label {
-          font-family: 'Sora', sans-serif;
-          font-size: 11px;
-          color: rgba(255,255,255,0.5);
+          font-size: clamp(40px, 5vw, 66.902px);
+          font-style: normal;
+          line-height: 74.2px;
+          letter-spacing: 1.338px;
           text-transform: uppercase;
-          letter-spacing: 1px;
+          text-align: center;
+          text-shadow: 8.437px 8.437px 8.015px rgba(0, 0, 0, 0.25);
+          -webkit-text-stroke-width: 3px;
+          -webkit-text-stroke-color: #FFF;
+          margin: 0;
+          padding: 32px 24px 12px;
+          position: relative;
+          z-index: 1;
         }
-
-        /* GRID */
-        .quest-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-          gap: 24px;
-          max-width: 1100px;
-          margin: 0 auto;
-          padding: 0 24px;
+        .qc-section__row {
+          display: flex;
+          flex-direction: row;
+          align-items: flex-start;
+          gap: 39px;
+          overflow-x: auto;
+          padding: 24px 36px 36px;
+          position: relative;
+          z-index: 1;
+          scrollbar-width: thin;
+          scrollbar-color: rgba(255,255,255,0.2) transparent;
+        }
+        .qc-section__row::-webkit-scrollbar { height: 6px; }
+        .qc-section__row::-webkit-scrollbar-track { background: transparent; }
+        .qc-section__row::-webkit-scrollbar-thumb {
+          background: rgba(255,255,255,0.2);
+          border-radius: 3px;
         }
 
         /* CARD */
-        .quest-card {
-          position: relative;
-          background: rgba(255,255,255,0.05);
-          border: 1.5px solid var(--card-border);
-          border-radius: 20px;
-          padding: 24px;
-          overflow: hidden;
-          transition: transform 0.25s ease, box-shadow 0.25s ease;
-          animation: questCardIn 0.5s ease both;
-        }
-
-        @keyframes questCardIn {
-          from { opacity: 0; transform: translateY(24px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        .quest-card::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: radial-gradient(ellipse at top left, var(--card-glow), transparent 65%);
-          pointer-events: none;
-          border-radius: inherit;
-        }
-
-        .quest-card:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 12px 40px var(--card-glow);
-        }
-
-        .quest-card__header {
-          margin-bottom: 12px;
-        }
-
-        .quest-card__chapter-row {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          margin-bottom: 10px;
-        }
-
-        .quest-card__badge {
-          font-family: 'Tektur', sans-serif;
-          font-size: 9px;
-          font-weight: 800;
-          letter-spacing: 1.5px;
-          padding: 3px 10px;
-          border-radius: 100px;
-        }
-
-        .quest-card__chapter {
-          font-family: 'Tektur', sans-serif;
-          font-size: 11px;
-          font-weight: 700;
-          color: rgba(255,255,255,0.5);
-          letter-spacing: 2px;
-        }
-
-        .quest-card__title {
-          font-family: 'Tektur', sans-serif;
-          font-size: clamp(18px, 3vw, 24px);
-          font-weight: 900;
-          color: #fff;
-          margin: 0 0 12px;
-        }
-
-        .quest-card__meta {
+        .qc-card {
+          flex-shrink: 0;
+          width: 508px;
+          min-height: 621px;
+          background: rgba(41, 54, 62, 0.6);
+          border: 4px solid #FFFFFF;
+          border-radius: 50px;
+          padding: 41px 44px;
           display: flex;
           flex-direction: column;
-          gap: 4px;
-          font-family: 'Sora', sans-serif;
-          font-size: 12px;
-          color: rgba(255,255,255,0.55);
+          box-sizing: border-box;
+        }
+        .qc-card__top {
+          display: flex;
+          flex-direction: row;
+          align-items: flex-start;
+          gap: 11px;
+        }
+        .qc-card__thumb {
+          flex-shrink: 0;
+          width: 82px;
+          height: 81px;
+          object-fit: contain;
+          border-radius: 12px;
+        }
+        .qc-card__header-info {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 3px;
+          padding-top: 4px;
+        }
+        .qc-card__penugasan {
+          font-family: 'Tektur', sans-serif;
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 20.09px;
+          letter-spacing: 0.02em;
+          text-transform: uppercase;
+          color: #FFFFFF;
           margin: 0;
         }
-
-        .quest-card__desc {
-          font-family: 'Sora', sans-serif;
-          font-size: 13px;
-          color: rgba(255,255,255,0.7);
-          line-height: 1.6;
-          margin: 0 0 16px;
+        .qc-card__title {
+          font-family: 'Tektur', sans-serif;
+          font-weight: 900;
+          font-size: 35px;
+          line-height: 38.62px;
+          letter-spacing: 0.02em;
+          text-transform: uppercase;
+          color: #FFFFFF;
+          margin: 0;
+        }
+        .qc-card__date-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          background: rgba(0, 0, 0, 0.31);
+          border-radius: 20px;
+          padding: 3px 12px 3px 10px;
+          margin-top: 6px;
+          width: fit-content;
+        }
+        .qc-card__clock {
+          width: 11px;
+          height: 11px;
+          color: #FFFFFF;
+          flex-shrink: 0;
+        }
+        .qc-card__date-badge span {
+          font-family: 'Londrina Solid', cursive;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 13.54px;
+          letter-spacing: 0.02em;
+          text-transform: uppercase;
+          color: #FFFFFF;
+          white-space: nowrap;
+        }
+        .qc-card__divider {
+          width: 100%;
+          height: 2px;
+          background: #FFFFFF;
+          margin: 20px 0;
+          border-radius: 1px;
+        }
+        .qc-card__desc {
+          font-family: 'Londrina Solid', cursive;
+          font-weight: 300;
+          font-size: 18px;
+          line-height: 1.55;
+          color: #FFFFFF;
+          margin: 0;
+          flex: 1;
         }
 
-        .quest-card__toggle {
+        /* BACK BUTTON */
+        .qc-back-wrap {
+          padding: 24px 0 0 48px;
+        }
+        .qc-back {
+          display: inline-flex;
+          align-items: center;
           background: none;
           border: none;
           cursor: pointer;
-          font-family: 'Tektur', sans-serif;
-          font-size: 12px;
-          font-weight: 700;
+          filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.25));
           padding: 0;
-          margin-bottom: 14px;
-          transition: opacity 0.2s;
+        }
+        .qc-back__arrow {
+          width: 40px;
+          height: 55px;
+          background: #FFD900;
+          clip-path: polygon(100% 0%, 100% 100%, 0% 50%);
+        }
+        .qc-back__label {
+          background: #FFD900;
+          border-radius: 0 4px 4px 0;
+          padding: 7px 16px;
+          font-family: 'Londrina Solid', cursive;
+          font-weight: 400;
+          font-size: 25px;
+          color: #FFFFFF;
+          line-height: 1.2;
         }
 
-        .quest-card__toggle:hover { opacity: 0.75; }
-
-        .quest-card__list {
-          list-style: none;
-          margin: 0 0 16px;
-          padding: 0;
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-        }
-
-        .quest-card__list-item {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          background: rgba(255,255,255,0.05);
-          border-radius: 10px;
-          padding: 8px 12px;
-        }
-
-        .quest-card__list-icon {
-          font-size: 10px;
-          flex-shrink: 0;
-        }
-
-        .quest-card__list-label {
-          font-family: 'Sora', sans-serif;
-          font-size: 12px;
-          color: rgba(255,255,255,0.85);
-          flex: 1;
-        }
-
-        .quest-card__list-xp {
-          font-family: 'Tektur', sans-serif;
-          font-size: 11px;
-          font-weight: 700;
-          flex-shrink: 0;
-        }
-
-        .quest-card__footer {
-          border-top: 1px solid rgba(255,255,255,0.08);
-          padding-top: 14px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 12px;
-        }
-
-        .quest-card__xp-bar {
-          flex: 1;
-          height: 5px;
-          background: rgba(255,255,255,0.1);
-          border-radius: 100px;
-          overflow: hidden;
-        }
-
-        .quest-card__xp-fill {
-          height: 100%;
-          width: 100%;
-          border-radius: 100px;
-        }
-
-        .quest-card__total-xp {
-          font-family: 'Tektur', sans-serif;
-          font-size: 13px;
-          font-weight: 800;
-          white-space: nowrap;
-        }
-
-        /* DIVIDER LABEL */
-        .quest-section-label {
-          text-align: center;
-          margin: 48px auto 24px;
-          font-family: 'Tektur', sans-serif;
-          font-size: 12px;
-          font-weight: 700;
-          letter-spacing: 3px;
-          color: rgba(255,255,255,0.3);
-          text-transform: uppercase;
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          max-width: 1100px;
-          padding: 0 24px;
-        }
-
-        .quest-section-label::before,
-        .quest-section-label::after {
-          content: '';
-          flex: 1;
-          height: 1px;
-          background: rgba(255,255,255,0.1);
-        }
-
-        @media (max-width: 640px) {
-          .quest-grid {
-            grid-template-columns: 1fr;
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+          .qc-card {
+            width: 320px;
+            min-height: unset;
+            padding: 28px 24px;
+            border-radius: 32px;
           }
-
-          .quest-hero {
-            padding: 40px 20px 28px;
-          }
-
-          .quest-hero__stats {
-            gap: 20px;
+          .qc-card__title { font-size: 22px; line-height: 1.2; }
+          .qc-section__row { padding: 16px 20px 24px; gap: 20px; }
+          .qc-content { padding: 0 16px; }
+          .qc-section { margin: 24px -16px 32px; }
+          .qc-section__title {
+            -webkit-text-stroke-width: 2px;
+            font-size: clamp(32px, 8vw, 66.902px);
           }
         }
       `}</style>
 
-      {/* HERO */}
-      <header className="quest-hero">
-        <span className="quest-hero__eyebrow">🎯 Interface 2026</span>
-        <h1 className="quest-hero__title">
-          QUEST <span>COLLECT</span>
-        </h1>
-        <p className="quest-hero__subtitle">
-          Kumpulkan XP dari setiap chapter kegiatan Interface 2026.
-          Semakin aktif, semakin banyak poin yang kamu dapatkan!
-        </p>
-        <div className="quest-hero__stats">
-          <div className="quest-stat">
-            <span className="quest-stat__value">4</span>
-            <span className="quest-stat__label">Chapter</span>
-          </div>
-          <div className="quest-stat">
-            <span className="quest-stat__value">2.175</span>
-            <span className="quest-stat__label">Total XP</span>
-          </div>
-          <div className="quest-stat">
-            <span className="quest-stat__value">16</span>
-            <span className="quest-stat__label">Quest</span>
-          </div>
-        </div>
+      {/* BACK BUTTON */}
+      {/* <div className="qc-back-wrap">
+        <button className="qc-back" onClick={() => window.history.back()} aria-label="Kembali ke halaman sebelumnya">
+          <span className="qc-back__arrow" aria-hidden="true" />
+          <span className="qc-back__label">BACK</span>
+        </button>
+      </div> */}
+
+      {/* HERO TITLE */}
+      <header className="qc-hero">
+        <h1 className="qc-hero__title">
+            <span className="yellow">Q</span><span className="white">UEST</span>
+            <br />
+            <span className="yellow">C</span><span className="white">OLLECT</span>
+          </h1>
       </header>
 
-      {/* SECTION DIVIDER */}
-      <div className="quest-section-label">Semua Chapter</div>
-
-      {/* QUEST CARDS */}
-      <div className="quest-grid">
-        {QUESTS.map((quest, index) => (
-          <QuestCard key={quest.id} quest={quest} index={index} />
-        ))}
+      {/* SECTIONS */}
+      <div className="qc-content">
+        <TaskSection title="Player Tasks" tasks={PLAYER_TASKS} />
+        <TaskSection title="Party Tasks" tasks={PARTY_TASKS} />
       </div>
     </main>
-    </>
   );
 }

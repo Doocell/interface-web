@@ -187,6 +187,14 @@
     height: 76px;
   }
 
+  .figma-navbar {
+    overflow: hidden;
+  }
+
+  .figma-navbar__background {
+    display: none;
+  }
+
   .figma-navbar__brand {
     left: 20px;
     top: 14px;

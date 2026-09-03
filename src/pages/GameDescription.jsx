@@ -100,94 +100,92 @@ export default function GameDescription() {
 
         .game-desc-section {
           position: relative;
+          margin-top: 58px;
           margin-bottom: 100px;
           display: flex;
           flex-direction: column;
         }
 
         /* Left aligned sections (1, 3) */
-        .game-desc-section.left {
-          align-items: flex-start;
-        }
+        .game-desc-section.left { align-items: stretch; }
 
         /* Right aligned sections (2, 4) */
-        .game-desc-section.right {
-          align-items: flex-end;
-        }
+        .game-desc-section.right { align-items: stretch; }
 
         /* ============================================
-           BADGE - Dengan rotation & overlap
+           BADGE - Absolute overlap (InterfaceInfo style)
            ============================================ */
         .game-desc-badge {
-          display: inline-block;
-          padding: 14px 50px;
-          background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.08));
+          position: absolute;
+          top: -42px;
+          left: 18px;
+          min-width: 360px;
+          height: 86px;
+          margin: 0;
+          padding: 17px 42px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           border: 5px solid;
-          border-radius: 50px;
-          margin-bottom: -25px;
-          position: relative;
+          border-radius: 8px;
           z-index: 10;
-          box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-          backdrop-filter: blur(8px);
-        }
-
-        .game-desc-section.left .game-desc-badge {
-          transform: rotate(-2.5deg);
-          margin-left: 50px;
+          box-shadow: 0 0 24px currentColor, 5px 5px 5px rgba(0,0,0,0.25);
+          transform: rotate(-2.6deg) skewX(-3deg);
+          white-space: nowrap;
         }
 
         .game-desc-section.right .game-desc-badge {
-          transform: rotate(1deg);
-          margin-right: 50px;
+          left: auto;
+          right: 18px;
+          transform: rotate(2.1deg) skewX(3deg);
         }
 
         .game-desc-badge-text {
           font-family: "Londrina Solid", sans-serif;
           font-weight: 900;
-          font-size: 44px;
+          font-size: clamp(1.8rem, 2.6vw, 2.4rem);
           text-transform: uppercase;
-          letter-spacing: 1.5px;
-          text-shadow: 5px 5px 8px rgba(0,0,0,0.5);
+          letter-spacing: 0.02em;
+          text-shadow: 5px 5px 8px rgba(0,0,0,0.3);
           margin: 0;
-          white-space: nowrap;
+          line-height: 1;
         }
 
         /* ============================================
-           CONTENT BOX - Background #29363E 60% opacity
+           CONTENT BOX - InterfaceInfo style
            ============================================ */
         .game-desc-content {
+          position: relative;
           width: 100%;
           max-width: 1350px;
-          background: rgba(41, 54, 62, 0.6);
-          border: 5px solid;
-          border-radius: 30px;
-          padding: 50px 60px;
-          backdrop-filter: blur(12px);
+          min-height: 407px;
+          background: rgba(41, 54, 62, 0.68);
+          border: 7px solid;
+          border-radius: 25px;
+          /* top padding besar karena badge overlap dari atas */
+          padding: 70px 66px 44px;
+          box-sizing: border-box;
         }
 
         /* ============================================
-           GLOW EFFECTS - Per POS warna
+           GLOW EFFECTS - 0 0 45px per InterfaceInfo
            ============================================ */
         .game-desc-section.color-review .game-desc-content {
-          box-shadow: 0 0 40px rgba(223, 176, 9, 0.4), 0 12px 48px rgba(0,0,0,0.6);
+          box-shadow: 0 0 45px #DFB009, inset 0 0 0 1px rgba(255,255,255,0.08);
         }
-
         .game-desc-section.color-analyze .game-desc-content {
-          box-shadow: 0 0 40px rgba(24, 156, 244, 0.4), 0 12px 48px rgba(0,0,0,0.6);
+          box-shadow: 0 0 45px #189CF4, inset 0 0 0 1px rgba(255,255,255,0.08);
         }
-
         .game-desc-section.color-improve .game-desc-content {
-          box-shadow: 0 0 40px rgba(149, 19, 255, 0.4), 0 12px 48px rgba(0,0,0,0.6);
+          box-shadow: 0 0 45px #9513FF, inset 0 0 0 1px rgba(255,255,255,0.08);
         }
-
         .game-desc-section.color-deploy .game-desc-content {
-          box-shadow: 0 0 40px rgba(255, 89, 251, 0.4), 0 12px 48px rgba(0,0,0,0.6);
+          box-shadow: 0 0 45px #FF59FB, inset 0 0 0 1px rgba(255,255,255,0.08);
         }
 
         .game-desc-section.left .game-desc-content {
           text-align: left;
         }
-
         .game-desc-section.right .game-desc-content {
           text-align: right;
         }
@@ -225,43 +223,47 @@ export default function GameDescription() {
         }
 
         /* ============================================
-           COLORS - Border & Badge per POS
+           COLORS - Border, Badge bg & text per POS
            ============================================ */
         .color-review .game-desc-badge,
         .color-review .game-desc-content {
           border-color: #DFB009;
         }
-
-        .color-review .game-desc-badge-text {
-          color: #DFB009;
+        .color-review .game-desc-badge {
+          background: #fff7c7;
+          box-shadow: 0 0 24px #DFB009, 5px 5px 5px rgba(0,0,0,0.25);
         }
+        .color-review .game-desc-badge-text { color: #DFB009; }
 
         .color-analyze .game-desc-badge,
         .color-analyze .game-desc-content {
           border-color: #189CF4;
         }
-
-        .color-analyze .game-desc-badge-text {
-          color: #189CF4;
+        .color-analyze .game-desc-badge {
+          background: #cceeff;
+          box-shadow: 0 0 24px #189CF4, 5px 5px 5px rgba(0,0,0,0.25);
         }
+        .color-analyze .game-desc-badge-text { color: #189CF4; }
 
         .color-improve .game-desc-badge,
         .color-improve .game-desc-content {
           border-color: #9513FF;
         }
-
-        .color-improve .game-desc-badge-text {
-          color: #9513FF;
+        .color-improve .game-desc-badge {
+          background: #e6c4ff;
+          box-shadow: 0 0 24px #9513FF, 5px 5px 5px rgba(0,0,0,0.25);
         }
+        .color-improve .game-desc-badge-text { color: #9513FF; }
 
         .color-deploy .game-desc-badge,
         .color-deploy .game-desc-content {
           border-color: #FF59FB;
         }
-
-        .color-deploy .game-desc-badge-text {
-          color: #FF59FB;
+        .color-deploy .game-desc-badge {
+          background: #ffd2fd;
+          box-shadow: 0 0 24px #FF59FB, 5px 5px 5px rgba(0,0,0,0.25);
         }
+        .color-deploy .game-desc-badge-text { color: #FF59FB; }
 
         /* ============================================
            RESPONSIVE BREAKPOINTS
@@ -503,11 +505,18 @@ export default function GameDescription() {
           }
 
           .game-desc-section {
+            margin-top: 75px;
             margin-bottom: 60px;
           }
 
           .game-desc-badge {
-            padding: 9px 35px;
+            position: absolute;
+            top: -48px;
+            left: 50%;
+            transform: translateX(-50%) rotate(0deg) !important;
+            padding: 10px 36px;
+            margin: 0 !important;
+            min-width: 300px;
           }
 
           .game-desc-badge-text {
@@ -515,9 +524,10 @@ export default function GameDescription() {
           }
 
           .game-desc-content {
-            padding: 30px 30px;
+            padding: 36px 28px;
             border-width: 4px;
             border-radius: 20px;
+            min-height: auto;
           }
 
           .game-desc-text {
@@ -578,38 +588,39 @@ export default function GameDescription() {
           }
 
           .game-desc-section {
+            margin-top: 80px;
             margin-bottom: 50px;
             align-items: flex-start !important;
           }
 
           .game-desc-badge {
-            padding: 8px 28px;
-            margin-bottom: -18px;
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%) rotate(0deg) !important;
+            padding: 10px 32px;
+            margin: 0 !important;
             border-width: 3px;
-            border-radius: 40px;
-          }
-
-          .game-desc-section.left .game-desc-badge,
-          .game-desc-section.right .game-desc-badge {
-            margin-left: 20px;
-            margin-right: 0;
-            transform: rotate(-2deg);
+            border-radius: 50px;
+            min-width: 280px;
+            height: auto;
           }
 
           .game-desc-badge-text {
-            font-size: 22px;
+            font-size: 24px;
             letter-spacing: 0.8px;
           }
 
           .game-desc-content {
-            padding: 25px 22px;
+            padding: 35px 24px 28px;
             border-width: 3px;
             border-radius: 18px;
+            min-height: auto;
           }
 
           .game-desc-text {
             font-size: 16px;
-            line-height: 1.6;
+            line-height: 1.65;
           }
 
           /* Minimal glow for mobile */
@@ -636,9 +647,47 @@ export default function GameDescription() {
             padding: 0 10px;
           }
 
+          .game-desc-section {
+            margin-top: 75px;
+            margin-bottom: 45px;
+          }
+
           .game-desc-badge {
-            padding: 7px 22px;
-            margin-left: 15px !important;
+            top: -48px;
+            padding: 9px 28px;
+            min-width: 260px;
+          }
+
+          .game-desc-badge-text {
+            font-size: 21px;
+            letter-spacing: 0.6px;
+          }
+
+          .game-desc-content {
+            padding: 32px 20px 26px;
+          }
+
+          .game-desc-text {
+            font-size: 15px;
+            line-height: 1.7;
+          }
+
+          .game-desc-title h1 {
+            font-size: clamp(32px, 15vw, 42px);
+          }
+        }
+
+        /* Ultra Small Mobile (<360px) */
+        @media (max-width: 320px) {
+          .game-desc-section {
+            margin-top: 70px;
+            margin-bottom: 40px;
+          }
+
+          .game-desc-badge {
+            top: -46px;
+            padding: 8px 24px;
+            min-width: 240px;
           }
 
           .game-desc-badge-text {
@@ -647,51 +696,24 @@ export default function GameDescription() {
           }
 
           .game-desc-content {
-            padding: 22px 18px;
-          }
-
-          .game-desc-text {
-            font-size: 15px;
-          }
-
-          .game-desc-title h1 {
-            font-size: clamp(32px, 15vw, 42px);
-          }
-
-          .game-desc-section {
-            margin-bottom: 45px;
-          }
-        }
-
-        /* Ultra Small Mobile (<360px) */
-        @media (max-width: 320px) {
-          .game-desc-badge {
-            padding: 6px 18px;
-            margin-left: 10px !important;
-          }
-
-          .game-desc-badge-text {
-            font-size: 17px;
-          }
-
-          .game-desc-content {
-            padding: 20px 15px;
+            padding: 30px 18px 24px;
           }
 
           .game-desc-text {
             font-size: 14px;
+            line-height: 1.75;
           }
         }
       `}</style>
 
       <main className="game-description-container">
         {/* Back Button */}
-        <button className="game-desc-back" onClick={() => navigate(-1)}>
+        {/* <button className="game-desc-back" onClick={() => navigate(-1)}>
           <svg viewBox="0 0 24 24">
             <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
           </svg>
           <span>BACK</span>
-        </button>
+        </button> */}
 
         {/* Title */}
         <header className="game-desc-title">

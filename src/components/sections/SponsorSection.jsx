@@ -20,15 +20,28 @@ const SPONSORS_TOP = [
   },
   {
     id: "top-4",
-    name: "E-Ujian",
-    logo: "/Logo Sponsor/TravelLinkHT (L) 1.svg",
+    name: "TraveLinkHT",
+    logo: "/Logo Sponsor/TraveLinkHT (L) 1.svg",
     accent: "#9513FF",
   },
   {
     id: "top-5",
-    name: "TraveLinkHT",
+    name: "69",
     logo: "/Logo Sponsor/69 (M) 1.svg",
     accent: "#FFD900",
+  },
+  {
+    id: "top-6",
+    name: "Group",
+    logo: "/Logo Sponsor/Group 101463.svg",
+    accent: "#FF59FB",
+  },
+  {
+    id: "top-7",
+    name: "Mask Group",
+    logo: "/Logo Sponsor/Mask group.svg",
+    accent: "#189CF4",
+    invert: true,
   },
 ];
 
@@ -70,18 +83,6 @@ const SPONSORS_BOTTOM = [
     logo: "/Logo Sponsor/VIRGIN CAKE AND BAKERY (S) 1.svg",
     accent: "#FFD900",
   },
-  // {
-  //   id: "bottom-7",
-  //   name: "Travel Link HT",
-  //   logo: "/Logo Sponsor/TravelLinkHT (L) 1.svg",
-  //   accent: "#2f00ff",
-  // },
-    {
-    id: "bottom-8",
-    name: "Virgin Cake and Bakery",
-    logo: "/Logo Sponsor/TraveLinkHT (L) 1.svg",
-    accent: "#FFD900",
-  },
 ];
 
 
@@ -98,7 +99,7 @@ function SponsorCard({ sponsor }) {
           <img
             src={sponsor.logo}
             alt={sponsor.name}
-            className="sp-card__logo"
+            className={`sp-card__logo${sponsor.invert ? " sp-card__logo--invert" : ""}`}
             draggable="false"
           />
         ) : (
@@ -580,6 +581,11 @@ export default function SponsorSection() {
           background: #ffffff;
         }
 
+        /* Mask group SVG has a light background — invert it to black */
+        .sp-card__logo--invert {
+          filter: invert(1);
+        }
+
 
         /* =================================================
            LOGO
@@ -588,11 +594,18 @@ export default function SponsorSection() {
         .sp-card__logo {
           display: block;
 
-          width: 76%;
+          /* max size agar tidak terpotong */
+          max-width: 82%;
+          max-height: 75%;
 
-          height: 70%;
+          /* auto agar aspect ratio terjaga */
+          width: auto;
+          height: auto;
 
           object-fit: contain;
+
+          /* pastikan selalu di tengah */
+          margin: auto;
 
           user-select: none;
 
