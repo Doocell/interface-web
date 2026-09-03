@@ -118,7 +118,7 @@ const committeeColumns = [
       badge: "S",
       count: 2,
       names: [
-        "Zahra Tus",
+        " Rara",
         "Jenifer",
       ],
       color: COLORS.pink,
@@ -163,7 +163,7 @@ const committeeColumns = [
       badge: "+",
       count: 8,
       names: [
-        "Lulik",
+        "Luluk",
         "Okta",
         "Sabilla",
         "Graselia",
@@ -330,7 +330,7 @@ const wideCommitteeCards = [
     badge: "N",
     count: 10,
     names: [
-      "Syalmuita",
+      "Syalomita",
       "Rosita",
       "Bintang",
       "Dika",
