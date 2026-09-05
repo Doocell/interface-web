@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const pool = require('../config/database');
+const requireAdmin = require('../middleware/adminAuth');
 
 router.get('/', async (req, res) => {
   try {
@@ -34,7 +35,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.patch('/kelompok/:id/score', async (req, res) => {
+router.patch('/kelompok/:id/score', requireAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const { poin } = req.body;

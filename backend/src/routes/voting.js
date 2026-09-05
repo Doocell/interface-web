@@ -4,6 +4,7 @@ const router = express.Router();
 
 
 const pool = require('../config/database');
+const requireAdmin = require('../middleware/adminAuth');
 
  //  Cek yunique  code
 router.post("/verify-code", async (req, res) => {
@@ -289,6 +290,38 @@ router.post("/submit", async (req, res) => {
 
   } finally {
     connection.release();
+  }
+});
+
+// Only an authenticated admin can read the voting totals.
+router.get('/admin/results', requireAdmin, async (req, res) => {
+  try {
+    const rows = await pool.query(
+      `
+      SELECT
+        k.id,
+        k.name AS team_name,
+        COUNT(vr.id) AS total_votes
+      FROM kelompok k
+      LEFT JOIN vote_record vr ON vr.voted_kelompok_id = k.id
+      GROUP BY k.id, k.name
+      ORDER BY total_votes DESC, k.id ASC
+      `
+    );
+
+    const results = rows.map((result) => ({
+      ...result,
+      id: Number(result.id),
+      total_votes: Number(result.total_votes),
+    }));
+
+    return res.json({ success: true, results });
+  } catch (error) {
+    console.error('Fetch voting results error:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Gagal mengambil hasil voting.',
+    });
   }
 });
 

@@ -21,6 +21,7 @@ import GameDescription from "./pages/GameDescription";
 import Map from "./pages/Map";
 import FAQ from "./pages/FAQ";
 import InterfaceInfo from "./pages/InterfaceInfo";
+import AdminVotingResults from "./pages/AdminVotingResults";
 
 
 function RouteScrollReset() {
@@ -144,6 +145,11 @@ function AppRoutes() {
           <Route
             path="/vote"
             element={<Vote />}
+          />
+
+          <Route
+            path="/admin/voting-results"
+            element={<AdminVotingResults />}
           />
 
           <Route

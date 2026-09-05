@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const pool = require('../config/database');
+const requireAdmin = require('../middleware/adminAuth');
 
 router.get('/', async (req, res) => {
   try {
@@ -77,7 +78,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.get('/admin', async (req, res) => {
+router.get('/admin', requireAdmin, async (req, res) => {
   try {
     const questions = await pool.query(
       `
@@ -109,7 +110,7 @@ router.get('/admin', async (req, res) => {
   }
 });
 
-router.patch('/admin/:id/answer', async (req, res) => {
+router.patch('/admin/:id/answer', requireAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const { jawaban } = req.body;

@@ -6,8 +6,27 @@ const faqRoutes = require('./routes/faq');
 const leaderboardRoutes = require('./routes/leaderboard');
 
 const app = express();
-app.use(cors());
-app.use(express.json());
+const allowedOrigins = (process.env.FRONTEND_URL || '')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+app.use(cors({
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error('Origin is not allowed by CORS'));
+  },
+}));
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  next();
+});
+app.use(express.json({ limit: '100kb' }));
 
 // Health check endpoint (case insensitive)
 app.get('/api/health', (req, res) => {
@@ -55,6 +74,18 @@ app.use((req, res) => {
     success: false,
     message: 'Endpoint tidak ditemukan',
     path: req.path
+  });
+});
+
+app.use((error, req, res, next) => {
+  if (res.headersSent) {
+    return next(error);
+  }
+
+  console.error('Unhandled request error:', error);
+  return res.status(500).json({
+    success: false,
+    message: 'Terjadi kesalahan pada server.',
   });
 });
 
