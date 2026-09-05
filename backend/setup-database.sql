@@ -69,7 +69,7 @@ CREATE TABLE questions (
 );
 
 -- Insert sample data (opsional)
-INSERT INTO grup (name) VALUES 
+INSERT INTO grup (name) VALUES
   ('Grup A'),
   ('Grup B'),
   ('Grup C');
@@ -83,6 +83,6 @@ INSERT INTO kelompok (grup_id, name, unique_code, max_uses, poin) VALUES
 
 -- Verify
 SELECT 'Database setup completed successfully!' AS status;
-SELECT COUNT(*) AS total_tables FROM information_schema.tables 
+SELECT COUNT(*) AS total_tables FROM information_schema.tables
 WHERE table_schema = 'Interpes';
 SELECT COUNT(*) AS total_kelompok FROM kelompok;

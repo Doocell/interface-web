@@ -7,7 +7,6 @@ import circleAsset from "../assets/leaderboard/elemen-lingkaran.svg";
 import triangleAsset from "../assets/leaderboard/elemen-segitiga.svg";
 import crossAsset from "../assets/leaderboard/elemen-x.svg";
 import BackgroundPattern from "../components/layout/BackgroundPattern";
-import { supabase } from "../lib/supabase";
 import "../styles/FAQSection.css";
 
 const iconAssets = {
@@ -19,27 +18,27 @@ const iconAssets = {
 const defaultFaqItems = [
   {
     type: "triangle",
-    question: "Lorem Ipsum Dolor Sit Amet?",
+    question: "Apa reward dan benefit yang didapat player selama mengikuti INTERFACE 2026??",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+      "Menjadi bagian dari INTERFACE 2026 adalah main quest berharga yang cuma bisa kamu rasakan sekali seumur hidup! Selain mengukir memori seru, kamu bakal mendapatkan sertifikat PKMMPD untuk kebutuhan SKPI, memperluas networking dengan maba dan kating di dunia Ilkom yang berkembang cepat, hingga mengenal berbagai organisasi dan underbow positif. Plus, kamu jadi paham etika serta karakteristik berkomunikasi dengan dosen, sekaligus tahu ke mana harus mencari pertolongan kalau menghadapi kesulitan di kampus! "
   },
   {
     type: "square",
-    question: "Lorem Ipsum Dolor Sit Amet?",
+    question: "Kak, kalau aku berhalangan hadir saat Next Chapter, gimana alur perizinannya ya? ",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Alur perizinan dimulai dari Player yang mengunduh template di https://bit.ly/SuratKeteranganIzinInterface2026, mengisinya plus melampirkan bukti, meminta tanda tangan basah Game Master (Ketua Pelaksana), lalu menyerahkannya ke Ketua Party yang nantinya bertugas merekap nama-nama tersebut ke template surat izin kolektif dari https://bit.ly/SuratIzinKolektifInterface2026, menandatanganinya secara basah, dan menyerahkan seluruh berkasnya ke Field Commander (Korlap)."
   },
   {
     type: "cross",
-    question: "Lorem Ipsum Dolor Sit Amet?",
+    question: "Merch wajib ngga kak? Dan yang ngga beli merch, piko nya gimana ya kak?",
     answer:
-      "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "Pembelian merch tidak bersifat wajib, ya! Bagi peserta yang tidak membeli merch, pembuatan baju Piko dapat disesuaikan dengan ketentuan logo pada buku panduan serta kreativitas masing-masing. "
   },
   {
     type: "circle",
-    question: "Lorem Ipsum Dolor Sit Amet?",
+    question: "Kak, kapan aja sih tanggal pelaksanaan rangkaian Osjur INTERFACE 2026?",
     answer:
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "Perjalananmu di INTERFACE 2026 akan dimulai dari Chapter 1 pada tanggal 5 September 2026, kemudian berlanjut ke Chapter 2 pada 6 September 2026, Connection Chapter pada 10 September 2026, hingga quest terakhir yaitu Next Chapter yang digelar pada 11–13 September 2026. Siapkan energimu dan ikuti seluruh rangkaiannya! "
   },
 ];
 
@@ -106,27 +105,22 @@ export default function FAQ() {
   const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
-    if (!supabase) return undefined;
-
-    let cancelled = false;
-
     async function fetchFAQ() {
-      const { data, error } = await supabase
-        .from("questions")
-        .select("*")
-        .eq("status", "answered")
-        .order("created_at", { ascending: false });
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/faq`
+        );
+        const data = await response.json();
 
-      if (!cancelled && !error) {
-        setQuestions(Array.isArray(data) ? data : []);
+        if (response.ok && data.success) {
+          setQuestions(data.questions);
+        }
+      } catch (error) {
+        console.error("Error fetching FAQ:", error);
       }
     }
 
     fetchFAQ();
-
-    return () => {
-      cancelled = true;
-    };
   }, []);
 
   const faqItems =
@@ -172,10 +166,10 @@ export default function FAQ() {
             </span>
           </h1>
 
-            <a 
-              href="https://www.instagram.com/himailkomunnes/" 
-              className="faq-send-btn" 
-              target="_blank" 
+            <a
+              href="https://www.instagram.com/himailkomunnes/"
+              className="faq-send-btn"
+              target="_blank"
               rel="noopener noreferrer"
               style={{ marginTop: "24px", display: "inline-block" }}
             >

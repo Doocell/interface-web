@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Floating geometric shapes from leaderboard
 import elemenX from "../assets/leaderboard/elemen-x.svg";
@@ -14,17 +15,11 @@ import cardGamepad from "../assets/vote/card-gamepad.svg";
 import cardNamePlate from "../assets/vote/card-name-plate.svg";
 import cardCornerDot from "../assets/vote/card-corner-dot.svg";
 
-// Warn / Robot after vote assets
-import robotFace from "../assets/vote/robot-face.svg";
-import robotHead from "../assets/vote/robot-head.svg";
-import robotHat from "../assets/vote/robot-hat.svg";
-import robotEarL from "../assets/vote/robot-ear-l.svg";
-import robotEarR from "../assets/vote/robot-ear-r.svg";
-
-const API_BASE_URL = "http://localhost:3000/api";
+const API_BASE_URL = `${import.meta.env.VITE_API_URL}/api`;
 
 export default function Vote() {
-  const [step, setStep] = useState("input-code"); // "input-code" | "vote-selection" | "voted"
+  const navigate = useNavigate();
+  const [step, setStep] = useState("input-code"); // "input-code" | "vote-selection"
   const [uniqueCode, setUniqueCode] = useState("");
   const [token, setToken] = useState(null);
   const [kelompokInfo, setKelompokInfo] = useState(null);
@@ -112,24 +107,14 @@ export default function Vote() {
         return;
       }
 
-      // Success
-      setStep("voted");
+      // Return to the landing page after a successful vote.
+      navigate("/", { replace: true });
     } catch (err) {
       console.error("Vote submission error:", err);
       setErrorMessage("Terjadi kesalahan koneksi ke server");
     } finally {
       setSubmitting(false);
     }
-  }
-
-  function handleResetVote() {
-    setStep("input-code");
-    setUniqueCode("");
-    setToken(null);
-    setKelompokInfo(null);
-    setCandidates([]);
-    setSelectedCandidateId(null);
-    setErrorMessage("");
   }
 
   return (
@@ -518,66 +503,6 @@ export default function Vote() {
             </div>
           )}
 
-          {/* ------------------------------------------------------------- */}
-          {/* STEP 3: AFTER STATE - WARN MESSAGE ROBOT (FIGMA NODE 522:14258) */}
-          {/* ------------------------------------------------------------- */}
-          {step === "voted" && (
-            <div className="w-full flex flex-col items-center justify-center py-12 md:py-16 text-center animate-fade-in">
-              {/* Cute Robot Head Illustration from Figma */}
-              <div
-                className="relative w-[130px] sm:w-[150px] md:w-[170px] h-[110px] sm:h-[125px] md:h-[140px] mb-6 sm:mb-8 flex items-center justify-center"
-                style={{
-                  filter: "drop-shadow(0 0 20px rgba(107, 13, 53, 0.4))",
-                }}
-              >
-                {/* Robot Ears */}
-                <div className="absolute left-[-6px] top-[40%] w-[25px] h-[35px] pointer-events-none opacity-60">
-                  <img src={robotEarL} alt="" className="w-full h-full object-contain" />
-                </div>
-                <div className="absolute right-[-6px] top-[40%] w-[25px] h-[35px] pointer-events-none opacity-60">
-                  <img src={robotEarR} alt="" className="w-full h-full object-contain" />
-                </div>
-
-                {/* Robot Head Body */}
-                <div className="absolute inset-0 w-full h-full pointer-events-none opacity-60">
-                  <img src={robotHead} alt="" className="w-full h-full object-contain" />
-                </div>
-
-                {/* Robot Hat Inside */}
-                <div className="absolute inset-[15%] w-[70%] h-[70%] pointer-events-none opacity-60">
-                  <img src={robotHat} alt="" className="w-full h-full object-contain" />
-                </div>
-
-                {/* Robot Face & Screen */}
-                <div className="relative z-10 w-[70px] sm:w-[85px] h-[45px] sm:h-[55px] flex items-center justify-center opacity-70">
-                  <img src={robotFace} alt="" className="absolute inset-0 w-full h-full object-contain" />
-                  <span className="relative z-10 font-['Tektur',sans-serif] font-bold text-[#6b0d35] text-xl sm:text-2xl select-none">
-                    o_O
-                  </span>
-                </div>
-              </div>
-
-              {/* Warning Text: "Lau udah ngevote mpruy" */}
-              <h2
-                className="font-['Tektur',sans-serif] font-bold text-white uppercase text-center tracking-wide mb-6"
-                style={{
-                  fontSize: "clamp(24px, 3.5vw, 39.4px)",
-                  opacity: 0.6,
-                  textShadow: "0px 0px 15px rgba(255,255,255,0.4)",
-                }}
-              >
-                Lau udah ngevote mpruy
-              </h2>
-
-              {/* Button to test/re-vote */}
-              <button
-                onClick={handleResetVote}
-                className="mt-4 px-6 py-2 rounded-full border border-white/30 font-['Tektur',sans-serif] text-xs sm:text-sm text-white/70 hover:text-white hover:border-white transition-all cursor-pointer"
-              >
-                ↻ Vote Ulang (Reset Demo)
-              </button>
-            </div>
-          )}
         </section>
 
         {/* ========================================== */}

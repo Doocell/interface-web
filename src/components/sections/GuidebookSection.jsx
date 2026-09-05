@@ -1,7 +1,7 @@
 import "../../styles/guidebook.css";
 
-const PDF_URL = "";
-const DRIVE_URL = "";
+const PDF_URL = "/guidebook.pdf";
+const DRIVE_URL = "https://drive.google.com/drive/folders/1Lw7GghyfCEHEsng2oem09BFe90667iaf";
 
 function GuidebookButton({
   href,

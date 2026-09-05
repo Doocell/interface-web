@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { supabase } from "../lib/supabase";
 
 // Figma Assets
 import crown1 from "../assets/leaderboard/crown-1.svg";
@@ -27,14 +26,13 @@ export default function Leaderboard() {
   useEffect(() => {
     async function fetchGroups() {
       try {
-        const { data, error } = await supabase
-          .from("groups")
-          .select("*")
-          .order("poin", { ascending: false })
-          .limit(30);
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/leaderboard?limit=30`
+        );
+        const data = await response.json();
 
-        if (!error && data && data.length > 0) {
-          setGroups(data);
+        if (response.ok && data.success && data.groups?.length > 0) {
+          setGroups(data.groups);
         }
       } catch (err) {
         console.error("Error fetching leaderboard groups:", err);
@@ -42,6 +40,7 @@ export default function Leaderboard() {
         setLoading(false);
       }
     }
+
     fetchGroups();
   }, []);
 
@@ -586,7 +585,7 @@ export default function Leaderboard() {
 
                 {/* Ribbon Text */}
                 <h2
-                  className="relative z-10 font-['Londrina_Solid',sans-serif] font-black uppercase text-center text-[#ff3df9] tracking-wider whitespace-nowrap"
+                  className="absolute inset-0 z-10 flex items-center justify-center font-['Londrina_Solid',sans-serif] font-black uppercase text-center text-[#ff3df9] tracking-wider whitespace-nowrap"
                   style={{
                     fontSize: "clamp(24px, 3.4vw, 45.4px)",
                     lineHeight: 1,
@@ -618,17 +617,9 @@ export default function Leaderboard() {
                   opacity: 0.96,
                 }}
               >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                culpa qui officia deserunt mollit anim id est laborum Lorem ipsum
-                dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat.
+                "Push the Limit, Own the Top!"
+                Selamat datang di arena kompetisi INTERFACE! Perjalanan quest party mu dimulai dari Chapter 1 saat kumpul kedatangan di pagi hari. Party yang berhasil hadir dengan anggota lengkap (full member) paling cepat berhak mengklaim early bonus: penempatan ruangan khusus di aula sekaligus tambahan skor! Perjuangan berlanjut dengan menaklukkan rintangan post to post RAID pada Chapter 2, hingga memberikan pertunjukan terbaik di panggung PENSI sebagai final quest. Kunci kemenangan juga terletak pada buff kekompakan dan semangat yel-yel jargon kelompok yang dinilai sepanjang acara. Seluruh skor diakumulasikan dan diunggah ke Leaderboard, jadi selalu cek papan skor dan susun strategi terbaikmu!
+
               </p>
             </div>
           </div>

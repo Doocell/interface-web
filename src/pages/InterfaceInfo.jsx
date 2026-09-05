@@ -374,7 +374,8 @@ const mentorCard = {
     "Gaska",
     "Ridho",
   ],
-  columns: 12,
+  // Four columns keep each mentor name readable on the wide card.
+  columns: 4,
   color: COLORS.purple,
   icon: mentorIcon,
 };
