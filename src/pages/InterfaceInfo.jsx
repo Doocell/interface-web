@@ -224,7 +224,7 @@ const committeeColumns = [
       badge: "R",
       count: 10,
       names: [
-        "Haridar",
+        "Haidar",
         "Rizki",
         "Batara",
         "Dariel",
@@ -419,12 +419,13 @@ function InformationCard({ section }) {
 }
 
 function RoleCard({ card, wide = false }) {
-  const columns = card.columns ?? 1;
-  const rows = Math.ceil(card.count / columns);
-  const minimumHeight =
-    card.count === 1 ? 136 : 96 + rows * 57;
-
   const names = card.names ?? [];
+  const columns =
+    card.columns ??
+    (names.length >= 9 ? 3 : names.length >= 5 ? 2 : 1);
+  const rows = Math.ceil(names.length / columns);
+  const minimumHeight =
+    names.length === 1 ? 136 : 96 + rows * 57;
 
   return (
     <article

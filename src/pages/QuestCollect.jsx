@@ -6,79 +6,87 @@ const PLAYER_TASKS = [
     id: 1,
     penugasan: "Penugasan 1",
     logo: "/logo_tugas/Skill-Ketua 2.svg",
-    title: "Patch Notes!",
-    date: "Sabtu, 29 Agustus 2026",
+    title: "PRESS START BUTTON ",
+    date: "Kamis, 27 Agustus 2026",
     description:
-      "Sesi pembukaan online Interface 2026. Dapatkan informasi awal, perkenalan tim, dan pengumuman penting sebelum kegiatan inti dimulai. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "Dalam penugasan ini, player wajib menggunakan foto pribadi yang terlihat jelas dan tidak mengandung unsur SARA maupun pornografi. Foto tersebut diunggah pada feed Instagram dari akun utama yang tidak di-private, dengan menggunakan Twibbon yang telah disediakan. player juga dilarang menghapus atau mengarsipkan postingan tersebut hingga seluruh rangkaian acara INTERFACE berakhir. Postingan wajib menggunakan lagu “INTERFACE” yang tersedia pada Template Logbook 2026, serta mengikuti dan menandai akun Instagram @osjurilkom dan @himailkomunnes. Selain itu, player wajib menandai 5 akun teman Ilkom Unnes dan akun Pendamping masing-masing.Deadline maksimal Upload Kamis, 27 Agustus 2026 pukul 23.59 WIB.",
   },
   {
     id: 2,
     penugasan: "Penugasan 2",
     logo: "/logo_tugas/Skill-Ketua 2-1.svg",
-    title: "Spawn Point",
-    date: "Minggu, 6 September 2026",
+    title: "WELCOME NEW PLAYER",
+    date: "Minggu, 30 Agustus 2026",
     description:
-      "Hari pertama kegiatan offline Interface 2026. Ice Breaking, pengenalan lingkungan kampus, dan pembentukan kelompok. Mulailah perjalananmu! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "Dalam penugasan ini, berupa video biodata, player diwajibkan membuat video yang memperkenalkan diri dengan mencantumkan nama lengkap, asal daerah, rombel, dan prodi. Video juga berisi hobi, perjalanan hingga masuk Ilkom UNNES, rencana dan harapan selama berada di Ilkom UNNES, minat dan bakat, serta game yang disukai beserta alasannya. Video wajib menggunakan frame yang telah disediakan dengan durasi 2–3 menit, kemudian diunggah ke akun Instagram utama (main account) yang tidak di-private. Postingan tidak boleh dihapus atau diarsipkan sampai seluruh rangkaian acara INTERFACE berakhir. player juga wajib mengikuti dan menandai akun Instagram @osjurilkom dan @himailkomunnes, serta menandai 3 akun teman Ilkom UNNES dan akun Pendamping masing-masing. Deadline maksimal upload Minggu, 30 Agustus 2026 pukul 23.59 WIB."
   },
   {
     id: 3,
     penugasan: "Penugasan 3",
     logo: "/logo_tugas/Skill-Ketua 2-2.svg",
-    title: "Questline PKMMPD",
+    title: "CONNECTING TO SERVER",
     date: "Sabtu, 5 September 2026",
     description:
-      "Rangkaian kegiatan PKMMPD. Selesaikan misi-misi kelompok dan kumpulkan XP sebanyak-banyaknya! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.",
+      "Tugas terbagi menjadi dua, yaitu Ilkom Player’s Session dan Player’s Knowledge Hunt. Ilkom Player’s Session dilakukan dengan membuat story Instagram bersama 20 teman Ilkom UNNES Angkatan 26 dari party berbeda menggunakan gelang dan template yang tersedia, kemudian dijadikan sorotan “Ilkom Players 26” serta dikumpulkan buktinya di Logbook. Sementara itu, Player’s Knowledge Hunt dilakukan dengan mewawancarai 5 Kating Ilkom Angkatan 25/24/23/22 menggunakan pertanyaan yang tersedia, lalu merangkum hasil wawancara dan melampirkan bukti foto di Logbook. Deadline maksimal upload Sabtu, 5 September 2026 pukul 23.59 WIB."
   },
   {
     id: 4,
     penugasan: "Penugasan 4",
     logo: "/logo_tugas/Skill-Ketua 2-3.svg",
-    title: "Into the Komputek Verse!",
-    date: "Jumat, 11 September 2026",
+    title: "QUEST ",
+    date: "Minggu, 6 September 2026",
     description:
-      "Puncak kegiatan Interface 2026! Malam keakraban, berbagai lomba seru, dan banyak kejutan menanti. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.",
+        "Dalam penugasan ini, player ditugaskan untuk melakukan chat dengan pendamping yang telah ditentukan dengan menerapkan etika komunikasi yang baik dan benar kepada dosen. Setelah mengikuti penyuluhan pada hari pertama, player memilih salah satu permasalahan yang diberikan, seperti menanyakan tugas, meminta izin tidak mengikuti perkuliahan, atau meminta tanda tangan, kemudian mengimplementasikannya melalui chat. Pendamping akan memberikan respon, dan jika chat belum sesuai, player wajib melakukan revisi dan mengulang chat dari awal. Deadline maksimal upload Minggu, 6 September 2026 pukul 23.59 WIB."
+  },
+  {
+    id: 5,
+    penugasan: "Penugasan 5",
+    logo: "/logo_tugas/Skill-Ketua 2.svg",
+    title: "EQUIPMENT SETUP",
+    date: "Rabu, 2 September 2026",
+    description:
+      "Dalam penugasan ini, player diwajibkan menginstal VSCode beserta compiler (MSYS2 atau MinGW), kemudian membuat laporan praktikum yang berisi langkah-langkah proses instalasi dan dilengkapi foto pada setiap tahap. Laporan dikumpulkan dalam format PDF dan hanya memuat alur pembuatannya. Deadline maksimal upload Rabu, 2 September 2026 pukul 23.59 WIB."
+  },
+  {
+    id: 6,
+    penugasan: "Penugasan 6",
+    logo: "/logo_tugas/Skill-Ketua 2-2.svg",
+    title: "USE YOUR EQUIPMENT",
+    date: "Kamis, 3 September 2026",
+    description:
+      "Dalam penugasan ini, player membuat program sederhana menggunakan C++ dengan studi kasus berdasarkan NIM, yaitu NIM genap menentukan apakah seseorang cukup umur untuk membuat SIM (≤17 tahun), sedangkan NIM ganjil menentukan tiket gratis atau berbayar (≤5 tahun gratis). player juga membuat video penjelasan dan mengunggahnya ke Google Drive bersama file program. Screenshot program dan hasil running serta link Google Drive dicantumkan pada Log Book, kemudian link Google Drive dikumpulkan melalui Google Classroom. Deadline maksimal upload Kamis, 3 September 2026 pukul 23.59 WIB."
   },
 ];
 
 const PARTY_TASKS = [
   {
-    id: 5,
+    id: 7,
     penugasan: "Penugasan 1",
     logo: "/logo_tugas/Skill-Ketua 2.svg",
-    title: "Party Formation",
+    title: "EASTER EGG HUNT",
     date: "Sabtu, 29 Agustus 2026",
     description:
-      "Bentuk party kamu dan mulai perjalanan bersama. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-  },
-  {
-    id: 6,
-    penugasan: "Penugasan 2",
-    logo: "/logo_tugas/Skill-Ketua 2-1.svg",
-    title: "Guild Challenge",
-    date: "Minggu, 6 September 2026",
-    description:
-      "Selesaikan tantangan bersama guild kamu. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-  },
-  {
-    id: 7,
-    penugasan: "Penugasan 3",
-    logo: "/logo_tugas/Skill-Ketua 2-2.svg",
-    title: "Co-op Mission",
-    date: "Sabtu, 5 September 2026",
-    description:
-      "Misi kolaborasi antar kelompok. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "Dalam penugasan ini, Aliansi yang berisikan 2 party ditugaskan untuk mencari maskot/logo yang telah disediakan panitia pada kegiatan Next Chapter: Into The Komputek Verse! pada Jumat, 11 September 2026. Setelah menemukannya, player membuat laporan penemuan yang dilengkapi foto di lokasi ditemukannya logo, kemudian mengunggah laporan tersebut ke Google Classroom yang telah disediakan. Deadline maksimal Jumat, 11 September 2026 pukul 23.59 WIB."
   },
   {
     id: 8,
-    penugasan: "Penugasan 4",
-    logo: "/logo_tugas/Skill-Ketua 2-3.svg",
-    title: "Final Raid",
-    date: "Jumat, 11 September 2026",
+    penugasan: "Penugasan 2",
+    logo: "/logo_tugas/Skill-Ketua 2-1.svg",
+    title: "PARTY JOURNEY",
+    date: "Minggu, 6 September 2026",
     description:
-      "Raid terakhir sebelum puncak acara. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
+      "Dalam penugasan ini, Masing-masing player membuat carousel Instagram party yang berisi foto party Day 1 Interface, foto bersama logo interface saat Easter Egg Hunt, quotes party, foto individu anggota, serta foto kolaborasi dengan 5 party lain. Player juga dapat menambahkan konten lain sesuai kreativitas dan tidak ada batas jumlah slide. Carousel diunggah ke akun Instagram masing-masing, postingan diperbolehkan kolaborasi dengan instagram party,  tidak boleh dihapus atau diarsipkan sampai rangkaian Interface berakhir, serta wajib mention @osjurilkom, @himailkomunnes, dan akun pendamping masing-masing. Deadline maksimal Rabu, 18 September 2026 pukul 23.59 WIB."
+  },
+  {
+    id: 9,
+    penugasan: "Penugasan 3",
+    logo: "/logo_tugas/Skill-Ketua 2-2.svg",
+    title: "FINAL PLAYTHROUGH",
+    date: "Sabtu, 5 September 2026",
+    description:
+      "Dalam penugasan ini, player mengikuti acara EXPO pada Next Chapter: Into The Komputek Verse! dan membuat vlog party berdurasi 3–5 menit yang diawali dengan perkenalan party dan seluruh player, serta menyertakan video Flashmob Interface. Kreativitas vlog dibebaskan kepada masing-masing party. Video diunggah ke akun TikTok setiap anggota party yang bersifat publik dan wajib menandai akun @himailkomunnes. Deadline maksimal Jumat, 18 September 2026 pukul 23.59 WIB."
   },
 ];
-
 /* ─── QUEST CARD ──────────────────────────────────────────────────────────── */
 function QuestCard({ task }) {
   return (

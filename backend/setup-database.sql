@@ -77,33 +77,33 @@ INSERT INTO grup (name) VALUES
   ('Group 5'),
   ('Group 6');
 
--- Team codes use INT-T<id>-<first four letters of the team name>.
+-- Team codes use INT-R<id>-<first four letters of the team name>.
 -- Usage counters and points are intentionally reset for a new deployment.
 INSERT INTO kelompok (grup_id, name, unique_code, max_uses, used_count, poin) VALUES
-  (1, 'Doom',          'INT-T1-DOOM', 13, 0, 0),
-  (1, 'Tahu bulat',    'INT-T2-TAHU', 13, 0, 0),
-  (1, 'Stellaris',     'INT-T3-STEL', 13, 0, 0),
-  (1, 'Valorant',      'INT-T4-VALO', 13, 0, 0),
-  (2, 'Minecraft',     'INT-T5-MINE', 13, 0, 0),
-  (2, 'Apex Legends',  'INT-T6-APEX', 13, 0, 0),
-  (2, 'Moo Whoo',      'INT-T7-MOOW', 13, 0, 0),
-  (2, 'Super Sus',     'INT-T8-SUPE', 13, 0, 0),
-  (3, 'The Spike',     'INT-T9-THES', 13, 0, 0),
-  (3, 'Far Cry',       'INT-T10-FARC', 13, 0, 0),
-  (3, 'Tekken',        'INT-T11-TEKK', 13, 0, 0),
-  (3, 'Free Fire',     'INT-T12-FREE', 13, 0, 0),
-  (4, 'Stumble Guys',  'INT-T13-STUM', 13, 0, 0),
-  (4, 'Terraria',      'INT-T14-TERR', 13, 0, 0),
-  (4, 'Assetto Corsa', 'INT-T15-ASSE', 13, 0, 0),
-  (4, 'Resident Evil', 'INT-T16-RESI', 13, 0, 0),
-  (5, 'PEAK',          'INT-T17-PEAK', 13, 0, 0),
-  (5, 'Talking Tom',   'INT-T18-TALK', 13, 0, 0),
-  (5, 'Tetris',        'INT-T19-TETR', 13, 0, 0),
-  (5, 'Super Mario',   'INT-T20-SUPE', 13, 0, 0),
-  (6, 'FIFA',          'INT-T21-FIFA', 13, 0, 0),
-  (6, 'Elden Ring',    'INT-T22-ELDE', 13, 0, 0),
-  (6, 'Roblox',        'INT-T23-ROBL', 13, 0, 0),
-  (6, 'Dread Out',     'INT-T24-DREA', 13, 0, 0);
+  (1, 'Doom',          'INT-R1-DOOM', 15, 0, 0),
+  (1, 'Tahu bulat',    'INT-R2-TAHU', 13, 0, 0),
+  (1, 'Stellaris',     'INT-R3-STEL', 13, 0, 0),
+  (1, 'Valorant',      'INT-R4-VALO', 13, 0, 0),
+  (2, 'Minecraft',     'INT-R5-MINE', 13, 0, 0),
+  (2, 'Apex Legends',  'INT-R6-APEX', 13, 0, 0),
+  (2, 'Moo Whoo',      'INT-R7-MOOW', 13, 0, 0),
+  (2, 'Super Sus',     'INT-R8-SUPE', 13, 0, 0),
+  (3, 'The Spike',     'INT-R9-THES', 13, 0, 0),
+  (3, 'Far Cry',       'INT-R10-FARC', 13, 0, 0),
+  (3, 'Tekken',        'INT-R11-TEKK', 13, 0, 0),
+  (3, 'Free Fire',     'INT-R12-FREE', 13, 0, 0),
+  (4, 'Stumble Guys',  'INT-R13-STUM', 13, 0, 0),
+  (4, 'Terraria',      'INT-R14-TERR', 13, 0, 0),
+  (4, 'Assetto Corsa', 'INT-R15-ASSE', 13, 0, 0),
+  (4, 'Resident Evil', 'INT-R16-RESI', 13, 0, 0),
+  (5, 'PEAK',          'INT-R17-PEAK', 13, 0, 0),
+  (5, 'Talking Tom',   'INT-R18-TALK', 13, 0, 0),
+  (5, 'Tetris',        'INT-R19-TETR', 13, 0, 0),
+  (5, 'Super Mario',   'INT-R20-SUPE', 13, 0, 0),
+  (6, 'FIFA',          'INT-R21-FIFA', 13, 0, 0),
+  (6, 'Elden Ring',    'INT-R22-ELDE', 13, 0, 0),
+  (6, 'Roblox',        'INT-R23-ROBL', 13, 0, 0),
+  (6, 'Dread Out',     'INT-R24-DREA', 13, 0, 0),
 
 -- Verify
 SELECT 'Database setup completed successfully!' AS status;

@@ -231,6 +231,7 @@
 
 .faq-page-section .faq-answer {
   position: relative;
+  box-sizing: border-box;
   z-index: 1;
   width: calc(100% - 1.041667cqw);
   min-height: 15.069444cqw;
@@ -248,12 +249,23 @@
 
 .faq-page-section .faq-answer-text {
   margin: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
   color: #ffffff;
   font-family: "Londrina Solid", sans-serif;
   font-size: 1.388889cqw;
   font-weight: 300;
   line-height: 1.666667cqw;
   text-align: left;
+}
+
+.faq-page-section .faq-answer-text a {
+  color: #ffd900;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
 }
 
 .faq-page-section .faq-triangle-decor {
@@ -433,8 +445,11 @@
   }
 
   .faq-page-section .faq-answer {
+    box-sizing: border-box;
     width: calc(100% - 14px);
-    min-height: 217px;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
     margin-top: -30px;
     margin-right: auto;
     margin-left: auto;
@@ -444,6 +459,9 @@
   }
 
   .faq-page-section .faq-answer-text {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
     font-size: 20px;
     line-height: 24px;
   }

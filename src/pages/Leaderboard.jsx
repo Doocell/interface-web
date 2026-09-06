@@ -501,54 +501,56 @@ export default function Leaderboard() {
                   return (
                     <div
                       key={group.id || index}
-                      className="relative w-full h-[52px] sm:h-[62px] md:h-[66.7px] flex items-center justify-between pl-[44px] pr-2 sm:pl-[60px] sm:pr-4 md:pl-[90px] md:pr-6 rounded-lg sm:rounded-xl transition-transform duration-200 hover:scale-[1.008]"
+                      className="relative grid w-full h-[52px] sm:h-[62px] md:h-[66.7px] items-center rounded-lg sm:rounded-xl transition-transform duration-200 hover:scale-[1.008]"
+                      style={{
+                        gridTemplateColumns:
+                          "clamp(32px, 4.5vw, 70px) minmax(0, 1fr) clamp(32px, 7vw, 80px)",
+                      }}
                     >
                       {/* Exact SVG Neon Frame from Figma */}
                       <img
                         src={rowBorderSvg}
                         alt=""
-                        className="absolute inset-0 w-full h-full pointer-events-none object-fill"
+                        className="pointer-events-none absolute inset-0 z-0 h-full w-full object-fill"
                       />
 
                       {/* Rank Number - Positioned absolute inside the left corner */}
                       <span
-                        className="absolute left-2 sm:left-3 md:left-4 top-1/2 -translate-y-1/2 font-['Tektur',sans-serif] font-bold leading-none select-none text-center"
+                        className="relative z-10 col-start-1 row-start-1 flex h-full -translate-y-[11px] items-center justify-center font-['Tektur',sans-serif] font-bold leading-none select-none text-center"
                         style={{
                           fontSize: "clamp(16px, 2.8vw, 44.5px)",
                           color: rankColor,
                           textShadow: rankShadow,
-                          width: "clamp(32px, 4.5vw, 70px)",
                         }}
                       >
                         {rank}
                       </span>
 
-                      {/* Team Name & Score Container */}
-                      <div className="relative z-10 flex items-center justify-between w-full gap-2">
-                        {/* Team Name */}
-                        <span
-                          className="font-['Tektur',sans-serif] font-semibold truncate tracking-wide flex-1"
-                          style={{
-                            fontSize: "clamp(11px, 1.6vw, 24.7px)",
-                            color: nameColor,
-                            textShadow: nameShadow,
-                          }}
-                          title={group.nama_kelompok}
-                        >
+                      {/* Team name */}
+                      <span
+                        className="relative z-10 col-start-2 row-start-1 flex min-w-0 h-full -translate-y-[11px] items-center justify-center overflow-hidden px-1 text-center font-['Tektur',sans-serif] font-semibold tracking-wide"
+                        style={{
+                          fontSize: "clamp(11px, 1.6vw, 24.7px)",
+                          color: nameColor,
+                          textShadow: nameShadow,
+                        }}
+                        title={group.nama_kelompok}
+                      >
+                        <span className="min-w-0 truncate">
                           {group.nama_kelompok}
                         </span>
+                      </span>
 
-                        {/* Score */}
-                        <span
-                          className="font-['Tektur',sans-serif] font-semibold text-right shrink-0"
-                          style={{
-                            fontSize: "clamp(12px, 1.6vw, 24.7px)",
-                            color: scoreColor,
-                          }}
-                        >
-                          {group.poin}
-                        </span>
-                      </div>
+                      {/* Score */}
+                      <span
+                        className="relative z-10 col-start-3 row-start-1 flex h-full -translate-y-[11px] items-center justify-end pr-2 font-['Tektur',sans-serif] font-semibold text-right"
+                        style={{
+                          fontSize: "clamp(12px, 1.6vw, 24.7px)",
+                          color: scoreColor,
+                        }}
+                      >
+                        {group.poin}
+                      </span>
                     </div>
                   );
                 })}

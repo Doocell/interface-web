@@ -26,7 +26,7 @@ const defaultFaqItems = [
     type: "square",
     question: "Kak, kalau aku berhalangan hadir saat Next Chapter, gimana alur perizinannya ya? ",
     answer:
-      "Alur perizinan dimulai dari Player yang mengunduh template di https://bit.ly/SuratKeteranganIzinInterface2026, mengisinya plus melampirkan bukti, meminta tanda tangan basah Game Master (Ketua Pelaksana), lalu menyerahkannya ke Ketua Party yang nantinya bertugas merekap nama-nama tersebut ke template surat izin kolektif dari https://bit.ly/SuratIzinKolektifInterface2026, menandatanganinya secara basah, dan menyerahkan seluruh berkasnya ke Field Commander (Korlap)."
+      "Alur perizinan dimulai dari Player yang mengunduh template di https://bit.ly/SuratKeteranganIzinInterface2026 ,mengisinya plus melampirkan bukti, meminta tanda tangan basah Game Master (Ketua Pelaksana), lalu menyerahkannya ke Ketua Party yang nantinya bertugas merekap nama-nama tersebut ke template surat izin kolektif dari https://bit.ly/SuratIzinKolektifInterface2026 , menandatanganinya secara basah, dan menyerahkan seluruh berkasnya ke Field Commander (Korlap)."
   },
   {
     type: "cross",
@@ -97,6 +97,29 @@ function ChevronIcon() {
         fill="#FFFFFF"
       />
     </svg>
+  );
+}
+
+function AnswerContent({ answer }) {
+  const parts = String(answer ?? "").split(/(https?:\/\/[^\s]+)/g);
+
+  return (
+    <>
+      {parts.map((part, index) =>
+        /^https?:\/\//.test(part) ? (
+          <a
+            href={part}
+            key={`${part}-${index}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {part}
+          </a>
+        ) : (
+          <span key={`${part}-${index}`}>{part}</span>
+        ),
+      )}
+    </>
   );
 }
 
@@ -209,7 +232,9 @@ export default function FAQ() {
 
                 {isOpen && (
                   <div className="faq-answer" id={answerId}>
-                    <p className="faq-answer-text">{item.answer}</p>
+                    <p className="faq-answer-text">
+                      <AnswerContent answer={item.answer} />
+                    </p>
                   </div>
                 )}
               </article>

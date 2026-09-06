@@ -40,7 +40,7 @@ export default function Vote() {
 
   async function handleVerifyCode() {
     if (!uniqueCode.trim()) {
-      setErrorMessage("Kode kelompok wajib diisi!");
+      setErrorMessage("Kode Party wajib diisi!");
       return;
     }
 
@@ -77,7 +77,7 @@ export default function Vote() {
 
   async function handleVoteSubmit() {
     if (!selectedCandidateId) {
-      alert("Silakan pilih kelompok yang ingin kamu vote terlebih dahulu!");
+      alert("Silakan pilih Party yang ingin kamu vote terlebih dahulu!");
       return;
     }
 
@@ -282,7 +282,7 @@ export default function Vote() {
                   textShadow: "0px 0px 15px rgba(255,255,255,0.4)",
                 }}
               >
-                Masukkan Kode Kelompok
+                Masukkan Kode Party
               </h2>
 
               <input
@@ -325,7 +325,7 @@ export default function Vote() {
               </button>
 
               <p className="mt-2 text-xs sm:text-sm font-['Tektur',sans-serif] text-white/60 text-center">
-                *Masukkan kode unik kelompok kamu untuk mulai voting
+                *Masukkan kode unik Party kamu untuk mulai voting
               </p>
             </div>
           )}
@@ -497,7 +497,7 @@ export default function Vote() {
                 </button>
 
                 <p className="mt-3 text-xs sm:text-sm font-['Tektur',sans-serif] text-white/60 text-center">
-                  *Klik salah satu kartu kelompok di atas lalu tekan tombol Vote
+                  *Klik salah satu kartu Party di atas lalu tekan tombol Vote
                 </p>
               </div>
             </div>
