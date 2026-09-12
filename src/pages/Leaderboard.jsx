@@ -257,9 +257,9 @@ export default function Leaderboard() {
                 className="absolute inset-0 w-full h-full object-fill pointer-events-none drop-shadow-[0_0_12px_rgba(255,89,251,0.7)]"
               />
               <span
-                className="relative z-10 font-['Tektur',sans-serif] font-bold text-white uppercase truncate px-2 sm:px-3"
+                className="lb-podium-ribbon-text relative z-10 block min-w-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap px-2 text-center font-['Tektur',sans-serif] font-bold uppercase sm:px-3"
                 style={{
-                  fontSize: "clamp(10px, 1.4vw, 18.9px)",
+                  fontSize: "clamp(8px, 1.4vw, 18.9px)",
                   textShadow: "0px 0px 8px #ff59fb, 1px 1px 2px rgba(0,0,0,0.5)",
                 }}
                 title={top2.nama_kelompok}
@@ -316,9 +316,9 @@ export default function Leaderboard() {
                 className="absolute inset-0 w-full h-full object-fill pointer-events-none drop-shadow-[0_0_14px_rgba(255,217,0,0.9)]"
               />
               <span
-                className="relative z-10 font-['Tektur',sans-serif] font-bold text-[#FFF3AD] uppercase truncate px-2 sm:px-3"
+                className="lb-podium-ribbon-text relative z-10 block min-w-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap px-2 text-center font-['Tektur',sans-serif] font-bold uppercase sm:px-3"
                 style={{
-                  fontSize: "clamp(10px, 1.4vw, 18.9px)",
+                  fontSize: "clamp(8px, 1.4vw, 18.9px)",
                   textShadow: "0px 0px 8px #ffd900, 1px 1px 2px rgba(0,0,0,0.4)",
                 }}
                 title={top1.nama_kelompok}
@@ -375,9 +375,9 @@ export default function Leaderboard() {
                 className="absolute inset-0 w-full h-full object-fill pointer-events-none drop-shadow-[0_0_12px_rgba(24,156,244,0.7)]"
               />
               <span
-                className="relative z-10 font-['Tektur',sans-serif] font-bold text-white uppercase truncate px-2 sm:px-3"
+                className="lb-podium-ribbon-text relative z-10 block min-w-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap px-2 text-center font-['Tektur',sans-serif] font-bold uppercase sm:px-3"
                 style={{
-                  fontSize: "clamp(10px, 1.4vw, 18.9px)",
+                  fontSize: "clamp(8px, 1.4vw, 18.9px)",
                   textShadow: "0px 0px 8px #199bf3, 1px 1px 2px rgba(0,0,0,0.5)",
                 }}
                 title={top3.nama_kelompok}
@@ -463,7 +463,7 @@ export default function Leaderboard() {
                 </p>
               </div>
             ) : (
-              <div className="space-y-2 sm:space-y-3">
+              <div className="lb-ranking-list space-y-2 sm:space-y-3">
                 {displayGroups.map((group, index) => {
                   const rank = index + 1;
 
@@ -501,11 +501,7 @@ export default function Leaderboard() {
                   return (
                     <div
                       key={group.id || index}
-                      className="relative grid w-full h-[52px] sm:h-[62px] md:h-[66.7px] items-center rounded-lg sm:rounded-xl transition-transform duration-200 hover:scale-[1.008]"
-                      style={{
-                        gridTemplateColumns:
-                          "clamp(32px, 4.5vw, 70px) minmax(0, 1fr) clamp(32px, 7vw, 80px)",
-                      }}
+                      className="lb-ranking-row relative grid w-full h-[52px] sm:h-[62px] md:h-[66.7px] items-center rounded-lg sm:rounded-xl transition-transform duration-200 hover:scale-[1.008]"
                     >
                       {/* Exact SVG Neon Frame from Figma */}
                       <img
@@ -516,7 +512,7 @@ export default function Leaderboard() {
 
                       {/* Rank Number - Positioned absolute inside the left corner */}
                       <span
-                        className="relative z-10 col-start-1 row-start-1 flex h-full -translate-y-[11px] items-center justify-center font-['Tektur',sans-serif] font-bold leading-none select-none text-center"
+                        className="relative z-10 col-start-1 row-start-1 flex h-full items-center justify-center font-['Tektur',sans-serif] font-bold leading-none select-none text-center"
                         style={{
                           fontSize: "clamp(16px, 2.8vw, 44.5px)",
                           color: rankColor,
@@ -528,7 +524,7 @@ export default function Leaderboard() {
 
                       {/* Team name */}
                       <span
-                        className="relative z-10 col-start-2 row-start-1 flex min-w-0 h-full -translate-y-[11px] items-center justify-center overflow-hidden px-1 text-center font-['Tektur',sans-serif] font-semibold tracking-wide"
+                        className="relative z-10 col-start-2 row-start-1 flex min-w-0 h-full items-center justify-center overflow-hidden px-1 text-center font-['Tektur',sans-serif] font-semibold leading-none tracking-wide"
                         style={{
                           fontSize: "clamp(11px, 1.6vw, 24.7px)",
                           color: nameColor,
@@ -543,7 +539,7 @@ export default function Leaderboard() {
 
                       {/* Score */}
                       <span
-                        className="relative z-10 col-start-3 row-start-1 flex h-full -translate-y-[11px] items-center justify-end pr-2 font-['Tektur',sans-serif] font-semibold text-right"
+                        className="relative z-10 col-start-3 row-start-1 flex h-full items-center justify-center px-1 font-['Tektur',sans-serif] font-semibold leading-none text-center"
                         style={{
                           fontSize: "clamp(12px, 1.6vw, 24.7px)",
                           color: scoreColor,
@@ -647,6 +643,90 @@ export default function Leaderboard() {
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
           background: #9513ff;
           box-shadow: 0 0 8px #9513ff;
+        }
+
+        .lb-ranking-row {
+          grid-template-columns: clamp(32px, 4.5vw, 70px) minmax(0, 1fr) clamp(32px, 7vw, 80px);
+        }
+
+        @media (max-width: 640px) {
+          .lb-ranking-row {
+            grid-template-columns: 38px minmax(0, 1fr) 48px;
+            height: 52px;
+          }
+
+          .lb-ranking-row > span {
+            position: absolute;
+            top: 50%;
+            height: auto;
+            min-width: 0;
+            line-height: 1;
+            transform: translateY(-50%);
+          }
+
+          .lb-ranking-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+          }
+
+          .lb-ranking-list > .lb-ranking-row {
+            margin-top: 0;
+          }
+
+          .lb-ranking-row > span:nth-of-type(1) {
+            left: 0;
+            width: 38px;
+            justify-content: center;
+          }
+
+          .lb-ranking-row > span:nth-of-type(2) {
+            left: 38px;
+            width: calc(100% - 86px);
+            padding-inline: 4px;
+            font-size: clamp(10px, 3.1vw, 14px) !important;
+          }
+
+          .lb-ranking-row > span:nth-of-type(3) {
+            right: 0;
+            width: 48px;
+            padding-inline: 4px;
+            font-size: clamp(11px, 3.3vw, 15px) !important;
+          }
+
+          .lb-podium-ribbon-text {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            min-width: 0;
+            box-sizing: border-box;
+            margin: 0;
+            line-height: 1;
+            transform: translateY(-9px);
+            line-height: 1;
+          }
+
+          .lb-ranking-row {
+            height: 42px;
+            overflow: hidden;
+            border: 2px solid #9513ff;
+            border-radius: 7px;
+            background: rgba(37, 50, 57, 0.72);
+          }
+
+          .lb-ranking-row > img {
+            display: none;
+          }
+
+          .lb-ranking-row > span {
+            z-index: 1;
+            top: 50%;
+            transform: translateY(-50%);
+          }
         }
 
         /* Ambient floating animations */

@@ -4,8 +4,14 @@ const cors = require('cors');
 const votingRoutes = require('./routes/voting');
 const faqRoutes = require('./routes/faq');
 const leaderboardRoutes = require('./routes/leaderboard');
+const {
+  apiRateLimit,
+  adminRateLimit,
+  votingRateLimit,
+} = require('./middleware/rateLimit');
 
 const app = express();
+app.set('trust proxy', 1);
 const allowedOrigins = (process.env.FRONTEND_URL || '')
   .split(',')
   .map((origin) => origin.trim())
@@ -27,6 +33,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.json({ limit: '100kb' }));
+app.use('/api', apiRateLimit);
 
 // Health check endpoint (case insensitive)
 app.get('/api/health', (req, res) => {
@@ -45,8 +52,11 @@ app.get('/api/Health', (req, res) => {
 });
 
 // Routes
+app.use('/api/voting/verify-code', votingRateLimit);
+app.use('/api/voting/submit', votingRateLimit);
 app.use('/api/voting', votingRoutes);
 app.use('/api/faq', faqRoutes);
+app.use('/api/leaderboard/admin', adminRateLimit);
 app.use('/api/leaderboard', leaderboardRoutes);
 
 // Alias for kelompok (untuk consistency)

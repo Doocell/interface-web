@@ -47,9 +47,14 @@ export default function AdminVotingResults() {
               Atmin
             </h1>
           </div>
-          <Link className="font-['Tektur',sans-serif] text-sm text-white/70 hover:text-white" to="/">
-            Kembali
-          </Link>
+          <div className="flex gap-4 font-['Tektur',sans-serif] text-sm">
+            <Link className="text-white/70 hover:text-white" to="/admin/leaderboard">
+              Kelola leaderboard
+            </Link>
+            <Link className="text-white/70 hover:text-white" to="/">
+              Kembali
+            </Link>
+          </div>
         </div>
 
         {!results ? (

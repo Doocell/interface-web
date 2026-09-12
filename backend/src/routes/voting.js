@@ -5,6 +5,7 @@ const router = express.Router();
 
 const pool = require('../config/database');
 const requireAdmin = require('../middleware/adminAuth');
+const { adminRateLimit } = require('../middleware/rateLimit');
 
  //  Cek yunique  code
 router.post("/verify-code", async (req, res) => {
@@ -294,7 +295,7 @@ router.post("/submit", async (req, res) => {
 });
 
 // Only an authenticated admin can read the voting totals.
-router.get('/admin/results', requireAdmin, async (req, res) => {
+router.get('/admin/results', adminRateLimit, requireAdmin, async (req, res) => {
   try {
     const rows = await pool.query(
       `

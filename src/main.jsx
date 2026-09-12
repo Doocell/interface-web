@@ -14,6 +14,12 @@ if (!rootElement) {
   );
 }
 
+document.documentElement.classList.add("notranslate");
+document.documentElement.setAttribute("translate", "no");
+document.body.classList.add("notranslate");
+document.body.setAttribute("translate", "no");
+rootElement.classList.add("notranslate");
+rootElement.setAttribute("translate", "no");
 
 createRoot(rootElement).render(
   <StrictMode>
