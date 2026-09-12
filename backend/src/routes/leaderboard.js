@@ -7,7 +7,13 @@ const { adminRateLimit } = require('../middleware/rateLimit');
 
 router.get('/', async (req, res) => {
   try {
-    const limit = Math.min(Number(req.query.limit) || 30, 100);
+    const requestedLimit = Number(req.query.limit);
+    const limit = Math.min(
+      Number.isInteger(requestedLimit) && requestedLimit > 0
+        ? requestedLimit
+        : 100,
+      100
+    );
 
     const groups = await pool.query(
       `

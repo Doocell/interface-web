@@ -27,7 +27,7 @@ export default function Leaderboard() {
     async function fetchGroups() {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/leaderboard?limit=30`
+          `${import.meta.env.VITE_API_URL}/api/leaderboard?limit=100`
         );
         const data = await response.json();
 
